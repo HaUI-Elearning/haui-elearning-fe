@@ -1,0 +1,93 @@
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    background-color: white;
+    border-bottom: 1px solid lightgray;
+
+    .navbar-logo {
+        .logo {
+            width: 100px;
+        }
+    }
+
+   
+
+    .navbar-search {
+        display: flex;
+        align-items: center;
+        margin: 0 20px;
+
+        .search-input {
+            width: 460px;
+            padding: 14px 20px;
+            border: 1px solid lightgray;
+            border-radius: 0 50px 50px 0;
+            outline: none;
+            border-left: none;
+            background-color: whitesmoke;
+        }
+
+        .search-button {
+            background-color: whitesmoke;
+            padding: 10px 20px;
+            border: 1px solid lightgray;
+            border-right: none;
+            border-radius: 50px 0 0 50px;
+            cursor: pointer;
+            margin-left: -40px;
+            display: flex;
+            align-items: center;
+
+            &:hover {
+                background-color: gainsboro;
+            }
+        }
+    }
+
+
+
+    .navbar-buttons {
+        display: flex;
+        align-items: center;
+        padding: 10px 15px;
+        gap: 10px;
+        transition: background-color 0.3s;
+
+        .login-button{
+            position: relative;
+            align-items: center;
+            border: 1px solid black;
+            cursor: pointer;
+            display: inline-flex;
+            max-width: 100%;
+            min-width: 7rem;
+            height: 40px;
+            justify-content: center;
+            user-select: none;
+            background-color: white;
+            white-space: nowrap;
+            font-size: 14px;
+            font-weight: 700;
+        }
+        .signup-button{
+            position: relative;
+            align-items: center;
+            cursor: pointer;
+            display: inline-flex;
+            max-width: 100%;
+            min-width: 6.5rem;
+            height: 40px;
+            justify-content: center;
+            user-select: none;
+            background-color: black;
+            color: white;
+            white-space: nowrap;
+            font-size: 14px;
+            font-weight: 700;
+        }
+
+        
+    }
+}
