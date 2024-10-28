@@ -7,5 +7,8 @@ export const ApiConstant = {
     },
     course:{
         getAllCourse:'/courses'
+    },
+    users :{
+        getUserById:'/users'
     }
 }

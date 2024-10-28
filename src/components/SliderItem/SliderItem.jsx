@@ -2,6 +2,8 @@ import './SliderItem.scss';
 import { useState, useEffect } from 'react';
 import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react';
 import { getAllItemSlider } from '../../apis/slider';
+import { getAllItemCourse } from "../../apis/course";
+
 
 const SliderItem = () => {
     const [index, setIndex] = useState(0);
