@@ -29,6 +29,47 @@
       "url": "https://i.pinimg.com/564x/d9/82/4f/d9824ff2b80bbdc298db52a298208a7e.jpg"
     }
   ],
+  "users": [
+    {
+      "id": 1,
+      "username": "admin",
+      "password": "admin123",
+      "roleName": [
+        "ADMIN"
+      ],
+      "tokenContent": "fake-jwt-token-admin",
+      "refreshToken": "fake-refresh-token-admin",
+      "linkAvatar": "https://example.com/avatar1.png",
+      "email": "admin@example.com",
+      "name": "Admin User",
+      "description": "Administrator"
+    },
+    {
+      "id": 2,
+      "username": "user",
+      "password": "user123",
+      "roleName": [
+        "USER"
+      ],
+      "tokenContent": "fake-jwt-token-user",
+      "refreshToken": "fake-refresh-token-user",
+      "linkAvatar": "https://example.com/avatar2.png",
+      "email": "user@example.com",
+      "name": "Normal User",
+      "description": "Regular user"
+    }
+  ],
+  "login": [
+    {
+      "username": "admin",
+      "password": "admin123"
+    },
+    {
+      "username": "user",
+      "password": "user123"
+    }
+    
+  ],
   "courses": [
     {
       "id": 1,

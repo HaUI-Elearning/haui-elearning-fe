@@ -21,12 +21,29 @@ api.interceptors.response.use(
     (error) => {
         if (error.code === 401) {
             const navigate = useNavigate();
-            localStorage.removeItem(LocalStorage.auth);
-            navigate('/login')
+            const currentUser = JSON.parse(localStorage.getItem(localStorage.auth));
+            if(!currentUser){
+                localStorage.removeItem(LocalStorage.auth);
+                navigate('/login')
+            }     
         }
         return Promise.reject(error);
     }
 )
+
+export async function loginUser(login){
+    try {
+        const response = await api.post('/user', login)
+        if (response.status >= 200 && response.status < 300) {
+          return response.data
+        } else {
+          return null
+        }
+      } catch (error) {
+        console.error(error)
+        return null
+      }
+}
 
 const apiDefault = axios.create({
     baseURL: `${import.meta.env.VITE_API_SERVER}`,
