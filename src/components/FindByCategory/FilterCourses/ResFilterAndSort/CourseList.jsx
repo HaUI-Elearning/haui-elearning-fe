@@ -81,7 +81,22 @@ const CourseList = ({ courses, currentPage, setCurrentPage, totalPages, totalRes
                     ))}
                 </ul>
             ) : (
-                <p>Không có khóa học nào phù hợp.</p>
+                    <Box sx={styles.boxNoCourse}>
+                        <Typography
+                            variant="h5"
+                            sx={styles.typoNoCourse1}
+                        >
+                            No courses available.
+                        </Typography>
+                        <Typography
+                            variant="body1"
+                            sx={{
+                                color: '#666',
+                            }}
+                        >
+                            Please check your selections or try searching for a different course.
+                        </Typography>
+                    </Box>
             )}
             <Box>
                 <Button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>

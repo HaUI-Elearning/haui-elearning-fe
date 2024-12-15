@@ -43,6 +43,21 @@ const styles = {
             marginBottom: '8px',
             paddingLeft: '16px',
         },
+    },
+    boxNoCourse:{
+        alignItems: 'center',
+        justifyContent: 'center',
+        height: '40vh',
+        backgroundColor: '#f9f9f9',
+        padding: '20px',
+        borderRadius: '8px',
+        boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+        textAlign: 'center',
+    },
+    typoNoCourse1:{
+        color: '#333',
+        fontWeight: 'bold',
+        marginBottom: '10px',
     }
 };
 export default styles

@@ -11,14 +11,14 @@ AllLesson.propTypes = {
 function AllLesson({ data }) {
     // Xử lý dữ liệu từ props
     const chapters = parseData(data);
-    // Tính tổng số chapters, lectures và tổng thời gian
+    
     const totalChapters = chapters.length;
     const totalLectures = chapters.reduce((total, chapter) => total + chapter.lectures.length, 0);
     const totalTime = chapters.reduce((total, chapter) => total + calculateTotalTime(chapter.lectures), 0);
     return (
         <div style={{ marginBottom: '35px' }}>
             <Typography sx={styles.typo1}>Course Sections</Typography>
-            <Typography variant="body2" color="textSecondary" style={{ paddingTop: '20px' }}>
+            <Typography variant="body2" color="textSecondary" style={{ paddingTop: '7px', fontSize:'18px', marginBottom:'5px' }}>
                 {totalChapters} sections | {totalLectures} lectures | {totalTime.toFixed(2)}min total length
             </Typography>
             <Box sx={{ border: '1px solid black' }}>

@@ -8,6 +8,7 @@ import Categories from './pages/Categories/Categories'
 import CourseDetailPage from './pages/CourseDetail/Detail'
 import TabPage from './pages/MyCourse/TabPage'
 import MyProfile from './components/User/MyProfile'
+import MyCart from './components/MyCart/myCart'
 
 
 function App() {
@@ -68,6 +69,17 @@ function App() {
         {
           path: '/my-profile',
           element:<MyProfile/>
+        }
+
+      ]
+    },
+    {
+      path: '/',
+      element: <MainLayout />,
+      children: [
+        {
+          path: '/cart',
+          element: <MyCart />
         }
 
       ]

@@ -2,18 +2,11 @@ import StarBorderIcon from '@mui/icons-material/StarBorder';
 import StarHalfIcon from '@mui/icons-material/StarHalf';
 import PropTypes from 'prop-types';
 import StarIcon from '@mui/icons-material/Star';
+import styles from './styles';
 RenderStar.propTypes = {
     numStars: PropTypes.number,
 };
-
-//hiển thị sao
 function RenderStar({numStars}) {
-    const styles = {
-        star: {
-            color: '#FFD700',
-            marginRight: 4
-        },
-    }
     const fullStars = Math.floor(numStars);
     const hasHalfStar = numStars % 1 >= 0.35;
     const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
@@ -36,7 +29,7 @@ function RenderStar({numStars}) {
             {[...Array(emptyStars)].map((_, index) => (
                 <StarBorderIcon
                     key={`empty-${index}`}
-                    style={{ color: '#e0e0e0', marginRight: 4 }}
+                    style={styles.emptyStar}
                     fontSize='small'
                 />
             ))}

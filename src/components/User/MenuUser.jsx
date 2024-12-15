@@ -1,73 +1,136 @@
 import { useState } from 'react';
 import Avatar from '@mui/material/Avatar';
-import Menu from '@mui/material/Menu';
-import MenuItem from '@mui/material/MenuItem';
 import { deepOrange } from '@mui/material/colors';
-import { Grid, Typography } from '@mui/material';
+import { Box, Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid, Typography } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { logout } from '../../store/userSlice';
 
 function MenuUser() {
-    const [anchorEl, setAnchorEl] = useState(null);
+    const [openMenu, setOpenMenu] = useState(false);
+    const [openDialog, setOpenDialog] = useState(false);
+    const dispatch = useDispatch();
+    const userInfo = useSelector((state) => state.user.userInfo);
+    const parseInfo = JSON.parse(userInfo);
     const navigate = useNavigate();
 
-    const handleMouseEnter = (event) => {
-        setAnchorEl(event.currentTarget);
+    const handleMouseEnter = () => {
+        setOpenMenu(true);
     };
 
     const handleMouseLeave = () => {
-        setAnchorEl(null);
+        setOpenMenu(false);
     };
 
     const handleMenuItemClick = (path) => {
         navigate(path);
-        setAnchorEl(null);
+        setOpenMenu(false);
+    };
+
+    const handleLogoutClick = () => {
+        setOpenDialog(true);
+    };
+
+    const handleCloseDialog = () => {
+        setOpenDialog(false);
+    };
+
+    const handleConfirmLogout = () => {
+        dispatch(logout());
+        localStorage.removeItem('accessToken');
+        navigate('/');
+        setOpenDialog(false);
     };
 
     return (
-        <div
-            onMouseEnter={handleMouseEnter}
-            onMouseLeave={handleMouseLeave}
-        >
+        <Box>
             <Avatar
                 sx={{
                     bgcolor: deepOrange[500],
                     cursor: 'pointer',
                     marginRight: '40px',
                 }}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
             >
                 TL
             </Avatar>
-            <Menu
-                anchorEl={anchorEl}
-                open={Boolean(anchorEl)}
-                onClose={handleMouseLeave}
-                anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'center',
-                }}
-                transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'center',
-                }}
-                MenuListProps={{
-                    onMouseLeave: handleMouseLeave,
-                }}
-            >
-                <Grid container alignItems="center" padding={1}>
-                    <Grid item><Avatar>TL</Avatar></Grid>
-                    <Grid item marginLeft={1}>
-                        <Typography>Thanh Long</Typography>
-                        <Typography>long@gmail.com</Typography>
+
+            {openMenu && (
+                <Box
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
+                    style={{
+                        position: 'absolute',
+                        backgroundColor: 'white',
+                        boxShadow: '0 2px 10px rgba(0,0,0,0.1)',
+                        borderRadius: '4px',
+                        zIndex: 17,
+                        width: '250px',
+                        padding: '10px',
+                        right:'10px'
+                    }}
+                >
+                    <Grid container alignItems="center" padding={1}>
+                        <Grid item>
+                            <Avatar>TL</Avatar>
+                        </Grid>
+                        <Grid item marginLeft={1}>
+                            <Typography>{parseInfo.name}</Typography>
+                            <Typography>{parseInfo.email}</Typography>
+                        </Grid>
                     </Grid>
-                </Grid>
-                <MenuItem onClick={() => handleMenuItemClick("/my-profile")}>Public profile</MenuItem>
-                <MenuItem onClick={() => handleMenuItemClick('/my-course/my-learning')}>My learning</MenuItem>
-                <MenuItem onClick={()=>handleMenuItemClick("/my-profile")}>My cart </MenuItem>
-                <MenuItem onClick={() => handleMenuItemClick('/my-course/my-wishlist')}>Wishlist</MenuItem>
-                <MenuItem>Purchase history</MenuItem>
-                <MenuItem onClick={handleMouseLeave}>Log out</MenuItem>
-            </Menu>
-        </div>
+                    <ul style={{ listStyleType: 'none', padding: 0, margin: 0 }}>
+                        {[
+                            { text: "Public profile", path: "/my-profile" },
+                            { text: "My learning", path: "/my-course/my-learning" },
+                            { text: "My cart", path: "/cart" },
+                            { text: "Wishlist", path: "/my-course/my-wishlist" },
+                            { text: "Purchase history", path: "/purchase-history" },
+                            { text: "Log out", path: null, onClick: handleLogoutClick }, 
+                        ].map((item, index) => (
+                            <li
+                                key={index}
+                                onClick={() => {
+                                    if (item.path) {
+                                        handleMenuItemClick(item.path);
+                                    } else if (item.onClick) {
+                                        item.onClick();
+                                    }
+                                }}
+                                style={{
+                                    cursor: 'pointer',
+                                    padding: '10px',
+                                    borderBottom: '1px solid #f0f0f0',
+                                    transition: 'background-color 0.2s ease',
+                                }}
+                                onMouseEnter={(e) => e.currentTarget.style.backgroundColor = '#f5f5f5'}
+                                onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'transparent'}
+                            >
+                                {item.text}
+                            </li>
+                        ))}
+                    </ul>
+                </Box>
+            )}
+
+            <Dialog open={openDialog} onClose={handleCloseDialog}>
+               <DialogTitle style={{ textAlign: 'center', fontWeight: 'bold' }}>Xác nhận đăng xuất</DialogTitle>
+                <DialogContent style={{ padding: '20px', textAlign: 'center' }}>
+                    <DialogContentText>
+                        Bạn có chắc chắn muốn đăng xuất không?
+                    </DialogContentText>
+                </DialogContent>
+                <DialogActions style={{ justifyContent: 'center' }}>
+                    <Button onClick={handleCloseDialog} color="primary">
+                        Hủy
+                    </Button>
+                    <Button onClick={handleConfirmLogout} color="primary">
+                        Đăng xuất
+                    </Button>
+                </DialogActions>
+            </Dialog>
+        </Box>
     );
 }
 

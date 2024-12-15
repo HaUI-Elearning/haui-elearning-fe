@@ -27,7 +27,6 @@ const Course = ({ courses = [] }) => {
                     <Slider {...settings}>
                         {category.courseCategories.map(course => (
                             <div key={course.courseId}>
-                              
                                 <Tooltip
                                     title={<RenderToolTipContent course={course}/>}
                                     placement="right"

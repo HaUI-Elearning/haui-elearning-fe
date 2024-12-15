@@ -44,15 +44,10 @@
             }
         }
     }
-    .favoriteIcon{
-        margin-right: 30px;
-    }
-    .cartIcon{
-        margin-right: 30px;
-    }
         .favoriteIcon {
             position: relative;
             cursor: pointer;
+            margin-right: 30px;
         }
     
         .favorite-menu {
@@ -68,14 +63,36 @@
             overflow-y: auto;
             z-index: 1000;
             padding: 10px;
+            display: flex;
+            flex-direction: column;
         }
     
         .favorite-items {
-            display: flex;
-            flex-direction: column;
+        
             gap: 10px;
+            flex: 1 1 80%;
+            overflow-y: auto;
         }
-    
+        .navigate-button {
+            margin-top: 10px; 
+            display: flex;
+            justify-content: center; 
+            align-items: center;
+            font-Weight: 'bolder';
+            button {
+                background-color: black;
+                border: none; 
+                border-radius: 5px;
+                padding: 10px 20px; 
+                font-size: 16px; 
+                cursor: pointer; 
+                color: white;
+                transition: background-color 0.3s ease;
+                &:hover {
+                    background-color: grey; 
+                }
+            }
+        }
         .favorite-item {
             display: flex;
             align-items: center;
@@ -109,7 +126,88 @@
             color: #888;
             font-size: 14px;
         }
-    
+
+                .cartIcon {
+                    position: relative;
+                    cursor: pointer;
+                    margin-right: 30px;
+                }
+        
+                .cart-menu {
+                    position: absolute;
+                    top: 100%;
+                    right: 0;
+                    background-color: #fff;
+                    border: 1px solid #ddd;
+                    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+                    border-radius: 8px;
+                    width: 340px;
+                    max-height: 400px;
+                    overflow-y: auto;
+                    z-index: 1000;
+                    padding: 10px;
+                    display: flex;
+                    flex-direction: column;
+                }
+        
+                .cart-items {
+        
+                    gap: 10px;
+                    flex: 1 1 80%;
+                    overflow-y: auto;
+                }
+        
+                .navigate-button {
+                    margin-top: 10px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    font-Weight: 'bolder';
+        
+                    button {
+                        background-color: black;
+                        border: none;
+                        border-radius: 5px;
+                        padding: 10px 20px;
+                        font-size: 16px;
+                        cursor: pointer;
+                        color: white;
+                        transition: background-color 0.3s ease;
+        
+                        &:hover {
+                            background-color: grey;
+                        }
+                    }
+                }
+                .cart-item {
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                }
+        
+                .cart-thumbnail {
+                    width: 80px;
+                    height: 80px;
+                    object-fit: cover;
+                    border-radius: 4px;
+                }
+        
+                .cart-item-details {
+                    display: flex;
+                    flex-direction: column;
+                }
+        
+                .cart-item-name {
+                    font-weight: bolder;
+                }
+        
+                .cart-item-price {
+                    font-weight: bolder;
+                }
+        
+                .cart-item-author {
+                    color: #888;
+                }
         .view-cart-button {
             width: 100%;
             padding: 10px;

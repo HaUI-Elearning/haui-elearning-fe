@@ -8,6 +8,8 @@ import { FaLock } from 'react-icons/fa6';
 import { MdEmail } from "react-icons/md";
 import { registerValidate } from '../../utils/registerValidate';
 import axios from 'axios';
+import { useState } from 'react';
+import { Alert, Snackbar } from '@mui/material';
 
 const Register = () => {
   const navigate = useNavigate();
@@ -19,6 +21,12 @@ const Register = () => {
     navigate('/signIn');
   };
 
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState('');
+  const [snackbarSeverity, setSnackbarSeverity] = useState('success');
+  const handleCloseSnackbar = () => {
+    setOpenSnackbar(false);
+  };
   return (
     <div className='container'>
       <div className='box'>
@@ -42,11 +50,27 @@ const Register = () => {
           onSubmit={async (values) => {
             try {
               console.log("Data being sent to the API:", values);
-              const response = await axios.post('http://localhost:8080/api/v1/users', values);
+              const response = await axios.post('http://localhost:8080/api/v1/register', values);
               console.log('Registration successful:', response.data);
-              // Redirect or show success message
+              setSnackbarMessage('Đăng ký thành công!');
+              setSnackbarSeverity('success');
+              setOpenSnackbar(true);
+              setTimeout(() => {
+                navigate('/signIn');
+              }, 2000);
             } catch (error) {
-              console.error('Error during registration:', error.response ? error.response.data : error.message);
+              // Xử lý lỗi và hiển thị thông báo cụ thể
+              if (error.response) {
+                // Nếu có phản hồi từ máy chủ
+                console.error('Error during registration:', error.response ? error.response.data : error.message);
+                const errorMessage = error.response.data.error || 'Đăng ký thất bại!';
+                setSnackbarMessage(errorMessage);
+                setSnackbarSeverity('error');
+              } else {
+                setSnackbarMessage('Đã xảy ra lỗi, vui lòng thử lại!');
+                setSnackbarSeverity('error');
+              }
+              setOpenSnackbar(true);
             }
           }}
         >
@@ -60,6 +84,7 @@ const Register = () => {
               </div>
               {errors.username && touched.username && <p className='errorMsg'>{errors.username}</p>}
               <br />
+
               <div className='input-group pass'>
                 <Field type='password' placeholder='Mật khẩu' name='password' required />
                 <span className='icon'>
@@ -69,14 +94,17 @@ const Register = () => {
               <br />
               {errors.password && touched.password && <p className='errorMsg'>{errors.password}</p>}
               <br />
+
               <div className='input-group pass'>
                 <Field type='password' placeholder='Nhập lại Mật khẩu' name='confirmPassword' required />
                 <span className='icon'>
                   <FaLock />
                 </span>
               </div>
+              <br />
               {errors.confirmPassword && touched.confirmPassword && <p className='errorMsg'>{errors.confirmPassword}</p>}
               <br />
+
               <div className="input-group email">
                 <Field type='text' placeholder='Email' name='email' required />
                 <span className='icon'>
@@ -98,6 +126,18 @@ const Register = () => {
           )}
         </Formik>
       </div>
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={6000}
+        onClose={handleCloseSnackbar}
+        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+        <Alert
+          onClose={handleCloseSnackbar}
+          severity={snackbarSeverity} 
+          sx={{ width: '100%', fontSize: '1.2rem', padding: '16px' }}>
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
     </div>
   );
 };

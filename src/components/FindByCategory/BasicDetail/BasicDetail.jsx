@@ -9,8 +9,6 @@ BasicDetail.propTypes = {
 };
 
 function BasicDetail({ course = [], detail = {} }) {
-    ////const totalStar = course.reduce((sum, current) => sum + current.star, 0);
-    // const averageStar = course.length ? (totalStar / course.courses.length).toFixed(2) : 0;
     const averageStar = course.reduce((sum, course) => sum + course.star, 0) / course.length;
     return (
         <div style={styles.paper}>
