@@ -38,7 +38,7 @@ const styles = {
     },
     typo3: {
         fontWeight: 'bolder',
-        fontSize: '30px'
+        fontSize: '30px',
     },
 
     courseDetails: {
@@ -59,6 +59,7 @@ const styles = {
     checkoutButton: {
         backgroundColor: '#a46aea',
         color: 'white',
+        marginTop: '20px',
         '&:hover': {
             backgroundColor: '#a053fb',
         },
