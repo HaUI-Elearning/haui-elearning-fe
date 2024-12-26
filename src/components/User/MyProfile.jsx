@@ -133,9 +133,12 @@ function MyProfile() {
                             </tr>
                         </tbody>
                     </table>
-                    <Button variant="contained" color="primary" onClick={handleSave} sx={styles.stylesButton}>
-                        Save
-                    </Button>
+                    <Box sx={{display:'flex',justifyContent:'center'}}>
+                        <Button variant="contained" color="primary" onClick={handleSave} sx={styles.stylesButton}>
+                            Save
+                        </Button>
+                    </Box>
+                  
                 </Box>
             </Box>
             <Snackbar

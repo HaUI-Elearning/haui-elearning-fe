@@ -9,6 +9,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import RenderStar from '../Course/RenderStar/RenderStar';
 import LoyaltyIcon from '@mui/icons-material/Loyalty';
 import { addToFavoritesApi } from '../../store/favoritesSlice';
+import { useNavigate } from 'react-router-dom';
 function MyCart() {
     const dispatch = useDispatch();
     const courses = JSON.parse(localStorage.getItem('cartItems'));
@@ -16,8 +17,10 @@ function MyCart() {
     const totalPrice = courses.reduce((total, course) => total + course.price, 0);
     const accessToken = useSelector(state => state.user.accessToken);
     const prevItems = useRef();
-
-    
+    const navigate = useNavigate();
+    const handleBuyNow = () => {
+        navigate('/checkout', { state: courseDetails });
+    };
     useEffect(() => {
         if (JSON.stringify(prevItems.current) !== JSON.stringify(courses)) {
             prevItems.current = courses;
@@ -54,7 +57,7 @@ function MyCart() {
 
     const handleMoveToWishlist = async (courseId) => {
         await dispatch(addToFavoritesApi({ courseId, accessToken }));
-        await handleRemoveCourse(courseId); 
+        await handleRemoveCourse(courseId);
     };
     return (
         <Container style={styles.container}>
@@ -100,7 +103,9 @@ function MyCart() {
                             <Paper sx={styles.totalPaper}>
                                 <Typography sx={styles.typo2}>Total: </Typography>
                                 <Typography sx={styles.typo3}>{formatMoney(totalPrice)}</Typography>
-                                <Button style={styles.checkoutButton}>
+                                <Button style={styles.checkoutButton}
+                                    onClick={handleBuyNow}
+                                >
                                     Checkout
                                 </Button>
                             </Paper>

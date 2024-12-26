@@ -6,7 +6,24 @@ const styles = {
         height: '400px',
         color: 'white',
         boxShadow: 1,
-        marginTop: '20px'
+      
+    },
+    box1: {
+        display: 'flex',
+        marginBottom: '6px',
+        padding: '10px',
+        justifyContent:'center'
+    },
+    circle:{
+        width: 50,
+        height: 50,
+        borderRadius: '50%',
+        border: '2px solid black',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        cursor: 'pointer',
+        marginLeft: '1.5rem',
     },
     breadcrumb: {
         paddingTop: '20px',
@@ -78,11 +95,11 @@ const styles = {
         position: 'absolute',
         top: '16%',
         right: '180px',
-        zIndex: 10,
+        zIndex: 2,
         alignItems: 'center',
         bgcolor: 'white',
         borderRadius: '5px',
-        height: '580px',
+        minHeight: '580px',
         width: '350px',
         boxShadow: '0px 6px 12px rgba(0, 0, 0, 0.1)',
         border: '1px solid grey',
@@ -90,18 +107,19 @@ const styles = {
     boxImage: {
         display: 'flex', justifyContent: 'center', alignItems: 'center'
     },
-    addToCartButton: {
-        width: '80%',
-        backgroundColor: '#A46AEA',
-        color: 'white',
-        '&:hover': {
-            backgroundColor: '#303f9f',
-        },
+    cart1: {
+        backgroundColor: 'rgb(192, 66, 206)',
+        padding: '18px',
+        color: '#fff',
+        width: '70%',
+        fontWeight: 'bold',
     },
     buyNowButton: {
-        width: '80%',
-        color: '#3f51b5',
-        borderColor: '#3f51b5',
+        backgroundColor: 'white',
+        padding: '18px',
+        color: 'Black',
+        width: '90%',
+        fontWeight: 'bolder',
         '&:hover': {
             borderColor: '#303f9f',
         },

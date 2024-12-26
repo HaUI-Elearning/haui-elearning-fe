@@ -9,6 +9,8 @@ import CourseDetailPage from './pages/CourseDetail/Detail'
 import TabPage from './pages/MyCourse/TabPage'
 import MyProfile from './components/User/MyProfile'
 import MyCart from './components/MyCart/myCart'
+import SearchPage from './pages/Search/SearchPage'
+import Checkout from './components/checkout/Checkout'
 
 
 function App() {
@@ -82,6 +84,27 @@ function App() {
           element: <MyCart />
         }
 
+      ]
+    },
+    {
+      path: '/',
+      element: <MainLayout />,
+      children: [
+        {
+          path: '/search',
+          element: <SearchPage />
+        }
+      ]
+    },
+
+    {
+      path: '/',
+      element: <MainLayout />,
+      children: [
+        {
+          path: '/checkout',
+          element: <Checkout />
+        }
       ]
     }
 

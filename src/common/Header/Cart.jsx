@@ -99,8 +99,8 @@ const CartIcon = () => {
                             }
                         </>
                     ) : (
-                        <div className="login-prompt" style={{ backgroundColor: '#f8d7da', color: '#721c24', padding: '10px', border: '1px solid #f5c6cb', borderRadius: '5px', textAlign: 'center', fontSize: '18px', fontWeight: 'bolder' }}>
-                            <p>Sign in to use this function</p>
+                        <div className="login-prompt" style={{ padding: '10px', border: '1px solid #f5c6cb', borderRadius: '5px', textAlign: 'center', fontSize: '18px', fontWeight: 'bolder' }}>
+                            <p>Sign in to use this feature</p>
                             <button onClick={() => navigate('/signIn')} style={{ fontSize: '14px', padding: '5px', marginTop: '5px' }}>Sign in</button>
                         </div>
                     )}

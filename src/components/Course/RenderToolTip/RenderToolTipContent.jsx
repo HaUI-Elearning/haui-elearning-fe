@@ -34,56 +34,56 @@ function RenderToolTipContent({ course = {} }) {
     const [isFavorited, setIsFavorited] = useState(isFavorite);
 
     const handleRemoveCart = async (courseId) => {
-            const accessToken = localStorage.getItem('accessToken');
-            await dispatch(removeFromCartApi({ courseId, accessToken }));
-            const updatedCart = cartItems.filter(course => course.courseId !== courseId);
-            localStorage.setItem('cartItems', JSON.stringify(updatedCart));
-        };
-        const handleRemoveFavorite = async (courseId) => {
-            const accessToken = localStorage.getItem('accessToken');
-            await dispatch(removeFromFavoritesApi({ courseId, accessToken }));
-            const updatedFavorite = favorites.filter(course => course.courseId !== courseId);
-            localStorage.setItem('favoriteItems', JSON.stringify(updatedFavorite));
-        };
-    
-        const handleCartClick = async () => {
-            if (accessToken) {
-                if (isInCart) {
-                    navigate('/cart')
-                } else {
-                    try {
-                        if (isFavorited) {
-                            await handleRemoveFavorite(course.courseId)
-                            setIsFavorited(false)
-                        }
-                        await dispatch(addToCartApi({ courseId: course.courseId, accessToken })).unwrap()
-                        setIsInCart(true)
-                    } catch (error) {
-                        console.error('fail to add to cart', error)
+        const accessToken = localStorage.getItem('accessToken');
+        await dispatch(removeFromCartApi({ courseId, accessToken }));
+        const updatedCart = cartItems.filter(course => course.courseId !== courseId);
+        localStorage.setItem('cartItems', JSON.stringify(updatedCart));
+    };
+    const handleRemoveFavorite = async (courseId) => {
+        const accessToken = localStorage.getItem('accessToken');
+        await dispatch(removeFromFavoritesApi({ courseId, accessToken }));
+        const updatedFavorite = favorites.filter(course => course.courseId !== courseId);
+        localStorage.setItem('favoriteItems', JSON.stringify(updatedFavorite));
+    };
+
+    const handleCartClick = async () => {
+        if (accessToken) {
+            if (isInCart) {
+                navigate('/cart')
+            } else {
+                try {
+                    if (isFavorited) {
+                        await handleRemoveFavorite(course.courseId)
+                        setIsFavorited(false)
                     }
+                    await dispatch(addToCartApi({ courseId: course.courseId, accessToken })).unwrap()
+                    setIsInCart(true)
+                } catch (error) {
+                    console.error('fail to add to cart', error)
                 }
             }
         }
-    
-        const handleFavoriteClick = async () => {
-            if (accessToken) {
-                const newFavoritedStatus = !isFavorited; 
-                setIsFavorited(newFavoritedStatus);
-                if (isInCart) {
-                    await handleRemoveCart(course.courseId);
-                    setIsInCart(false);
-                }
-                if (newFavoritedStatus) {
-                    await dispatch(addToFavoritesApi({ courseId: course.courseId, accessToken })).unwrap();
-                    setIsFavorited(true)
-                } else {
-                    await handleRemoveFavorite(course.courseId);
-                    setIsFavorited(false)
-                }
-            } else {
-                navigate('/login');
+    }
+
+    const handleFavoriteClick = async () => {
+        if (accessToken) {
+            const newFavoritedStatus = !isFavorited;
+            setIsFavorited(newFavoritedStatus);
+            if (isInCart) {
+                await handleRemoveCart(course.courseId);
+                setIsInCart(false);
             }
-        };
+            if (newFavoritedStatus) {
+                await dispatch(addToFavoritesApi({ courseId: course.courseId, accessToken })).unwrap();
+                setIsFavorited(true)
+            } else {
+                await handleRemoveFavorite(course.courseId);
+                setIsFavorited(false)
+            }
+        } else {
+            navigate('/login');
+        }
+    };
 
     return (
         <Box>

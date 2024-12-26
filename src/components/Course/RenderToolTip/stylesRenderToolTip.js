@@ -18,8 +18,6 @@ const styles = {
         color: '#fff',
         width: '70%',
         fontWeight: 'bold',
-        
-
     },
     heart: {
         fontSize: '1.8rem',
