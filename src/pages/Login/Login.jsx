@@ -1,173 +1,188 @@
-import { Link, useNavigate } from 'react-router-dom';
-import { loginValidate } from '../../utils/loginValidate';
-import { Field, Formik, Form } from 'formik';
-import axios from 'axios';
-import { useDispatch } from 'react-redux'; // Import useDispatch
-import { setUser } from '../../store/userSlice'; // Import action
+import { useCallback, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { Formik, Form, Field, ErrorMessage } from "formik";
+import { useDispatch } from "react-redux";
+import axios from "axios";
+
+import { loginValidate } from "../../utils/loginValidate";
+import { setUser } from "../../store/userSlice";
+
+import { IoIosArrowBack } from "react-icons/io";
+import { FaUser } from "react-icons/fa";
+import { FaLock } from "react-icons/fa6";
+
+import { Alert, Snackbar } from "@mui/material";
+import logo from "../../assets/images/logo.png";
 import "../Login/Login.scss";
-import logo from '../../assets/images/logo.png';
-import { IoIosArrowBack } from 'react-icons/io';
-import { FaUser } from 'react-icons/fa';
-import { FaLock } from 'react-icons/fa6';
-import { useEffect, useState } from 'react';
-import { Alert, Snackbar } from '@mui/material';
 
 const Login = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const accessToken = localStorage.getItem('accessToken');
+  const accessToken = localStorage.getItem("accessToken");
 
-  const [openSnackbar, setOpenSnackbar] = useState(false);
-  const [snackbarMessage, setSnackbarMessage] = useState('');
-  const [snackbarSeverity, setSnackbarSeverity] = useState('success');
+  const [snackbar, setSnackbar] = useState({
+    open: false,
+    message: "",
+    severity: "success",
+  });
 
-  const handleCloseSnackbar = () => {
-    setOpenSnackbar(false);
-  };
+  const showSnackbar = useCallback((message, severity = "success") => {
+    setSnackbar({ open: true, message, severity });
+  }, []);
 
-  const handleLogin = async (values) => {
+  const fetchUserProfile = useCallback(async () => {
+    if (!accessToken) return;
+
     try {
-      const response = await axios.post('http://localhost:8080/api/v1/login', {
-        username: values.username,
-        password: values.password,
-      });
-
-      if (response.status === 200) {
-        const { accessToken } = response.data.data;
-        localStorage.setItem('accessToken', accessToken);
-        dispatch(setUser({ accessToken }));
-        setSnackbarMessage('Đăng nhập thành công!');
-        setSnackbarSeverity('success');
-        setOpenSnackbar(true);
-        setTimeout(() => {
-          navigate('/');
-        }, 2000);
-      }
-    } catch (error) {
-      if (error.response) {
-        const errorMessage = 'Sai tài khoản hoặc mật khẩu!';
-        setSnackbarMessage(errorMessage);
-        setSnackbarSeverity('error');
-      } else {
-        setSnackbarMessage('Đã xảy ra lỗi, vui lòng thử lại!');
-        setSnackbarSeverity('error');
-      }
-      setOpenSnackbar(true);
-    }
-  };
-
-  useEffect(() => {
-    const fetchUserInfo = async () => {
-      if (accessToken) {
-      
-        try {
-          const response = await axios.get('http://localhost:8080/api/v1/users/my-profile', {
-            headers: {
-              'Authorization': `Bearer ${accessToken}`,
-              'Content-Type': 'application/json',
-            },
-          });
-
-          dispatch(setUser({ userInfo: JSON.stringify(response.data.data), accessToken }));
-        } catch (err) {
-          console.error('Failed to fetch user info:', err.message);
-      
+      const res = await axios.get(
+        "http://localhost:8080/api/v1/users/my-profile",
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+            "Content-Type": "application/json",
+          },
         }
-      }
-    };
+      );
 
-    fetchUserInfo();
+      dispatch(
+        setUser({
+          accessToken,
+          userInfo: JSON.stringify(res.data.data),
+        })
+      );
+    } catch (err) {
+      console.error("Lỗi lấy thông tin user:", err.message);
+    }
   }, [accessToken, dispatch]);
 
-  const goToForgotPassword = () => {
-    navigate('/forgot-password');
-  };
+  useEffect(() => {
+    fetchUserProfile();
+  }, [fetchUserProfile]);
 
-  const goToRegister = () => {
-    navigate('/signUp');
-  };
+  const handleLogin = useCallback(
+    async (values) => {
+      try {
+        const res = await axios.post(
+          "http://localhost:8080/api/v1/login",
+          values
+        );
 
-  const goBack = () => {
-    navigate('/');
-  };
+        if (res.status === 200) {
+          const { accessToken } = res.data.data;
+          localStorage.setItem("accessToken", accessToken);
+          dispatch(setUser({ accessToken }));
+
+          showSnackbar("Login successful!");
+
+          setTimeout(() => navigate("/"), 2000);
+        }
+      } catch (err) {
+        const mess = err.response.data.error;
+        if (mess === "user not verify") {
+          showSnackbar("Your account is not verified yet", "error");
+          setTimeout(() => navigate("/verify-email"), 2000);
+          return;
+        }
+
+        showSnackbar("Incorrect username or password!", "error");
+      }
+    },
+    [dispatch, navigate, showSnackbar]
+  );
 
   return (
-    <div className='container'>
-      <div className='box'>
-        <div className='back'>
-          <span onClick={goBack}>
-            <IoIosArrowBack /> QUAY LẠI
-          </span>
+    <div className="container">
+      <div className="box">
+        <div className="back">
+          <button
+            type="button"
+            className="back-button"
+            onClick={() => navigate('/')}
+            aria-label="Back to Sign In"
+          >
+            <IoIosArrowBack /> Back Home
+          </button>
         </div>
-        <div className='logo'>
-          <img src={logo} alt=' Logo' />
+
+        <div className="logo">
+          <img src={logo} alt="Logo" />
         </div>
+
         <Formik
-          initialValues={{
-            username: '',
-            password: '',
-          }}
+          initialValues={{ username: "", password: "" }}
           validationSchema={loginValidate()}
           onSubmit={handleLogin}
         >
-          {({ errors, touched }) => (
+          {() => (
             <Form>
-              <div className='input-group'>
+              <div className="input-group">
                 <Field
-                  type='text'
-                  placeholder='Tên Đăng Nhập'
-                  name='username'
+                  type="text"
+                  name="username"
+                  placeholder="User name"
                   autoComplete="off"
                   required
                 />
-                <span className='icon'>
+                <span className="icon">
                   <FaUser />
                 </span>
               </div>
-              {errors.username && touched.username ? (
-                <p className='errorMsg'>{errors.username}</p>
-              ) : null}
-              <br />
-              <div className='input-group pass'>
+              <ErrorMessage
+                name="username"
+                component="p"
+                className="errorMsg"
+              />
+
+              <div className="input-group pass">
                 <Field
-                  type='password'
-                  placeholder='Mật khẩu'
-                  name='password'
+                  type="password"
+                  name="password"
+                  placeholder="Password"
                   required
                 />
-                <span className='icon'>
+                <span className="icon">
                   <FaLock />
                 </span>
               </div>
-              <br />
-              {errors.password && touched.password ? (
-                <p className='errorMsg'>{errors.password}</p>
-              ) : null}
+              <ErrorMessage
+                name="password"
+                component="p"
+                className="errorMsg"
+              />
 
-              <div className='forgot-password' onClick={goToForgotPassword}>
-                <Link to='/forgot-password'><i>Quên mật khẩu ?</i></Link>
+              <div className="forgot-password">
+                <Link to="/forgot-password">
+                  <i>Forgot password?</i>
+                </Link>
               </div>
-              <button type='submit' className='button'>
-                ĐĂNG NHẬP
+
+              <button type="submit" className="button">
+                Sign in
               </button>
+
               <div className="linkRegister">
-                <p>Bạn chưa có tài khoản?</p>
-                <Link to='/signUp' onClick={goToRegister} className='dangky'>Đăng ký</Link>
+                <p>Do not have an account?</p>
+                <Link to="/signUp" className="dangky">
+                  Sign up
+                </Link>
               </div>
             </Form>
           )}
         </Formik>
       </div>
+
       <Snackbar
-        open={openSnackbar}
+        open={snackbar.open}
         autoHideDuration={6000}
-        onClose={handleCloseSnackbar}
-        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+        onClose={() => setSnackbar((prev) => ({ ...prev, open: false }))}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+      >
         <Alert
-          onClose={handleCloseSnackbar}
-          severity={snackbarSeverity}
-          sx={{ width: '100%', fontSize: '1.2rem', padding: '16px' }}>
-          {snackbarMessage}
+          onClose={() => setSnackbar((prev) => ({ ...prev, open: false }))}
+          severity={snackbar.severity}
+          sx={{ width: "100%", fontSize: "1.2rem", padding: "16px" }}
+        >
+          {snackbar.message}
         </Alert>
       </Snackbar>
     </div>

@@ -1,0 +1,55 @@
+.tittle{
+    font-size: 24px;
+    font-weight: 600;
+    color: #000;
+    margin-bottom: 20px;
+}
+
+.description{
+    font-size: 16px;
+    color: #000;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+.email{
+    font-size: 16px;
+    color: #000;
+    margin-bottom: 20px;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.button-submit {
+    width: calc(100%);
+    background: #a435f0;
+    color: #fff;
+    padding: 15px;
+    border: none;
+    border-radius: 15px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 20px;
+}
+
+.button-resend {
+    width: calc(100%);
+    background: #a435f0;
+    /* màu tím */
+    color: #fff;
+    padding: 15px;
+    border: none;
+    border-radius: 15px;
+    font-size: 16px;
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 20px;
+    transition: background 0.3s ease;
+}
+
+.button-resend.disabled {
+    background: #999999;
+    /* màu xám */
+    cursor: not-allowed;
+    pointer-events: none;
+    /* không cho click */ }

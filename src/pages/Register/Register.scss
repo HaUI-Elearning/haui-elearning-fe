@@ -4,9 +4,9 @@
   align-items: center;
   min-height: 100vh;
   background-image: url("../../assets/images/b2.jpg");
-  background-size: cover; // Đảm bảo ảnh phủ kín khu vực
-  background-position: center; // Căn giữa ảnh
-  background-repeat: no-repeat; // Không lặp lại ảnh
+  background-size: cover; 
+  background-position: center; 
+  background-repeat: no-repeat; 
 }
 
 .box {
@@ -108,7 +108,26 @@
   font-weight: 600;
   margin-top: 20px;
 }
+.button-resend {
+  width: calc(100% - 40px);
+  background: #a435f0;
+  /* màu tím */
+  color: #fff;
+  padding: 15px;
+  border: none;
+  border-radius: 15px;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: 600;
+  margin-top: 20px;
+  transition: background 0.3s ease;
+}
 
+.button-resend.disabled {
+  background: #999999;
+  cursor: not-allowed;
+  pointer-events: none;
+}
 .errorMsg {
   max-width: 100%;
   font-size: 0.85rem;
