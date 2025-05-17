@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import axios from 'axios';
 import Search from '../../components/SearchComp/Search';
+import { CircularProgress } from '@mui/material';
 
 const SearchPage = () => {
     const location = useLocation();
@@ -31,6 +32,14 @@ const SearchPage = () => {
         loadAllCourses();
     }, [searchTerm]);
 
+    if (loading) {
+        return (
+          <div style={{ textAlign: 'center', marginTop: '100px' }}>
+            <CircularProgress size={60} color="primary" />
+            <p style={{ fontSize: '18px', marginTop: '10px' }}>Đang tìm kiếm khoá học...</p>
+          </div>
+        );
+      }
     return (
         <Search searchTerm={searchTerm} loading={loading} courses={courses} />
     );

@@ -29,7 +29,7 @@ api.interceptors.response.use(
 )
 
 const apiDefault = axios.create({
-    baseURL: `${import.meta.env.VITE_API_SERVER}`,
+    baseURL: `http://localhost:3000`,
     headers: {
         "Content-Type": 'Application/json'
     }
