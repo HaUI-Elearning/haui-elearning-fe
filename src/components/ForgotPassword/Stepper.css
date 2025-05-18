@@ -144,3 +144,33 @@
   font-weight: 600;
   margin-top: 20px;
 }
+
+.button-back3{
+  background: #ededed;
+  /* màu tím */
+  color: #552fea;
+  padding: 15px;
+  border-radius: 15px;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: 600;
+  margin-top: 20px;
+  background-color: #eeeff4;
+  transition: background 0.3s ease;
+  border: 1px solid #552fea;
+  min-width: 100px;
+}
+
+.button-submit3{
+  width: calc(100% - 40px);
+  background: #a435f0;
+  color: #fff;
+  padding: 15px;
+  border: none;
+  border-radius: 15px;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: 600;
+  margin: 20px auto 0;
+  display: block;
+}

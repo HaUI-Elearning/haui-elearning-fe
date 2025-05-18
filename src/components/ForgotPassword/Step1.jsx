@@ -55,7 +55,7 @@ const Step1 = ({ onNext, onSend, sendLoading }) => {
         <button
           className="back-to-login"
           onClick={() => {
-            localStorage.removeItem("emailUserForgot");
+            localStorage.removeItem("emailForgot");
             navigate("/signIn");
           }}
         >

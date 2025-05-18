@@ -1,14 +1,15 @@
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 import VerifySignUpForm from "../../components/VerifySignUp/VerifySignUpForm";
 import SnackbarAlert from "../../common/SnackbarAlert";
 import logo from "../../assets/images/logo.png";
 import { verifySignUpUser } from "../../apis/verifySignUp";
-import { resendOtpSignUp } from "../../apis/resendOtp";
+import useResendOtp from "../../customHooks/useResendOtp";
+import { useState } from "react";
 
 const VerifySignUp = () => {
   const navigate = useNavigate();
+  const emailUser = localStorage.getItem("emailRegister");
   const [snackbar, setSnackbar] = useState({
     open: false,
     message: "",
@@ -16,13 +17,19 @@ const VerifySignUp = () => {
   });
 
   const [loading, setLoading] = useState(false);
-  const [resendLoading, setResendLoading] = useState(false);
-  const [countdown, setCountdown] = useState(0);
-  const emailUser = localStorage.getItem("emailRegister");
+
   const handleSnackbarClose = () => {
     setSnackbar({ ...snackbar, open: false });
   };
+  const notify = (message, severity = "success") => {
+    setSnackbar({
+      open: true,
+      message,
+      severity,
+    });
+  };
 
+  const { resend, resendLoading, countdown } = useResendOtp();
   const handleSubmit = async (formData) => {
     try {
       setLoading(true);
@@ -37,7 +44,6 @@ const VerifySignUp = () => {
         severity: "success",
       });
       localStorage.removeItem("emailRegister");
-      setCountdown(60);
       setTimeout(() => navigate("/signIn"), 2000);
     } catch (err) {
       console.error("Verification error:", err);
@@ -51,44 +57,6 @@ const VerifySignUp = () => {
       setLoading(false);
     }
   };
-  const handleResend = async () => {
-    try {
-      setResendLoading(true);
-      const payload = {
-        email: emailUser,
-      };
-      const res = await resendOtpSignUp(payload);
-      console.log("OTP resend successful!", res);
-      setSnackbar({
-        open: true,
-        message: "OTP resend successful!",
-        severity: "success",
-      });
-      setCountdown(60);
-    } catch (err) {
-      let message = "";
-
-      if (err.error === "Bạn đã gửi quá số lần OTP cho REGISTER trong ngày.") {
-        message = "You have sent too many OTPs for REGISTER today!";
-      } else {
-        message = "Failed to resend OTP!";
-      }
-      setSnackbar({
-        open: true,
-        message,
-        severity: "error",
-      });
-    } finally {
-      setResendLoading(false);
-    }
-  };
-  useEffect(() => {
-    if (countdown === 0) return;
-    const timer = setInterval(() => {
-      setCountdown((prev) => prev - 1);
-    }, 1000);
-    return () => clearInterval(timer);
-  }, [countdown]);
 
   return (
     <div className="container">
@@ -98,7 +66,7 @@ const VerifySignUp = () => {
         </div>
         <VerifySignUpForm
           onSubmit={handleSubmit}
-          onResend={handleResend}
+          onResend={() => resend(emailUser, notify)}
           loading={loading}
           resendLoading={resendLoading}
           countdown={countdown}

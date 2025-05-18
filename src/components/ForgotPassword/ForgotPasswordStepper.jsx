@@ -56,7 +56,9 @@ const ForgotPasswordStepper = ({
       case 2:
         return (
           <Step3
+            setActiveStep={setActiveStep}
             onBack={handleBack}
+            onResend={onResend}
             onChangePass={onChangePass}
             changePassLoading={changePassLoading}
           />
@@ -100,7 +102,6 @@ ForgotPasswordStepper.propTypes = {
   changePassLoading: PropTypes.bool.isRequired,
   countdown: PropTypes.number.isRequired,
   emailUser: PropTypes.string.isRequired,
-  otpVerified: PropTypes.string,
 };
 
 export default ForgotPasswordStepper;

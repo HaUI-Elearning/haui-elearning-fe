@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { verifyOtpForgotPasswordSchema } from "../../utils/emailForgotPassword";
-import OtpInput from "../../common/OtpInput "; // ✅ import
+import OtpInput from "../../common/OtpInput "; 
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useNavigate } from "react-router-dom";
 import "./Stepper.css";
@@ -79,7 +79,7 @@ const Step2 = ({
         <button
           className="back-to-login"
           onClick={() => {
-            localStorage.removeItem("emailUserForgot");
+            localStorage.removeItem("emailForgot");
             navigate("/signIn");
           }}
         >
