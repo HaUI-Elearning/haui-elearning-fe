@@ -6,6 +6,7 @@ import { resendOtpForgotPassword } from "../../apis/resendForgotPasswordOtp";
 import { verifyOtpForgotPassword } from "../../apis/verifyForgotPassword";
 import { changePassword } from "../../apis/changePassword";
 import { useNavigate } from "react-router-dom";
+import useResendOtp from "../../customHooks/useResendOtp";
 const ForgotPassPage = () => {
   const navigate = useNavigate();
   const [snackbar, setSnackbar] = useState({
@@ -18,14 +19,21 @@ const ForgotPassPage = () => {
   const [resendLoading, setResendLoading] = useState(false);
   const [verifyLoading, setVerifyLoading] = useState(false);
   const [changePassLoading, setChangePassLoading] = useState(false);
-  const [countdown, setCountdown] = useState(0);
+  const [countdown, setCountdown] = useState(60);
   const [otpVerified, setOtpVerified] = useState("");
-
-  const emailUserForgot = localStorage.getItem("emailUserForgot");
 
   const handleSnackbarClose = () => {
     setSnackbar({ ...snackbar, open: false });
   };
+  const notify = (message, severity = "success") => {
+    setSnackbar({
+      open: true,
+      message,
+      severity,
+    });
+  };
+  //resend OTP vêrify email
+  const { resend } = useResendOtp();
 
   const handleSend = async (formData) => {
     try {
@@ -33,6 +41,8 @@ const ForgotPassPage = () => {
       const payload = {
         email: formData.email,
       };
+      localStorage.setItem("emailForgot", formData.email);
+      console.log("Sending OTP to:", localStorage.getItem("emailForgot"));
       await sendOtpForgotPassword(payload);
       setCountdown(60);
       setSnackbar({
@@ -40,7 +50,7 @@ const ForgotPassPage = () => {
         message: "Send OTP successful.",
         severity: "success",
       });
-      localStorage.setItem("emailUserForgot", formData.email);
+
       return true;
     } catch (err) {
       let message = "";
@@ -53,11 +63,14 @@ const ForgotPassPage = () => {
         message = "Oops! You've hit the daily limit for OTP requests.";
       } else if (err.error === "Email does not exist..") {
         message = "Email does not exist. Please check again.";
-      }else if (err.error === "User not verify") {
+      } else if (err.error === "User not verify") {
         message = "Please go to verify your account first.";
+
         setTimeout(() => {
-          localStorage.removeItem("emailUserForgot");
-          localStorage.setItem("emailRegister", formData.email);
+          const resendTo = localStorage.getItem("emailForgot");
+          localStorage.setItem("emailRegister", resendTo);
+          resend(localStorage.getItem("emailRegister"), notify);
+
           navigate("/verify-email");
         }, 2000);
       } else {
@@ -78,7 +91,7 @@ const ForgotPassPage = () => {
     try {
       setResendLoading(true);
       const payload = {
-        email: emailUserForgot,
+        email: localStorage.getItem("emailForgot"),
       };
       console.log("Resending OTP to:", payload);
       const res = await resendOtpForgotPassword(payload);
@@ -97,7 +110,7 @@ const ForgotPassPage = () => {
 
       if (
         err.error ===
-        "Bạn đã gửi quá số lần OTP cho FORGOT-PASSWORD trong ngày."
+        "Bạn đã gửi quá số lần OTP cho FORGOT_PASSWORD trong ngày."
       ) {
         message = "Oops! You've hit the daily limit for OTP requests.";
       } else if (
@@ -105,8 +118,6 @@ const ForgotPassPage = () => {
       ) {
         message = "Please go to verify your account first.";
         setTimeout(() => {
-          localStorage.removeItem("emailUserForgot");
-          localStorage.setItem("emailRegister", emailUserForgot);
           navigate("/verify-email");
         }, 2000);
       } else {
@@ -169,20 +180,21 @@ const ForgotPassPage = () => {
       console.log("Change password successful!Please sign in again!", res);
       setSnackbar({
         open: true,
-        message: "Change password successful!Please sign in again!",
+        message: "Change password successful! Please sign in again!",
         severity: "success",
       });
-      localStorage.removeItem("emailUserForgot");
+      localStorage.removeItem("emailForgot");
       setTimeout(() => navigate("/signIn"), 2000);
       return true;
     } catch (err) {
       console.error("Change error:", err);
-      const message = err.error || "Change password failed!";
+      const message = "OTP expried or invalid! Get new OTP!";
       setSnackbar({
         open: true,
         message,
         severity: "error",
       });
+      return false;
     } finally {
       setChangePassLoading(false);
     }
@@ -200,7 +212,7 @@ const ForgotPassPage = () => {
         verifyLoading={verifyLoading}
         changePassLoading={changePassLoading}
         countdown={countdown}
-        emailUser={emailUserForgot}
+        emailUser={localStorage.getItem("emailForgot")}
         otpVerified={otpVerified}
       />
 

@@ -2,50 +2,37 @@
 import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { Box, Button } from "@mui/material";
+
+import { Box } from "@mui/material";
 import InputField from "../../common/InputField";
 import { MdLock } from "react-icons/md";
+import "./Stepper.css";
+import { resetPasswordSchema } from "../../utils/emailForgotPassword";
 
-const schema = yup
-  .object({
-    password: yup
-      .string()
-      .required("Vui lòng nhập mật khẩu mới 😅")
-      .min(6, "Tối thiểu 6 ký tự nha!"),
-    confirmPassword: yup
-      .string()
-      .oneOf([yup.ref("password")], "Mật khẩu không khớp ❌")
-      .required("Nhập lại mật khẩu đi nào!"),
-  })
-  .required();
-
-export default function Step3({
-  onChangePass,
-
-  changePassLoading,
-  onBack,
-}) {
+export default function Step3({ onChangePass, changePassLoading, onBack, onResend }) {
   const {
     control,
     handleSubmit,
     formState: { errors },
   } = useForm({
-    resolver: yupResolver(schema),
+    resolver: yupResolver(resetPasswordSchema),
     mode: "onTouched",
   });
 
   const submitHandler = async (values) => {
     const ok = await onChangePass(values);
-    console.log("ok", ok);
     if (ok) {
-      alert("🎉 Đổi mật khẩu thành công!");
+      console.log("Change password successful! Please sign in again!");
+    } else {
+      console.log("Change password failed!");
+      onResend();
+      onBack();
     }
   };
 
   return (
     <form onSubmit={handleSubmit(submitHandler)} noValidate>
-    <h1 className="title">Create new password</h1>
+      <h1 className="title">Create new password</h1>
       <p className="description">
         Your new password must be different from your previous passwords.
         <br></br> It should be at least 6 characters.
@@ -54,7 +41,7 @@ export default function Step3({
       <InputField
         control={control}
         name="password"
-        placeholder="Mật khẩu mới"
+        placeholder="New password"
         icon={MdLock}
         type="password"
         defaultValue=""
@@ -64,7 +51,7 @@ export default function Step3({
       <InputField
         control={control}
         name="confirmPassword"
-        placeholder="Nhập lại mật khẩu"
+        placeholder="Confirm password"
         icon={MdLock}
         type="password"
         defaultValue=""
@@ -72,12 +59,13 @@ export default function Step3({
       {errors.confirm && <p className="errorMsg">{errors.confirm.message}</p>}
 
       <Box sx={{ display: "flex", justifyContent: "space-between", mt: 3 }}>
-        <Button variant="outlined" onClick={onBack}>
-          🔙 Quay lại
-        </Button>
-        <Button variant="contained" type="submit" disabled={changePassLoading}>
-          {changePassLoading ? "Đang xử lý..." : "✅ Xác nhận"}
-        </Button>
+        <button
+          className="button-submit3"
+          type="submit"
+          disabled={changePassLoading}
+        >
+          {changePassLoading ? "Is submitting..." : "Submit"}
+        </button>
       </Box>
     </form>
   );
@@ -87,4 +75,5 @@ Step3.propTypes = {
   onChangePass: PropTypes.func.isRequired,
   changePassLoading: PropTypes.bool.isRequired,
   onBack: PropTypes.func.isRequired,
+  onResend: PropTypes.func.isRequired,
 };
