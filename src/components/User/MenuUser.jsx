@@ -54,19 +54,22 @@ function MenuUser() {
     setOpenDialog(false);
   };
 
-  return (
-    <Box>
-      <Avatar
-        sx={{
-          bgcolor: deepOrange[500],
-          cursor: "pointer",
-          marginRight: "40px",
-        }}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
-        TL
-      </Avatar>
+
+    return (
+        <Box>
+            <Avatar
+                sx={{
+                    bgcolor: deepOrange[500],
+                    cursor: 'pointer',
+                    marginRight: '40px',
+                    
+                }}
+                onMouseEnter={handleMouseEnter}
+                onMouseLeave={handleMouseLeave}
+            >
+                TL
+            </Avatar>
+
 
       {openMenu && (
         <Box

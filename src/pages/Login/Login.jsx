@@ -68,7 +68,9 @@ const Login = () => {
         );
 
         if (res.status === 200) {
+          
           const { accessToken } = res.data.data;
+          console.log("ACCCCC" ,accessToken);
           localStorage.setItem("accessToken", accessToken);
           localStorage.removeItem("email")
           dispatch(setUser({ accessToken }));
