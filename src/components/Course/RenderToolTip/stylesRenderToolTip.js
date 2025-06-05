@@ -17,7 +17,28 @@ const styles = {
         padding: '18px',
         color: '#fff',
         width: '70%',
+        height: '50px',
         fontWeight: 'bold',
+        borderRadius: '8px',
+        transition: 'all 0.3s ease',
+        '&:hover': {
+          backgroundColor: 'rgb(160, 50, 170) !important',
+          color: '#fff',
+        },
+      },
+    cartEroll:{
+        backgroundColor: 'rgb(192, 66, 206)',
+        padding: '18px',
+        color: '#fff',
+        width: '100%',
+        height: '50px',
+        fontWeight: 'bold',
+        borderRadius: '8px',
+        transition: 'all 0.3s ease',
+        '&:hover': {
+          backgroundColor: 'rgb(160, 50, 170) !important',
+          color: '#fff',
+        },
     },
     heart: {
         fontSize: '1.8rem',

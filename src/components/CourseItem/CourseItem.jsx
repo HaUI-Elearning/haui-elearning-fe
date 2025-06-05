@@ -5,44 +5,61 @@ import SkeletonList from "./CourseItemSkeleton";
 import axios from "axios";
 
 const CourseItem = () => {
-    const [loading, setLoading] = useState(true);
-    const [error, setError] = useState(null);
-    const [courses, setCourses] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [courses, setCourses] = useState([]);
 
-    const loadAllCourses = async () => {
-        setLoading(true);
-        setError(null);
-        try {
-            const res = await axios.get('http://localhost:8080/api/v1/courses/categorycourse');
-            setCourses(res.data.data);
-        } catch (error) {
-            console.error('Error fetching courses:', error);
-            setError("Failed to load courses");
-        } finally {
-            setLoading(false);
-        }
-    };
+  const loadAllCourses = async () => {
+    setLoading(true);
+    setError(null);
 
-    useEffect(() => {
-        loadAllCourses();
-    }, []);
+    try {
+      const accessToken = localStorage.getItem("accessToken");
 
-    if (loading) {
-        return <SkeletonList />;
+      const res = await axios.get(
+        "http://localhost:8080/api/v1/courses/categorycourse",
+        accessToken
+          ? {
+              headers: {
+                Authorization: `Bearer ${accessToken}`,
+              },
+            }
+          : {}
+      );
+
+      setCourses(res.data.data);
+    } catch (error) {
+      console.error("Error fetching courses:", error);
+      setError("Failed to load courses");
+    } finally {
+      setLoading(false);
     }
+  };
 
-    if (error) {
-        return <Typography variant="h6" color="error">{error}</Typography>;
-    }
+  useEffect(() => {
+    loadAllCourses();
+  }, []);
 
+  if (loading) {
+    return <SkeletonList />;
+  }
+
+  if (error) {
     return (
-        <Container>
-            <Typography variant="h4" gutterBottom>
-                What to learn next?
-            </Typography>
-            <Course courses={courses} />
-        </Container>
+      <Typography variant="h6" color="error">
+        {error}
+      </Typography>
     );
+  }
+
+  return (
+    <Container>
+      <Typography variant="h4" gutterBottom>
+        What to learn next?
+      </Typography>
+      <Course courses={courses} />
+    </Container>
+  );
 };
 
 export default CourseItem;

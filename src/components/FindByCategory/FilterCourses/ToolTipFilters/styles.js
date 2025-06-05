@@ -14,7 +14,11 @@ const styles = {
         color: '#fff',
         width: '70%',
         height: '50px',
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        '&:hover': {
+    backgroundColor: 'rgb(160, 50, 170)', 
+    color: '#fff', 
+  },
     },
     heart: {
         fontSize: '1.8rem',

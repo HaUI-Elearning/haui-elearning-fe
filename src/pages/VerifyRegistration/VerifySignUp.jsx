@@ -9,7 +9,7 @@ import { useState } from "react";
 
 const VerifySignUp = () => {
   const navigate = useNavigate();
-  const emailUser = localStorage.getItem("emailRegister");
+  const emailUser = localStorage.getItem("email");
   const [snackbar, setSnackbar] = useState({
     open: false,
     message: "",
@@ -43,7 +43,7 @@ const VerifySignUp = () => {
         message: "Verification successful! Please log in again.",
         severity: "success",
       });
-      localStorage.removeItem("emailRegister");
+      localStorage.removeItem("email");
       setTimeout(() => navigate("/signIn"), 2000);
     } catch (err) {
       console.error("Verification error:", err);

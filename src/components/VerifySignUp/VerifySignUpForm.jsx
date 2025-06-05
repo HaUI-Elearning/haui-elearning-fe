@@ -3,14 +3,13 @@ import { verifySignUpSchema } from "../../utils/verifySignUpValidate";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import "./styles.css";
-import OtpInput from "../../common/OtpInput ";
+import OtpInput from "../../common/OtpInput/OtpInput ";
 const VerifySignUpForm = ({
   onSubmit,
   onResend,
   loading,
   resendLoading,
   countdown,
-  emailUser,
 }) => {
   const {
     register,
@@ -36,9 +35,7 @@ const VerifySignUpForm = ({
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
       <h1 className="title">Check Your Inbox</h1>
       <p className="description">
-        Enter the 6-digit code we sent to{" "}
-        <span className="email">{emailUser}</span> <br></br> to finish your sign
-        up.
+        Enter the 6-digit code we sent to your email to finish your sign up.
       </p>
       <input type="hidden" {...register("otp")} />
       <OtpInput length={6} onChange={handleOtpChange} />
@@ -67,7 +64,6 @@ VerifySignUpForm.propTypes = {
   loading: PropTypes.bool,
   resendLoading: PropTypes.bool,
   countdown: PropTypes.number.isRequired,
-  emailUser: PropTypes.string.isRequired,
 };
 
 export default VerifySignUpForm;

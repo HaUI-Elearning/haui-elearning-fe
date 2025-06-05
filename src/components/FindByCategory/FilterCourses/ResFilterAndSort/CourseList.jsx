@@ -11,6 +11,7 @@ const DotIcon = styled(FiberManualRecordSharpIcon)(({ theme }) => ({
     marginLeft: theme.spacing(1),
 }));
 const CourseList = ({ courses, currentPage, setCurrentPage, totalPages, totalResult }) => {
+    console.log("courses Filter", courses);
     const handlePageChange = (page) => {
         if (page > 0 && page <= totalPages) {
             setCurrentPage(page);

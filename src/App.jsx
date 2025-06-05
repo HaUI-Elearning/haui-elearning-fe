@@ -7,12 +7,16 @@ import Register from "./pages/Register/Register";
 import Categories from "./pages/Categories/Categories";
 import CourseDetailPage from "./pages/CourseDetail/Detail";
 import TabPage from "./pages/MyCourse/TabPage";
-import MyProfile from "./components/User/MyProfile";
+import MyProfile from "./components/User/MyProfile/MyProfile";
 import MyCart from "./components/MyCart/myCart";
 import SearchPage from "./pages/Search/SearchPage";
 import Checkout from "./components/checkout/Checkout";
 import VerifySignUp from "./pages/VerifyRegistration/VerifySignUp";
 import ForgotPassPage from "./pages/ForgotPasswordPage/ForgotPasswordPage";
+
+import CourseStudy from "./pages/CourseStudy/CourseStudy";
+
+
 import MainLayoutTeacher from "./layouts/MainLayoutTeacher";
 import CourseListTeacher from "./pages/CourseListTeacher/CourseListTeacher";
 import { ToastContainer } from "react-toastify";
@@ -20,6 +24,7 @@ import RegisterTeacherForm from "./components/RegisterTeacherForm/RegisterTeache
 import TeacherHome from "./pages/TeacherHome/TeacherHome";
 import CreateNewCourse from "./components/CreateNewCouse/CreateNewCouse";
 import { Toaster } from "react-hot-toast";
+
 function App() {
   const router = useRoutes([
     {
@@ -148,6 +153,17 @@ function App() {
         {
           path: "/forgot-password",
           element: <ForgotPassPage />,
+        },
+      ],
+    },
+    
+    {
+      path: "/",
+      element: <MainLayout />,
+      children: [
+        {
+          path: "/courses/learn/:courseId",
+          element: <CourseStudy />,
         },
       ],
     },

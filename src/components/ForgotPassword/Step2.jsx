@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { verifyOtpForgotPasswordSchema } from "../../utils/emailForgotPassword";
-import OtpInput from "../../common/OtpInput "; 
+import OtpInput from "../../common/OtpInput/OtpInput "
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import { useNavigate } from "react-router-dom";
 import "./Stepper.css";
@@ -49,7 +49,7 @@ const Step2 = ({
       <p className="description">
         Enter the 6‑digit code we sent to{" "}
         <span className="email">{emailUser}</span>
-        <br /> to verify your email.
+        <br /> to verify your email first.
       </p>
 
       <input type="hidden" {...register("otp")} />
@@ -79,7 +79,7 @@ const Step2 = ({
         <button
           className="back-to-login"
           onClick={() => {
-            localStorage.removeItem("emailForgot");
+            localStorage.removeItem("email");
             navigate("/signIn");
           }}
         >
