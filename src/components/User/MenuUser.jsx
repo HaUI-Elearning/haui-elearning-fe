@@ -49,6 +49,7 @@ function MenuUser() {
                     bgcolor: deepOrange[500],
                     cursor: 'pointer',
                     marginRight: '40px',
+                    
                 }}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}

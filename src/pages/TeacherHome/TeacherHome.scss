@@ -1,0 +1,33 @@
+.teacher-home {
+  padding: 20px;
+
+  .top-bar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 20px;
+    padding-right: 40px;
+
+    .add-course-btn {
+      padding: 12px 24px;
+      background: linear-gradient(135deg, #ba60e0, #9b59b6);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-size: 18px;
+      font-weight: 600;
+      cursor: pointer;
+      box-shadow: 0 4px 10px rgba(191, 108, 224, 0.4);
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: linear-gradient(135deg, #b669d5, #af7ac5);
+        box-shadow: 0 6px 14px rgba(155, 89, 182, 0.5);
+      }
+
+      &:active {
+        transform: scale(0.97);
+        box-shadow: 0 3px 8px rgba(155, 89, 182, 0.3);
+      }
+    }
+  }
+}

@@ -1,0 +1,85 @@
+.teacher-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-image: url("../../assets/images/b2.jpg");
+  background-size: cover; // Đảm bảo ảnh phủ kín khu vực
+  background-position: center; // Căn giữa ảnh
+  background-repeat: no-repeat; // Không lặp lại ảnh
+}
+.teacher-form-container {
+  max-width: 800px;
+  margin: 40px auto;
+  background: #fff;
+  padding: 30px 40px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+
+  h2 {
+    text-align: center;
+    margin-bottom: 28px;
+    font-size: 26px;
+    color: #2c3e50;
+  }
+
+  .teacher-form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+
+      label {
+        font-weight: 600;
+        margin-bottom: 6px;
+        color: #34495e;
+      }
+
+      textarea {
+        resize: vertical;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 15px;
+        transition: border-color 0.3s ease;
+
+        &:focus {
+          border-color: #3498db;
+          outline: none;
+        }
+      }
+    }
+
+    .submit-btn {
+      align-self: center;
+      padding: 12px 30px;
+      font-size: 16px;
+      font-weight: bold;
+      color: white;
+      background: linear-gradient(135deg, #a435f0,  #b158ed);
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s ease;
+
+      &:hover {
+        background: linear-gradient(135deg,  #a435f0,  #7720b1);
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .teacher-form-container {
+    padding: 20px;
+  }
+
+  .teacher-form {
+    .submit-btn {
+      width: 100%;
+    }
+  }
+}
