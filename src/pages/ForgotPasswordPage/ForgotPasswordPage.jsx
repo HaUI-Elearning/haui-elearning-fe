@@ -41,8 +41,8 @@ const ForgotPassPage = () => {
       const payload = {
         email: formData.email,
       };
-      localStorage.setItem("emailForgot", formData.email);
-      console.log("Sending OTP to:", localStorage.getItem("emailForgot"));
+      localStorage.setItem("email", formData.email);
+      console.log("Sending OTP to:", localStorage.getItem("email"));
       await sendOtpForgotPassword(payload);
       setCountdown(60);
       setSnackbar({
@@ -67,9 +67,9 @@ const ForgotPassPage = () => {
         message = "Please go to verify your account first.";
 
         setTimeout(() => {
-          const resendTo = localStorage.getItem("emailForgot");
-          localStorage.setItem("emailRegister", resendTo);
-          resend(localStorage.getItem("emailRegister"), notify);
+          const resendTo = localStorage.getItem("email");
+          console.log("Resending OTP to:", resendTo);
+          resend(localStorage.getItem("email"), notify);
 
           navigate("/verify-email");
         }, 2000);
@@ -91,7 +91,7 @@ const ForgotPassPage = () => {
     try {
       setResendLoading(true);
       const payload = {
-        email: localStorage.getItem("emailForgot"),
+        email: localStorage.getItem("email"),
       };
       console.log("Resending OTP to:", payload);
       const res = await resendOtpForgotPassword(payload);
@@ -183,7 +183,7 @@ const ForgotPassPage = () => {
         message: "Change password successful! Please sign in again!",
         severity: "success",
       });
-      localStorage.removeItem("emailForgot");
+      localStorage.removeItem("email");
       setTimeout(() => navigate("/signIn"), 2000);
       return true;
     } catch (err) {

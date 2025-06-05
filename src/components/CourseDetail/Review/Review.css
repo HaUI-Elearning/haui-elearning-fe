@@ -1,0 +1,137 @@
+.text-cmt {
+  align-items: center;
+  font-size: 30px;
+  font-weight: bolder;
+  color: #1c1d1f;
+}
+
+.star-icon {
+  color: #b4690e;
+  font-size: 25px;
+  margin-right: 4px;
+}
+
+.dot {
+  margin-right: 4px;
+  margin-left: 2px;
+}
+
+.rating-count {
+  white-space: nowrap;
+}
+.review-card {
+  background-color: #fff;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid #eee;
+  height: 100%;
+  
+}
+
+.review-top {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+.avatar {
+  background-color: #000;
+  font-weight: bold;
+}
+
+.review-info {
+  flex: 1;
+}
+
+.review-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user-name {
+  font-weight: 600;
+  font-size: 16px;
+  color: #333;
+}
+
+.review-meta {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin-top: 2px;
+  font-size: 14px;
+  color: #666;
+}
+
+.review-date {
+  margin-left: 6px;
+  font-size: 13px;
+  color: #888;
+}
+
+.review-content {
+  margin-top: 12px;
+  font-size: 15px;
+  color: #444;
+  line-height: 1.5;
+}
+.view-all-reviews {
+  display: block;
+  margin: 20px auto;
+  background-color: white;
+  color: #7b3fbf;
+  border: 2.5px solid #7b3fbf;
+  padding: 12px 25px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  text-align: center;
+}
+
+.view-all-reviews:hover {
+  background-color: #7b3fbf;
+  color: white;
+}
+.no-review {
+  text-align: center;
+  font-size: 1.3rem;
+  color: #777;
+  background-color: #f9f9f9;
+  padding: 25px 30px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+
+  width: 100%;
+  max-width: 100%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  font-weight: 600;
+  animation: fadeIn 0.5s ease-in-out;
+  border: 2px solid black;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.review-card-1 {
+  background-color: #fff;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid #eee;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid #eee;
+}

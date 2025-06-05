@@ -70,6 +70,7 @@ const Login = () => {
         if (res.status === 200) {
           const { accessToken } = res.data.data;
           localStorage.setItem("accessToken", accessToken);
+          localStorage.removeItem("email")
           dispatch(setUser({ accessToken }));
 
           showSnackbar("Login successful!");

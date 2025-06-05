@@ -14,6 +14,7 @@ import { useNavigate } from 'react-router-dom';
 const Course = ({ courses = [] }) => {
     const navigate = useNavigate(); 
 
+    console.log("Course component", courses);
     const handleCourseClick = (courseId) => {
         navigate(`/courses/${courseId}`); 
     };
