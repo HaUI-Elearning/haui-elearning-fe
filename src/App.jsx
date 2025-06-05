@@ -13,7 +13,13 @@ import SearchPage from "./pages/Search/SearchPage";
 import Checkout from "./components/checkout/Checkout";
 import VerifySignUp from "./pages/VerifyRegistration/VerifySignUp";
 import ForgotPassPage from "./pages/ForgotPasswordPage/ForgotPasswordPage";
-
+import MainLayoutTeacher from "./layouts/MainLayoutTeacher";
+import CourseListTeacher from "./pages/CourseListTeacher/CourseListTeacher";
+import { ToastContainer } from "react-toastify";
+import RegisterTeacherForm from "./components/RegisterTeacherForm/RegisterTeacherForm";
+import TeacherHome from "./pages/TeacherHome/TeacherHome";
+import CreateNewCourse from "./components/CreateNewCouse/CreateNewCouse";
+import { Toaster } from "react-hot-toast";
 function App() {
   const router = useRoutes([
     {
@@ -94,6 +100,10 @@ function App() {
         },
       ],
     },
+    {
+      path: "/register-teacher",
+      element: <RegisterTeacherForm />,
+    },
 
     {
       path: "/",
@@ -104,6 +114,20 @@ function App() {
           element: <Checkout />,
         },
       ],
+    },
+    {
+      path: "/teacher",
+      element: <MainLayoutTeacher />,
+      children: [
+        {
+          path: "",
+          element: <TeacherHome />,
+        },
+      ],
+    },
+    {
+      path: "/add-course",
+      element: <CreateNewCourse />,
     },
 
     {
@@ -128,7 +152,13 @@ function App() {
       ],
     },
   ]);
-  return <>{router}</>;
+  return (
+    <>
+      <Toaster />
+      {router}
+      <ToastContainer position="top-right" autoClose={3000} />
+    </>
+  );
 }
 
 export default App;

@@ -6,6 +6,7 @@ import SearchBar from './SearchBar';
 import FavoriteIcon from './Favorite';
 import CartIcon from './Cart';
 import AuthButtons from './Auth';
+import TeacherAccess from './TeacherAccess';
 
 const Header = () => {
     return (
@@ -13,6 +14,7 @@ const Header = () => {
             <Logo />
             <CategoryItem />
             <SearchBar />
+            <TeacherAccess/>
             <FavoriteIcon />
             <CartIcon />
             <AuthButtons />
