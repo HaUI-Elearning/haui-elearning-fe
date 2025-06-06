@@ -65,7 +65,7 @@ const FavoriteIcon = () => {
                                             <div className="favorite-item">
                                                 <img src={item.thumbnail} alt={item.name} className="favorite-thumbnail" />
                                                 <div className="favorite-item-details">
-                                                    <span className="favorite-item-name">{item.name}</span>
+                                                    <span className="favorite-item-name">{item.name} {item.courseId}</span>
                                                     <span className='favorite-item-author'>{item.author}</span>
                                                     <span className="favorite-item-price">{formatMoney(item.price)}</span>
                                                 </div>

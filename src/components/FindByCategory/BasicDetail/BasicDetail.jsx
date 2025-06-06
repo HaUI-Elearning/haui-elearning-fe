@@ -31,7 +31,7 @@ function BasicDetail({ course = [], detail = {} }) {
                 <Paper style={styles.item}>
                     <Typography style={styles.titleItem}>Average courses rating</Typography>
                     <Stack direction="row" spacing={2}>
-                        <Typography style={styles.titleContent}>{averageStar.toFixed(2)}</Typography>
+                        <Typography style={styles.titleContent}>{averageStar.toFixed(1)}</Typography>
                         <StarIcon style={styles.star} />
                     </Stack>
                 </Paper>

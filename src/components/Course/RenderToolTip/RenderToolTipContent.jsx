@@ -8,12 +8,12 @@ import styles from "./stylesRenderToolTip";
 import { useDispatch, useSelector } from "react-redux";
 import { formatMonthYear } from "../.././../utils/dateFomatter";
 import { useNavigate } from "react-router-dom";
-import { addToCartApi, removeFromCartApi } from "../../../store/cartSlice";
+import { addToCartApi, fetchCartItems } from "../../../store/cartSlice";
 import {
   addToFavoritesApi,
+  fetchFavoriteItems,
   removeFromFavoritesApi,
 } from "../../../store/favoritesSlice";
-import { useState } from "react";
 
 RenderToolTipContent.propTypes = {
   course: PropTypes.object,
@@ -26,80 +26,46 @@ const DotIcon = styled(FiberManualRecordSharpIcon)(({ theme }) => ({
 }));
 
 function RenderToolTipContent({ course = {} }) {
-  console.log("RenderToolTipContent", course);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const accessToken = useSelector((state) => state.user.accessToken);
-  const cartItems = JSON.parse(localStorage.getItem("cartItems"));
-  const favorites = JSON.parse(localStorage.getItem("favoriteItems"));
-  const courseInCart = cartItems
-    ? cartItems.some((item) => item.courseId === course.courseId)
-    : false;
-  const isFavorite = favorites
-    ? favorites.some((item) => item.courseId === course.courseId)
-    : false;
-  const [isInCart, setIsInCart] = useState(courseInCart);
-  const [isFavorited, setIsFavorited] = useState(isFavorite);
+  const cartItems = useSelector((state) => state.cart.items);
+  const favorites = useSelector((state) => state.favorites.items);
 
-  const handleRemoveCart = async (courseId) => {
-    const accessToken = localStorage.getItem("accessToken");
-    dispatch(removeFromCartApi({ courseId, accessToken }));
-    const updatedCart = cartItems.filter(
-      (course) => course.courseId !== courseId
-    );
-    localStorage.setItem("cartItems", JSON.stringify(updatedCart));
-  };
-  const handleRemoveFavorite = async (courseId) => {
-    const accessToken = localStorage.getItem("accessToken");
-    dispatch(removeFromFavoritesApi({ courseId, accessToken }));
-    const updatedFavorite = favorites.filter(
-      (course) => course.courseId !== courseId
-    );
-    localStorage.setItem("favoriteItems", JSON.stringify(updatedFavorite));
-  };
+  const isInCart = cartItems?.some((item) => item.courseId === course.courseId);
+  const isFavorited = favorites?.some(
+    (item) => item.courseId === course.courseId
+  );
 
   const handleCartClick = async () => {
-    if (accessToken) {
-      if (isInCart) {
-        navigate("/cart");
-      } else {
-        try {
-          if (isFavorited) {
-            await handleRemoveFavorite(course.courseId);
-            setIsFavorited(false);
-          }
-          await dispatch(
-            addToCartApi({ courseId: course.courseId, accessToken })
-          ).unwrap();
-          setIsInCart(true);
-        } catch (error) {
-          console.error("fail to add to cart", error);
-        }
-      }
+    if (!accessToken) return;
+
+    if (isInCart) {
+      navigate("/cart");
+    } else {
+      await dispatch(
+        addToCartApi({ courseId: course.courseId, accessToken })
+      ).unwrap();
+      await dispatch(fetchFavoriteItems(accessToken)).unwrap();
     }
   };
 
   const handleFavoriteClick = async () => {
-    if (accessToken) {
-      const newFavoritedStatus = !isFavorited;
-      setIsFavorited(newFavoritedStatus);
-      if (isInCart) {
-        await handleRemoveCart(course.courseId);
-        setIsInCart(false);
-      }
-      if (newFavoritedStatus) {
-        await dispatch(
-          addToFavoritesApi({ courseId: course.courseId, accessToken })
-        ).unwrap();
-        setIsFavorited(true);
-      } else {
-        await handleRemoveFavorite(course.courseId);
-        setIsFavorited(false);
-      }
+    if (!accessToken) return;
+
+    if (isFavorited) {
+      await dispatch(
+        removeFromFavoritesApi({ courseId: course.courseId, accessToken })
+      ).unwrap();
+      await dispatch(fetchCartItems(accessToken)).unwrap();
     } else {
-      navigate("/login");
+      await dispatch(
+        addToFavoritesApi({ courseId: course.courseId, accessToken })
+      ).unwrap();
+      await dispatch(fetchCartItems(accessToken)).unwrap();
     }
   };
+
   let actionButtons;
 
   if (accessToken) {

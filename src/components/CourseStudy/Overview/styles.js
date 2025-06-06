@@ -44,7 +44,7 @@ const styles = {
     learnTitle: {
         marginTop: 2,
         marginBottom: 2,
-        fontWeight: 400,
+        fontWeight: 600,
         fontSize: 18,
     },
     checkIcon: {
