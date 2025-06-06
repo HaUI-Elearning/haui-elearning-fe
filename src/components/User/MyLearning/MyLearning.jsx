@@ -76,7 +76,7 @@ function MyLearning() {
                   <Box sx={styles.ratingWrapper}>
                     <RenderStar numStars={item.star} />
                     <Typography variant="body2" sx={styles.ratingText}>
-                      {item.star}
+                      {item.star.toFixed(1)}
                     </Typography>
                   </Box>
                   <Typography>{item.hour} hours total</Typography>

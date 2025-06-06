@@ -57,7 +57,7 @@ const ChapterList = ({ chapters = [], onLessonClick }) => {
                     startIcon={<PictureAsPdfIcon />}
                     onClick={() => window.open(lesson.pdfURL, "_blank")}
                   >
-                    Homework
+                    Resource PDF
                   </Button>
                 )}
               </Box>
