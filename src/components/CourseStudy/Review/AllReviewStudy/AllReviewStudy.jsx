@@ -2,11 +2,11 @@ import PropTypes from "prop-types";
 import { Avatar, Box, IconButton } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Grid2 from "@mui/material/Unstable_Grid2";
-import RenderStar from "../../Course/RenderStar/RenderStar";
-import { formatDateArrayToRelativeTime } from "../../../utils/formatDateArrayToDDMMYYYY";
-import "./Review.css";
-import noReviewsImage from "../../../assets/images/no-reviews.jpg";
-const ReviewFilter = ({ comments }) => {
+import RenderStar from "../../../Course/RenderStar/RenderStar";
+import { formatDateArrayToRelativeTime } from "../../../../utils/formatDateArrayToDDMMYYYY";
+import "../Review.css";
+import noReviewsImage from "../../../../assets/images/no-reviews.jpg";
+const AllReviewStudy = ({ comments }) => {
   if (!comments || comments.length === 0) {
     return (
       <Box textAlign="center" color="#666">
@@ -51,8 +51,8 @@ const ReviewFilter = ({ comments }) => {
   );
 };
 
-ReviewFilter.propTypes = {
+AllReviewStudy.propTypes = {
   comments: PropTypes.array.isRequired,
 };
 
-export default ReviewFilter;
+export default AllReviewStudy;

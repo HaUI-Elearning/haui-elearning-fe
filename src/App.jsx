@@ -25,6 +25,9 @@ import CreateNewCourse from "./components/CreateNewCouse/CreateNewCouse";
 import { Toaster } from "react-hot-toast";
 import PaymentResult from "./components/checkout/PaymentResult/PaymentResult";
 import ScrollToTop from "./components/ScrollToTop";
+import AccessDeniedPage from "./pages/AccessDeniedPage/AccessDenied";
+import EnrollPage from "./pages/BuyAndEnrollCourse/Enroll/EnrollCourseRes";
+import NotFoundPage from "./pages/NotFoundPage/NotFound";
 
 function App() {
   const router = useRoutes([
@@ -166,6 +169,38 @@ function App() {
         {
           path: "/payment/result",
           element: <PaymentResult />,
+        },
+      ],
+    },
+
+    {
+      path: "/",
+      element: <MainLayout />,
+      children: [
+        {
+          path: "/access-denied",
+          element: <AccessDeniedPage />,
+        },
+      ],
+    },
+    {
+      path: "/",
+      element: <MainLayout />,
+      children: [
+        {
+          path: "/enrolled/:courseId",
+          element: <EnrollPage />,
+        },
+      ],
+    },
+
+    {
+      path: "*",
+      element: <MainLayout />,
+      children: [
+        {
+          path: "*",
+          element: <NotFoundPage />,
         },
       ],
     },

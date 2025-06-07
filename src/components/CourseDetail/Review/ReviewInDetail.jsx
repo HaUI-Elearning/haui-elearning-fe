@@ -3,7 +3,7 @@ import { useState } from "react"; // 👈 thêm useState
 import { Star } from "@mui/icons-material";
 import "./Review.css";
 import Grid2 from "@mui/material/Unstable_Grid2";
-import { Avatar, Container, IconButton } from "@mui/material";
+import { Avatar, Container, IconButton, Typography } from "@mui/material";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { formatDateArrayToRelativeTime } from "../../../utils/formatDateArrayToDDMMYYYY";
 import RenderStar from "../../Course/RenderStar/RenderStar";
@@ -13,14 +13,14 @@ const ReviewInDetail = ({ comment = {}, onCommentFilter }) => {
   const [expanded, setExpanded] = useState(false);
   return (
     <div>
-      <h1 className="course-rating">
+      <Typography variant="h5" className="course-rating">
         <Star className="star-icon" />
         <span className="text-cmt">{comment.avgRatting} course rating</span>
         <span className="dot">·</span>
         <span className="text-cmt">
           {comment.listReview?.length ?? 0} ratings
         </span>
-      </h1>
+      </Typography>
 
       {comment.listReview && comment.listReview.length > 0 ? (
         <Container>

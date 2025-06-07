@@ -29,7 +29,7 @@ export default function PaymentResult() {
         const msg = await fetchPaymentResult(location.search);
         setMessage(msg);
 
-        if (msg.toLowerCase().includes("thành công")) {
+        if (msg.includes("Payment successful!")) {
           setStatus("success");
 
           const result = await dispatch(

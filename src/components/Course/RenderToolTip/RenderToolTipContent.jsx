@@ -14,12 +14,11 @@ import {
   fetchFavoriteItems,
   removeFromFavoritesApi,
 } from "../../../store/favoritesSlice";
+import { enrollCourse } from "../../../apis/enrollCourseFree";
 
 RenderToolTipContent.propTypes = {
   course: PropTypes.object,
 };
-
-// Hiển thị tool tip
 const DotIcon = styled(FiberManualRecordSharpIcon)(({ theme }) => ({
   fontSize: "small",
   marginLeft: theme.spacing(1),
@@ -66,6 +65,17 @@ function RenderToolTipContent({ course = {} }) {
     }
   };
 
+  const handleEnrollClick = async () => {
+    try {
+      const enrolledCourse = await enrollCourse(course.courseId);
+      navigate(`/enrolled/${enrolledCourse.courseId}`, {
+        state: { enrolledCourse },
+      });
+    } catch (error) {
+      alert("Fail to enroll course: " + (error.message || "Er occur"));
+    }
+  };
+
   let actionButtons;
 
   if (accessToken) {
@@ -76,6 +86,7 @@ function RenderToolTipContent({ course = {} }) {
             variant="contained"
             sx={styles.cartEroll}
             style={{ height: "50px" }}
+            onClick={() => navigate(`/courses/learn/${course.courseId}`)}
           >
             Learn Now
           </Button>
@@ -107,6 +118,7 @@ function RenderToolTipContent({ course = {} }) {
             variant="outlined"
             sx={styles.cartEroll}
             style={{ height: "50px" }}
+            onClick={handleEnrollClick}
           >
             Enroll Now
           </Button>

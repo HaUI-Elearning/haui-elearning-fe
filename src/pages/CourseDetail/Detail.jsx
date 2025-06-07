@@ -1,10 +1,12 @@
 import { useEffect, useState, useCallback } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Detail from "../../components/CourseDetail/Detail";
 import axios from "axios";
-import { getCommentByCourseId } from "../../apis/getComment";
+import { getCommentByCourseId } from "../../apis/getCommentByCourseId";
 import { filterComment } from "../../apis/filterComment";
+
 const CourseDetailPage = () => {
+  const navigate = useNavigate();
   const { courseId } = useParams();
   const [course, setCourse] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -39,13 +41,20 @@ const CourseDetailPage = () => {
       setCourse(res.data.data);
       fetchAllCommnent();
     } catch (e) {
-      console.error("Error fetching courses:", e);
-      setError("Failed to load courses");
+      console.error("Error fetching courses:", e.response?.data?.error);
+
+      const errorMsg = e.response?.data?.error || "";
+
+      if (errorMsg.includes("Course not found")) {
+        navigate("*");
+      } else {
+        setError("Failed to load courses");
+      }
     } finally {
       setLoading(false);
     }
   }, [courseId, fetchAllCommnent]);
-  
+
   const fetchFilterCommnent = useCallback(
     async (star) => {
       const data = {

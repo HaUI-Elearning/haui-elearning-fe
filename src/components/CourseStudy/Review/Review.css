@@ -135,3 +135,22 @@
     gap: 12px;
     border-bottom: 1px solid #eee;
   }
+
+  .btn-purple {
+    background-color: #A435F0;
+    padding: 12px 32px;
+    font-weight: bold;
+    font-size: 1rem;
+    border-radius: 12px;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn-purple:hover {
+    background-color: #9228B3;
+  }
+  
