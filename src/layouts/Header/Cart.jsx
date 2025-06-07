@@ -65,7 +65,7 @@ const CartIcon = () => {
                                             <div className="cart-item">
                                                 <img src={item.thumbnail} alt={item.name} className="favorite-thumbnail" />
                                                 <div className="cart-item-details">
-                                                    <span className="cart-item-name">{item.name} {item.courseId} </span>
+                                                    <span className="cart-item-name">{item.name}</span>
                                                     <span className='cart-item-author'>{item.author}</span>
                                                     <span className="cart-item-price">{formatMoney(item.price)}</span>
                                                 </div>

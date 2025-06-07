@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import RenderStar from "../Course/RenderStar/RenderStar";
 import LoyaltyIcon from "@mui/icons-material/Loyalty";
 import { addToFavoritesApi } from "../../store/favoritesSlice";
-import { createVNPayPayment } from "../../apis/createVNPyPayment";
+import { createVNPayPayment } from "../../apis/createVNPayPayment";
 function MyCart() {
   const dispatch = useDispatch();
   const courses = useSelector((state) => state.cart.items);

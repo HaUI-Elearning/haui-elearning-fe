@@ -63,7 +63,7 @@ const CourseList = ({ courses, currentPage, setCurrentPage, totalPages, totalRes
                                         </Typography>
                                         <Typography style={styles.author}>{courseItem.author}</Typography>
                                         <Box style={styles.hours}>
-                                            <Typography variant='body2'>{courseItem.star}</Typography>
+                                            <Typography variant='body2'>{courseItem.star.toFixed(1)}</Typography>
                                             <RenderStar numStars={courseItem.star} />
                                         </Box>
                                         <Typography variant="body2">

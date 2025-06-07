@@ -17,7 +17,7 @@ LearnMore.propTypes = {
 function LearnMore({ handleClickOpen, handleClose, open }) {
   return (
     <Box sx={{ border: "1px solid black", padding: "15px" }}>
-      <Typography sx={{ fontWeight: "bolder", fontSize: "20px" }}>
+      <Typography variant="h5" sx={{ fontWeight: "bolder"}}>
         {" "}
         Top companies offer this course to their employees
       </Typography>

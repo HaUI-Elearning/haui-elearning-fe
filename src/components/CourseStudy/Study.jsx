@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Overview from "./Overview/Overview";
-import Reviews from "./Review/Reviews";
+import Reviews from "./Review/ReviewTab";
 import VideoPlayer from "./VideoPlayer/VideoPlayer";
 import ChapterList from "./ChapterList/ChapterList";
 import styles from "./styles";
