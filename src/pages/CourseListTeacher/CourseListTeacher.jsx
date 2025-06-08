@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import RenderStar from "../../components/Course/RenderStar/RenderStar";
-import math from '../../assets/images/maths.png';
+import math from "../../assets/images/maths.png";
 import {
   Card,
   CardContent,
@@ -16,12 +16,15 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./CourseListTeacher.scss";
+import { useNavigate } from "react-router-dom";
 
 const CourseListTeacher = () => {
   const [courses, setCourses] = useState([]);
   const [anchorEl, setAnchorEl] = useState(null);
   const [selectedCourseId, setSelectedCourseId] = useState(null);
   const token = localStorage.getItem("accessToken")?.trim();
+  const navigate = useNavigate();
+
 
   const fetchCourses = () => {
     if (!token) {
@@ -62,13 +65,13 @@ const CourseListTeacher = () => {
   const handleMenuAction = (action, courseId) => {
     switch (action) {
       case "edit":
-        console.log(`Chỉnh sửa khóa học ${courseId}`);
+        navigate(`/chapter/${courseId}`);
         break;
       case "delete":
         handleDeleteCourse(courseId);
         break;
       case "view":
-        console.log(`Xem chi tiết khóa học ${courseId}`);
+         navigate(`/courses/${courseId}`);
         break;
       default:
         break;
@@ -81,9 +84,14 @@ const CourseListTeacher = () => {
     if (!confirmed) return;
 
     try {
-      await axios.delete(`http://localhost:8080/api/v1/Teacher/Course/delete/${courseId}`, {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      await axios.delete(
+        `http://localhost:8080/api/v1/Teacher/Course/delete/${courseId}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+          },
+        }
+      );
 
       // Cập nhật lại danh sách sau khi xóa
       setCourses((prevCourses) =>
@@ -115,7 +123,11 @@ const CourseListTeacher = () => {
                 <Typography variant="h6" className="course-title">
                   {course.name}
                 </Typography>
-                <Typography variant="body2" color="text.secondary" className="course-author">
+                <Typography
+                  variant="body2"
+                  color="text.secondary"
+                  className="course-author"
+                >
                   {course.author}
                 </Typography>
                 <Box>
@@ -135,9 +147,21 @@ const CourseListTeacher = () => {
               open={Boolean(anchorEl) && selectedCourseId === course.courseId}
               onClose={handleMenuClose}
             >
-              <MenuItem onClick={() => handleMenuAction("edit", course.courseId)}>Chỉnh sửa</MenuItem>
-              <MenuItem onClick={() => handleMenuAction("delete", course.courseId)}>Xóa</MenuItem>
-              <MenuItem onClick={() => handleMenuAction("view", course.courseId)}>Xem chi tiết</MenuItem>
+              <MenuItem
+                onClick={() => handleMenuAction("edit", course.courseId)}
+              >
+                Chỉnh sửa
+              </MenuItem>
+              <MenuItem
+                onClick={() => handleMenuAction("delete", course.courseId)}
+              >
+                Xóa
+              </MenuItem>
+              <MenuItem
+                onClick={() => handleMenuAction("view", course.courseId)}
+              >
+                Xem chi tiết
+              </MenuItem>
             </Menu>
           </Card>
         ))

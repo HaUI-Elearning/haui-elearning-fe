@@ -10,23 +10,24 @@ import TabPage from "./pages/MyCourse/TabPage";
 import MyProfile from "./components/User/MyProfile/MyProfile";
 import MyCart from "./components/MyCart/myCart";
 import SearchPage from "./pages/Search/SearchPage";
-
 import VerifySignUp from "./pages/VerifyRegistration/VerifySignUp";
 import ForgotPassPage from "./pages/ForgotPasswordPage/ForgotPasswordPage";
-
+import ChapterList from "./components/CourseStudy/ChapterList/ChapterList";
 import CourseStudy from "./pages/CourseStudy/CourseStudy";
 
+import EditTeacherCourse from "./components/EditTeacherCourse/EditTeacherCourse";
 import MainLayoutTeacher from "./layouts/MainLayoutTeacher";
-
 import { ToastContainer } from "react-toastify";
 import RegisterTeacherForm from "./components/RegisterTeacherForm/RegisterTeacherForm";
 import TeacherHome from "./pages/TeacherHome/TeacherHome";
 import CreateNewCourse from "./components/CreateNewCouse/CreateNewCouse";
 import { Toaster } from "react-hot-toast";
+import ChapterTeacherList from "./components/ChapterTeacherList/ChapterTeacherList";
+import AddLesson from "./components/AddLesson/AddLesson";
+import EditLesson from "./components/EditLesson/EditLesson";
 import PaymentResult from "./components/checkout/PaymentResult/PaymentResult";
 import ScrollToTop from "./components/ScrollToTop";
 import AccessDeniedPage from "./pages/AccessDeniedPage/AccessDenied";
-
 import NotFoundPage from "./pages/NotFoundPage/NotFound";
 import EnrollPage from "./pages/BuyAndEnrollCourse/Enroll/EnrollPage";
 
@@ -128,6 +129,23 @@ function App() {
     {
       path: "/add-course",
       element: <CreateNewCourse />,
+    },
+    {
+      path: "/teacher/edit-course/:courseId",
+      element: <EditTeacherCourse />,
+    },
+
+    {
+      path: "/chapter/:id",
+      element: <ChapterTeacherList />,
+    },
+    {
+      path:"/teacher/addLesson/:chapterId",
+      element:<AddLesson/>
+    },
+    {
+      path:"/teacher/editLesson/:chapterId/:lessonId",
+      element:<EditLesson/>
     },
 
     {

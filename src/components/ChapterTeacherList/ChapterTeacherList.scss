@@ -1,0 +1,269 @@
+@import '../../styles/index.scss';
+.course-list-containers {
+  display: flex;
+  justify-content: space-around;
+  padding: 20px;
+  gap: 50px;
+
+  @include mobile {
+    display: flex;
+    flex-direction: column;
+  }
+  @include small-tablet {
+    display: flex;
+    flex-direction: column;
+  }
+  @include tablet {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .course-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    text-align: center;
+    padding-left: 20px;
+    width: 40%;
+
+    @include mobile {
+      margin-bottom: 40px;
+      width: 100% !important;
+    }
+    @include small-tablet {
+      margin-top: -10px;
+      width: 100% !important;
+    }
+    @include tablet {
+      margin-top: -10px;
+      width: 100% !important;
+    }
+
+    .course-img {
+      width: 100%;
+      height: 100%;
+      
+      .course-logo {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+    .course-leader-name {
+      text-align: center;
+      font-size: 16px;
+      font-weight: 700;
+    }
+    .infor {
+      
+      gap: 6px;
+      @include flex(center, center);
+      p {
+        font-size: 17px;
+        font-weight: 700;
+      }
+    }
+    & > h2 {
+      margin-top: 10px;
+    }
+    .btn-container{
+      display: flex;
+      flex-direction: row-reverse;
+      margin-top: 18px;
+    }
+    .edit-course-button {
+      border-radius: 10px;
+      padding: 16px 24px;
+      margin-left: 15px;
+      font-size: 15px;
+      color: white;
+      background-color: #f4b81e;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+    }
+    .cancel-course-button {
+      border-radius: 10px;
+      padding: 16px 24px;
+      margin-left: 15px;
+      font-size: 15px;
+      color: white;
+      background-color: #aeadaa;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+    }
+  }
+  .row2 {
+    display: flex;
+    width: 750px;
+    background-color: #f9f9f9;
+    border: 1px solid #f9f9f9;
+    padding: 20px;
+    justify-content: space-between;
+    border-radius: 10px;
+
+    @include mobile {
+      width: 100%;
+      height: 300px;
+    }
+    @include small-tablet {
+      width: 100% !important;
+    }
+    @include tablet {
+      width: 100% !important;
+    }
+    .course-contents {
+      width: 100%;
+      max-width: 600px;
+      display: block;
+      margin-right: 50px;
+
+      .sections {
+        .section {
+          background-color: #f9f9f9;
+          border: 1px solid #f9f9f9;
+          border-radius: 10px;
+          .section-header {
+            border-radius: 10px;
+            cursor: pointer;
+            .section-folder-header {
+              padding: 15px;
+              width: 100%;
+              display: flex;
+              justify-content: space-between;
+              align-items: center;
+              background-color: rgba(217, 217, 217, 0.5);
+              border-radius: 10px;
+              margin-bottom: 10px;
+              cursor: pointer;
+              & > h3 {
+                flex-grow: 1;
+              }
+            }
+
+            .section-actions {
+              display: flex;
+              gap: 10px;
+              .edit-icon,
+              .add-icon,
+              .delete-icon {
+                cursor: pointer;
+                transition: all 0.3s linear;
+              }
+              .delete-icon:hover{
+                color: red;
+              }
+              .add-icon:hover{
+                color: darkgreen;
+              }
+              .edit-icon:hover{
+                color: #f4b81e;
+              }
+            }
+          }
+        }
+        .section-items {
+          border-radius: 10px;
+          margin-bottom: 10px;
+          padding: 10px;
+          background-color: #f9f9f9;
+          border-top: none;
+
+          .section-item {
+            padding: 8px 0;
+            display: flex;
+            justify-content: space-between;
+            background-color: white;
+
+            border-radius: 5px;
+            cursor: pointer;
+            & > p {
+              padding-left: 15px;
+            }
+            .item-actions {
+              display: flex;
+              padding-right: 10px;
+              .delete-icon:hover{
+                color: red;
+              }
+              .edit-icon:hover{
+                color: #f4b81e;
+              }
+              & > svg {
+                margin-left: 10px;
+                cursor: pointer;
+              }
+            }
+          }
+        }
+      }
+    }
+    .buttons {
+       
+
+      .create-section-button {
+        border-radius: 10px;
+        padding: 12px 16px;
+        white-space: nowrap;
+        margin-left: 15px;
+        font-size: 14px;
+        font-weight: 600;
+        color: white;
+        background-color: #f4b81e;
+        border: none;
+        cursor: pointer;
+      }
+    }
+  }
+}
+.react-confirm-alert-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.react-confirm-alert {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 1001;
+}
+
+.react-confirm-alert-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.react-confirm-alert-button-group {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+
+  button {
+    margin: 0 10px;
+    padding: 10px 20px;
+    border: none;
+    width: 86px;
+    border-radius: 5px;
+    cursor: pointer;
+    background-color: #f4b81e;
+    color: white;
+    font-size: 16px;
+
+    &:hover {
+      background-color: darken(#f4b81e, 10%);
+    }
+  }
+}

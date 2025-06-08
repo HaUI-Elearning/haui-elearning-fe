@@ -33,7 +33,7 @@ export const CourseActions = ({ course, setOpen }) => {
   let actionButtons;
 
   if (accessToken) {
-    if (course.enrolled) {
+    if (course.enrolled || course.authorCourse) {
       actionButtons = (
         <Box sx={styles.box1}>
           <Button
