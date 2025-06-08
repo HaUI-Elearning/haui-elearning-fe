@@ -5,16 +5,9 @@ import FiberManualRecordSharpIcon from "@mui/icons-material/FiberManualRecordSha
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import styles from "./stylesRenderToolTip";
-import { useDispatch, useSelector } from "react-redux";
 import { formatMonthYear } from "../.././../utils/dateFomatter";
 import { useNavigate } from "react-router-dom";
-import { addToCartApi, fetchCartItems } from "../../../store/cartSlice";
-import {
-  addToFavoritesApi,
-  fetchFavoriteItems,
-  removeFromFavoritesApi,
-} from "../../../store/favoritesSlice";
-import { enrollCourse } from "../../../apis/enrollCourseFree";
+import { useCourseActions } from "../../../customHooks/useCourseAction";
 
 RenderToolTipContent.propTypes = {
   course: PropTypes.object,
@@ -25,57 +18,15 @@ const DotIcon = styled(FiberManualRecordSharpIcon)(({ theme }) => ({
 }));
 
 function RenderToolTipContent({ course = {} }) {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const accessToken = useSelector((state) => state.user.accessToken);
-  const cartItems = useSelector((state) => state.cart.items);
-  const favorites = useSelector((state) => state.favorites.items);
-
-  const isInCart = cartItems?.some((item) => item.courseId === course.courseId);
-  const isFavorited = favorites?.some(
-    (item) => item.courseId === course.courseId
-  );
-
-  const handleCartClick = async () => {
-    if (!accessToken) return;
-
-    if (isInCart) {
-      navigate("/cart");
-    } else {
-      await dispatch(
-        addToCartApi({ courseId: course.courseId, accessToken })
-      ).unwrap();
-      await dispatch(fetchFavoriteItems(accessToken)).unwrap();
-    }
-  };
-
-  const handleFavoriteClick = async () => {
-    if (!accessToken) return;
-
-    if (isFavorited) {
-      await dispatch(
-        removeFromFavoritesApi({ courseId: course.courseId, accessToken })
-      ).unwrap();
-      await dispatch(fetchCartItems(accessToken)).unwrap();
-    } else {
-      await dispatch(
-        addToFavoritesApi({ courseId: course.courseId, accessToken })
-      ).unwrap();
-      await dispatch(fetchCartItems(accessToken)).unwrap();
-    }
-  };
-
-  const handleEnrollClick = async () => {
-    try {
-      const enrolledCourse = await enrollCourse(course.courseId);
-      navigate(`/enrolled/${enrolledCourse.courseId}`, {
-        state: { enrolledCourse },
-      });
-    } catch (error) {
-      alert("Fail to enroll course: " + (error.message || "Er occur"));
-    }
-  };
-
+  const {
+    accessToken,
+    isInCart,
+    isFavorited,
+    handleCartClick,
+    handleFavoriteClick,
+    handleEnrollClick,
+  } = useCourseActions(course);
   let actionButtons;
 
   if (accessToken) {
@@ -85,7 +36,6 @@ function RenderToolTipContent({ course = {} }) {
           <Button
             variant="contained"
             sx={styles.cartEroll}
-            style={{ height: "50px" }}
             onClick={() => navigate(`/courses/learn/${course.courseId}`)}
           >
             Learn Now

@@ -23,6 +23,7 @@
     "axios": "^1.7.7",
     "formik": "^2.4.6",
     "framer-motion": "^12.11.3",
+    "html2pdf.js": "^0.10.3",
     "i18next": "^23.15.1",
     "i18next-browser-languagedetector": "^8.0.0",
     "i18next-http-backend": "^2.6.1",

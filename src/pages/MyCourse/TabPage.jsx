@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import WishList from "../../components/User/WishList/WishList";
 import MyLearning from "../../components/User/MyLearning/MyLearning";
 import NotFoundPage from "../NotFoundPage/NotFound";
+import PurchaseHistory from "../../components/User/MyProfile/PurchaseHistory/PurchaseHistory";
 
 const TABS = [
   {
@@ -12,6 +13,11 @@ const TABS = [
     content: <MyLearning />,
   },
   { label: "Wishlist", path: "/my-course/my-wishlist", content: <WishList /> },
+  {
+    label: "Order History",
+    path: "/my-course/purchase-history",
+    content: <PurchaseHistory />,
+  },
 ];
 
 function TabPage() {
