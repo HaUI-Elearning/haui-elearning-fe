@@ -103,7 +103,7 @@ function RenderToolTipContent({ course = {} }) {
   let actionButtons;
 
   if (accessToken) {
-    if (course.enrolled) {
+    if (course.enrolled||course.authorCourse) {
       actionButtons = (
         <Box sx={styles.box}>
           <Button
