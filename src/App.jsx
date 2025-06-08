@@ -26,8 +26,9 @@ import { Toaster } from "react-hot-toast";
 import PaymentResult from "./components/checkout/PaymentResult/PaymentResult";
 import ScrollToTop from "./components/ScrollToTop";
 import AccessDeniedPage from "./pages/AccessDeniedPage/AccessDenied";
-import EnrollPage from "./pages/BuyAndEnrollCourse/Enroll/EnrollCourseRes";
+
 import NotFoundPage from "./pages/NotFoundPage/NotFound";
+import EnrollPage from "./pages/BuyAndEnrollCourse/Enroll/EnrollPage";
 
 function App() {
   const router = useRoutes([

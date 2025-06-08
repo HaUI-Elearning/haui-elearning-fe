@@ -49,7 +49,7 @@ export default function PaymentResult() {
         }
       } catch (err) {
         console.error("Error when checking order status:", err);
-        setMessage("❌ Transaction failed or an error occurred!");
+        setMessage("Transaction failed or an error occurred!");
         setStatus("error");
         setOpenSnackbar(true);
       }

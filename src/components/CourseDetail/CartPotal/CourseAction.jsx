@@ -1,57 +1,23 @@
 import { Box, Button } from "@mui/material";
 import styles from "..";
 import { useNavigate } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
+
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
-import { addToCartApi, fetchCartItems } from "../../../store/cartSlice";
-import {
-  addToFavoritesApi,
-  fetchFavoriteItems,
-  removeFromFavoritesApi,
-} from "../../../store/favoritesSlice";
+
 import PropTypes from "prop-types";
+import { useCourseActions } from "../../../customHooks/useCourseAction";
 
 export const CourseActions = ({ course, setOpen }) => {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const accessToken = useSelector((state) => state.user.accessToken);
-  const cartItems = useSelector((state) => state.cart.items);
-  const favorites = useSelector((state) => state.favorites.items);
-
-  const isInCart = cartItems?.some((item) => item.courseId === course.courseId);
-  const isFavorited = favorites?.some(
-    (item) => item.courseId === course.courseId
-  );
-
-  const handleCartClick = async () => {
-    if (!accessToken) return;
-
-    if (isInCart) {
-      navigate("/cart");
-    } else {
-      await dispatch(
-        addToCartApi({ courseId: course.courseId, accessToken })
-      ).unwrap();
-      await dispatch(fetchFavoriteItems(accessToken)).unwrap();
-    }
-  };
-
-  const handleFavoriteClick = async () => {
-    if (!accessToken) return;
-
-    if (isFavorited) {
-      await dispatch(
-        removeFromFavoritesApi({ courseId: course.courseId, accessToken })
-      ).unwrap();
-      await dispatch(fetchCartItems(accessToken)).unwrap();
-    } else {
-      await dispatch(
-        addToFavoritesApi({ courseId: course.courseId, accessToken })
-      ).unwrap();
-      await dispatch(fetchCartItems(accessToken)).unwrap();
-    }
-  };
+  const {
+    accessToken,
+    isInCart,
+    isFavorited,
+    handleCartClick,
+    handleFavoriteClick,
+    handleEnrollClick,
+  } = useCourseActions(course);
 
   const handleBuyNow = () => {
     navigate("/checkout", { state: { course } });
@@ -118,9 +84,9 @@ export const CourseActions = ({ course, setOpen }) => {
         <Box sx={styles.box1}>
           <Button
             variant="outlined"
-            sx={styles.buyNowButton}
+            sx={styles.enroll}
             style={{ height: "50px" }}
-            onClick={handleBuyNow}
+            onClick={handleEnrollClick}
           >
             Enroll Now
           </Button>
@@ -163,7 +129,7 @@ export const CourseActions = ({ course, setOpen }) => {
         <Box sx={styles.box1}>
           <Button
             variant="outlined"
-            sx={styles.buyNowButton}
+            sx={styles.enroll}
             style={{ height: "50px" }}
             onClick={handleBuyClickNologin}
           >

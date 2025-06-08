@@ -1,20 +1,15 @@
-import { useLocation, useNavigate } from "react-router-dom";
-import { Button, Typography, Container, Box, Rating } from "@mui/material";
-import styles from "./styles"
-import enrollOk from "../../../assets/images/enrollOk.png"
-import NotFoundPage from "../../NotFoundPage/NotFound";
-const EnrollPage = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
-  const enrolledCourse = location.state?.enrolledCourse;
+// EnrollSuccessContent.jsx
+import PropTypes from "prop-types";
+import { Box, Typography, Rating, Button, Container } from "@mui/material";
+import styles from "./styles";
+import enrollOk from "../../../assets/images/enrollOk.png";
+import { useNavigate } from "react-router-dom";
 
-  if (!enrolledCourse) {
-    return <NotFoundPage/>;
-  }
+const EnrollSuccess = ({ enrolledCourse }) => {
+  const navigate = useNavigate();
 
   return (
     <Container sx={styles.container}>
-     
       <Box
         component="img"
         src={enrollOk}
@@ -72,4 +67,8 @@ const EnrollPage = () => {
   );
 };
 
-export default EnrollPage;
+EnrollSuccess.propTypes = {
+  enrolledCourse: PropTypes.any
+};
+
+export default EnrollSuccess;
