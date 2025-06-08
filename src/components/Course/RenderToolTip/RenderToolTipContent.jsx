@@ -5,101 +5,28 @@ import FiberManualRecordSharpIcon from "@mui/icons-material/FiberManualRecordSha
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 import styles from "./stylesRenderToolTip";
-import { useDispatch, useSelector } from "react-redux";
 import { formatMonthYear } from "../.././../utils/dateFomatter";
 import { useNavigate } from "react-router-dom";
-import { addToCartApi, removeFromCartApi } from "../../../store/cartSlice";
-import {
-  addToFavoritesApi,
-  removeFromFavoritesApi,
-} from "../../../store/favoritesSlice";
-import { useState } from "react";
+import { useCourseActions } from "../../../customHooks/useCourseAction";
 
 RenderToolTipContent.propTypes = {
   course: PropTypes.object,
 };
-
-// Hiển thị tool tip
 const DotIcon = styled(FiberManualRecordSharpIcon)(({ theme }) => ({
   fontSize: "small",
   marginLeft: theme.spacing(1),
 }));
 
 function RenderToolTipContent({ course = {} }) {
-  console.log("RenderToolTipContent", course);
-  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const accessToken = useSelector((state) => state.user.accessToken);
-  const cartItems = JSON.parse(localStorage.getItem("cartItems"));
-  const favorites = JSON.parse(localStorage.getItem("favoriteItems"));
-  const courseInCart = cartItems
-    ? cartItems.some((item) => item.courseId === course.courseId)
-    : false;
-  const isFavorite = favorites
-    ? favorites.some((item) => item.courseId === course.courseId)
-    : false;
-  const [isInCart, setIsInCart] = useState(courseInCart);
-  const [isFavorited, setIsFavorited] = useState(isFavorite);
-
-  const handleRemoveCart = async (courseId) => {
-    const accessToken = localStorage.getItem("accessToken");
-    dispatch(removeFromCartApi({ courseId, accessToken }));
-    const updatedCart = cartItems.filter(
-      (course) => course.courseId !== courseId
-    );
-    localStorage.setItem("cartItems", JSON.stringify(updatedCart));
-  };
-  const handleRemoveFavorite = async (courseId) => {
-    const accessToken = localStorage.getItem("accessToken");
-    dispatch(removeFromFavoritesApi({ courseId, accessToken }));
-    const updatedFavorite = favorites.filter(
-      (course) => course.courseId !== courseId
-    );
-    localStorage.setItem("favoriteItems", JSON.stringify(updatedFavorite));
-  };
-
-  const handleCartClick = async () => {
-    if (accessToken) {
-      if (isInCart) {
-        navigate("/cart");
-      } else {
-        try {
-          if (isFavorited) {
-            await handleRemoveFavorite(course.courseId);
-            setIsFavorited(false);
-          }
-          await dispatch(
-            addToCartApi({ courseId: course.courseId, accessToken })
-          ).unwrap();
-          setIsInCart(true);
-        } catch (error) {
-          console.error("fail to add to cart", error);
-        }
-      }
-    }
-  };
-
-  const handleFavoriteClick = async () => {
-    if (accessToken) {
-      const newFavoritedStatus = !isFavorited;
-      setIsFavorited(newFavoritedStatus);
-      if (isInCart) {
-        await handleRemoveCart(course.courseId);
-        setIsInCart(false);
-      }
-      if (newFavoritedStatus) {
-        await dispatch(
-          addToFavoritesApi({ courseId: course.courseId, accessToken })
-        ).unwrap();
-        setIsFavorited(true);
-      } else {
-        await handleRemoveFavorite(course.courseId);
-        setIsFavorited(false);
-      }
-    } else {
-      navigate("/login");
-    }
-  };
+  const {
+    accessToken,
+    isInCart,
+    isFavorited,
+    handleCartClick,
+    handleFavoriteClick,
+    handleEnrollClick,
+  } = useCourseActions(course);
   let actionButtons;
 
   if (accessToken) {
@@ -109,7 +36,7 @@ function RenderToolTipContent({ course = {} }) {
           <Button
             variant="contained"
             sx={styles.cartEroll}
-            style={{ height: "50px" }}
+            onClick={() => navigate(`/courses/learn/${course.courseId}`)}
           >
             Learn Now
           </Button>
@@ -141,6 +68,7 @@ function RenderToolTipContent({ course = {} }) {
             variant="outlined"
             sx={styles.cartEroll}
             style={{ height: "50px" }}
+            onClick={handleEnrollClick}
           >
             Enroll Now
           </Button>

@@ -1,45 +1,9 @@
-import { useEffect, useState } from "react";
 import { Container, Typography } from "@mui/material";
+import PropTypes from "prop-types";
 import Course from "../Course/Course";
 import SkeletonList from "./CourseItemSkeleton";
-import axios from "axios";
 
-const CourseItem = () => {
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [courses, setCourses] = useState([]);
-
-  const loadAllCourses = async () => {
-    setLoading(true);
-    setError(null);
-
-    try {
-      const accessToken = localStorage.getItem("accessToken");
-
-      const res = await axios.get(
-        "http://localhost:8080/api/v1/courses/categorycourse",
-        accessToken
-          ? {
-              headers: {
-                Authorization: `Bearer ${accessToken}`,
-              },
-            }
-          : {}
-      );
-
-      setCourses(res.data.data);
-    } catch (error) {
-      console.error("Error fetching courses:", error);
-      setError("Failed to load courses");
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    loadAllCourses();
-  }, []);
-
+const CourseItem = ({ loading, error, courses }) => {
   if (loading) {
     return <SkeletonList />;
   }
@@ -60,6 +24,11 @@ const CourseItem = () => {
       <Course courses={courses} />
     </Container>
   );
+};
+CourseItem.propTypes = {
+  loading: PropTypes.any,
+  error: PropTypes.any,
+  courses: PropTypes.any,
 };
 
 export default CourseItem;

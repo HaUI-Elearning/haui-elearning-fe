@@ -54,22 +54,19 @@ function MenuUser() {
     setOpenDialog(false);
   };
 
-
-    return (
-        <Box>
-            <Avatar
-                sx={{
-                    bgcolor: deepOrange[500],
-                    cursor: 'pointer',
-                    marginRight: '40px',
-                    
-                }}
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-            >
-                TL
-            </Avatar>
-
+  return (
+    <Box>
+      <Avatar
+        sx={{
+          bgcolor: deepOrange[500],
+          cursor: "pointer",
+          marginRight: "40px",
+        }}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
+        TL
+      </Avatar>
 
       {openMenu && (
         <Box
@@ -101,7 +98,7 @@ function MenuUser() {
               { text: "My learning", path: "/my-course/my-learning" },
               { text: "My cart", path: "/cart" },
               { text: "Wishlist", path: "/my-course/my-wishlist" },
-              { text: "Purchase history", path: "/purchase-history" },
+              { text: "Purchase history", path: "/my-course/purchase-history" },
               { text: "Log out", path: null, onClick: handleLogoutClick },
             ].map((item) => (
               <li

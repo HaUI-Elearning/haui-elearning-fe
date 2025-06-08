@@ -1,10 +1,12 @@
 import { useEffect, useState, useCallback } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Detail from "../../components/CourseDetail/Detail";
-import axios from "axios";
-import { getCommentByCourseId } from "../../apis/getComment";
+import { getCommentByCourseId } from "../../apis/getCommentByCourseId";
 import { filterComment } from "../../apis/filterComment";
+import { getCourseById } from "../../apis/Course/getCourseById";
+
 const CourseDetailPage = () => {
+  const navigate = useNavigate();
   const { courseId } = useParams();
   const [course, setCourse] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -22,30 +24,26 @@ const CourseDetailPage = () => {
     setError(null);
 
     try {
-      const accessToken = localStorage.getItem("accessToken");
+      const res = await getCourseById(courseId);
 
-      const headers = accessToken
-        ? {
-            Authorization: `Bearer ${accessToken}`,
-          }
-        : {};
-
-      const res = await axios.get(
-        `http://localhost:8080/api/v1/courses/${courseId}`,
-        { headers }
-      );
-
-      console.log("Course data:", res.data.data);
-      setCourse(res.data.data);
+      console.log("Course data api:", res.courseId);
+      setCourse(res);
       fetchAllCommnent();
     } catch (e) {
       console.error("Error fetching courses:", e);
-      setError("Failed to load courses");
+
+      const errorMsg = e.response?.data?.error || "";
+
+      if (errorMsg.includes("Course not found")) {
+        navigate("*");
+      } else {
+        setError("Failed to load courses");
+      }
     } finally {
       setLoading(false);
     }
   }, [courseId, fetchAllCommnent]);
-  
+
   const fetchFilterCommnent = useCallback(
     async (star) => {
       const data = {

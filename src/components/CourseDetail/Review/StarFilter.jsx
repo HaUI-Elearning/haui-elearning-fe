@@ -8,8 +8,6 @@ const StarFilter = ({ comment, selectedStar, handleSelect, starOptions }) => {
 
   return (
     <Box width="100%">
-
-
       <Box display="flex" flexDirection="column" gap={2}>
         {starOptions.map((star) => {
           const matchingReviews = comment.listReview.filter((r) => {
@@ -34,10 +32,14 @@ const StarFilter = ({ comment, selectedStar, handleSelect, starOptions }) => {
                   justifyContent: "flex-start",
                   width: "100%",
                   pr: 4,
-                  cursor: "pointer",
+                  cursor: percentage === "0.0" ? "not-allowed" : "pointer",
                   backgroundColor: isSelected ? "#cce4fb" : "transparent",
                 }}
-                onClick={() => handleSelect(star)}
+                onClick={() => {
+                  if (percentage !== "0.0") {
+                    handleSelect(star);
+                  }
+                }}
               >
                 <RenderStar numStars={star} />
                 <span style={{ marginLeft: 8 }}>{`(${percentage}%)`}</span>
@@ -45,7 +47,7 @@ const StarFilter = ({ comment, selectedStar, handleSelect, starOptions }) => {
                 {isSelected && (
                   <IconButton
                     onClick={(e) => {
-                      e.stopPropagation(); // Ngăn event lan sang onClick bên ngoài
+                      e.stopPropagation();
                       handleSelect(star);
                     }}
                     size="small"

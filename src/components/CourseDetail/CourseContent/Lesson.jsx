@@ -32,7 +32,7 @@ const AllLesson = ({ data }) => {
 
   return (
     <div style={{ marginBottom: "35px" }}>
-      <Typography sx={styles.typo1}>📚 Course Content</Typography>
+      <Typography variant="h5" sx={styles.typo1}>📚 Course Content</Typography>
 
       <Typography
         variant="body2"

@@ -55,7 +55,7 @@ function MostPopular({ course = [] }) {
                                         {course.author}
                                     </Typography>
                                     <Box sx={styles.starContainer}>
-                                        {course.star}
+                                        {course.star.toFixed(1)}
                                         <RenderStar numStars={course.star}></RenderStar>
                                     </Box>
                                     <Typography sx={styles.price}>

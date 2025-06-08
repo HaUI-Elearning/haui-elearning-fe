@@ -3,6 +3,8 @@ import { Box, Tab, Tabs, Typography, Container } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
 import WishList from "../../components/User/WishList/WishList";
 import MyLearning from "../../components/User/MyLearning/MyLearning";
+import NotFoundPage from "../NotFoundPage/NotFound";
+import PurchaseHistory from "../../components/User/MyProfile/PurchaseHistory/PurchaseHistory";
 
 const TABS = [
   {
@@ -11,14 +13,20 @@ const TABS = [
     content: <MyLearning />,
   },
   { label: "Wishlist", path: "/my-course/my-wishlist", content: <WishList /> },
+  {
+    label: "Order History",
+    path: "/my-course/purchase-history",
+    content: <PurchaseHistory />,
+  },
 ];
 
 function TabPage() {
   const navigate = useNavigate();
   const location = useLocation();
-  const [selectedTab, setSelectedTab] = useState(
-    TABS.findIndex((tab) => tab.path === location.pathname) || 0
+  const currentTabIndex = TABS.findIndex(
+    (tab) => tab.path === location.pathname
   );
+  const [selectedTab, setSelectedTab] = useState(currentTabIndex || 0);
 
   useEffect(() => {
     const currentTabIndex = TABS.findIndex(
@@ -31,7 +39,9 @@ function TabPage() {
     setSelectedTab(newValue);
     navigate(TABS[newValue].path);
   };
-
+  if (currentTabIndex === -1) {
+    return <NotFoundPage />;
+  }
   return (
     <Box sx={{ minHeight: "70vh", backgroundColor: "#f4f4f4" }}>
       <Box

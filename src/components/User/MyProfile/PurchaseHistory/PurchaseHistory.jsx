@@ -1,0 +1,136 @@
+import { useState, useEffect } from "react";
+import {
+  Container,
+  Table,
+  TableHead,
+  TableBody,
+  TableCell,
+  TableRow,
+  Button,
+} from "@mui/material";
+import { arrayToDate } from "../../../../utils/formatDateArrayToDDMMYYYY";
+
+import { fetchOrders } from "../../../../apis/OrderHistory/getAllOrder";
+import { fetchOrderDetail } from "../../../../apis/OrderHistory/getOrderDetail";
+import PurchaseFilters from "../../PurchaseHistory/PurchaseFilter/PurchaseFilter";
+import PurchaseView from "../../PurchaseHistory/PurchaseView/PurchaseView";
+import styles from "./styles";
+
+const PurchaseHistory = () => {
+  const [status, setStatus] = useState("");
+  const [fromDate, setFromDate] = useState("");
+  const [toDate, setToDate] = useState("");
+  const [orders, setOrders] = useState([]);
+
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const [orderDetail, setOrderDetail] = useState(null);
+
+  useEffect(() => {
+    const loadOrders = async () => {
+      try {
+        const result = await fetchOrders();
+        setOrders(result);
+      } catch (error) {
+        console.error("Fail to get all order history", error);
+      }
+    };
+
+    loadOrders();
+  }, []);
+
+  const filteredOrders = orders.filter((order) => {
+    const matchStatus = status
+      ? order.payment.status.toLowerCase() === status.toLowerCase()
+      : true;
+
+    const orderDate = arrayToDate(order.payment?.paymentDate);
+    if (!orderDate) return false;
+
+    const from = fromDate ? new Date(fromDate) : null;
+    const to = toDate ? new Date(toDate) : null;
+
+    const matchFromDate = from ? from <= orderDate : true;
+    const matchToDate = to ? orderDate <= to : true;
+
+    return matchStatus && matchFromDate && matchToDate;
+  });
+
+  const handleClear = () => {
+    setFromDate("");
+    setToDate("");
+    setStatus("");
+  };
+
+  const handleViewClick = async (paymentID) => {
+    try {
+      const detail = await fetchOrderDetail(paymentID);
+      setOrderDetail(detail);
+      setDialogOpen(true);
+    } catch (error) {
+      console.error("Error fetching order detail:", error);
+    }
+  };
+
+  return (
+    <Container>
+      <PurchaseFilters
+        fromDate={fromDate}
+        toDate={toDate}
+        status={status}
+        setFromDate={setFromDate}
+        setToDate={setToDate}
+        setStatus={setStatus}
+        onClear={handleClear}
+      />
+
+      <Table>
+        <TableHead>
+          <TableRow sx={styles.headRow}>
+            <TableCell sx={styles.headCell}>ID</TableCell>
+            <TableCell sx={styles.headCell}>TRN</TableCell>
+            <TableCell sx={styles.headCell}>Order Date</TableCell>
+            <TableCell sx={styles.headCell}>Total Amount</TableCell>
+            <TableCell sx={styles.headCell}>Quantity courses</TableCell>
+            <TableCell sx={styles.headCell}>Status</TableCell>
+            <TableCell sx={styles.headCell}></TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {filteredOrders.map((order) => (
+            <TableRow key={order.orderId}>
+              <TableCell>{order.orderId}</TableCell>
+              <TableCell>{order.payment?.txnRef}</TableCell>
+              <TableCell>
+                {order.payment?.paymentDate
+                  ? arrayToDate(order.payment.paymentDate).toLocaleString()
+                  : ""}
+              </TableCell>
+
+              <TableCell>{order.totalAmount?.toLocaleString()}₫</TableCell>
+              <TableCell>{order.courses?.length || 0}</TableCell>
+              <TableCell>{order.payment?.status}</TableCell>
+              <TableCell>
+                <Button
+                  variant="outlined"
+                  size="small"
+                  onClick={() => handleViewClick(order.payment?.paymentId)}
+                  sx={styles.view}
+                >
+                  VIEW
+                </Button>
+              </TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+
+      <PurchaseView
+        open={dialogOpen}
+        onClose={() => setDialogOpen(false)}
+        orderDetail={orderDetail}
+      />
+    </Container>
+  );
+};
+
+export default PurchaseHistory;

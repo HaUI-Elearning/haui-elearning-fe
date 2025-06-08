@@ -6,7 +6,6 @@ import { formatDayMonthYear } from "../../../utils/dateFomatter";
 import styles from "./styles";
 
 const Overview = ({ course = {} }) => {
-  console.log("Course Data from Overview Component:", course.course);
   return (
     <div style={styles.wrapper}>
       <h1 style={styles.title}>
@@ -22,19 +21,24 @@ const Overview = ({ course = {} }) => {
 
         <div style={styles.starGroup}>
           <span>🕒 {course.course.hour}</span>
-          <span style={{ color: "#B36B00", fontSize: 15 }}>learning </span>
+          <span style={{ color: "#B36B00", fontSize: 15 }}>
+            hours learning{" "}
+          </span>
         </div>
       </div>
 
       <div style={styles.updatedDate}>
         <span>
-          ⏰ Last updated {formatDayMonthYear(course.course.createdAt)}
+          ⏰ Last updated: {formatDayMonthYear(course.course.createdAt)}
         </span>
       </div>
 
       <div style={styles.langWrapper}>
         <span>🌐 English</span>
         <span>📝 English [Auto]</span>
+        <span>
+          📱 Available on <strong>iOS</strong> & <strong>Android</strong>
+        </span>
       </div>
 
       <div style={styles.description}>
@@ -47,7 +51,7 @@ const Overview = ({ course = {} }) => {
       <Grid2 container spacing={2}>
         <Grid2 xs={12}>
           <Typography variant="h5" sx={styles.learnTitle}>
-            What you will learn
+            Description
           </Typography>
 
           <Grid2

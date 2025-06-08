@@ -1,5 +1,5 @@
 import { useEffect, useState, useCallback } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Container, Typography, Grid } from "@mui/material";
 import BasicDetail from "../../components/FindByCategory/BasicDetail/BasicDetail";
 import TabCourse from "../../components/FindByCategory/TabCourse/TabCourse";
@@ -11,6 +11,8 @@ import CurrentFilters from "../../components/FindByCategory/FilterCourses/Curent
 import Introduce from "../../components/FindByCategory/FilterCourses/Introduce/Introduce";
 
 const Categories = () => {
+
+  const navigate= useNavigate()
   const { categoryId } = useParams();
   const [courses, setCourses] = useState([]);
   const [detail, setDetail] = useState({});
@@ -127,6 +129,7 @@ const Categories = () => {
       setDetail(res1.data.data);
     } catch (error) {
       console.error("Error fetching detail category:", error);
+      navigate("*")
       setError("Failed to load detail category");
     }
   }, [categoryId]);

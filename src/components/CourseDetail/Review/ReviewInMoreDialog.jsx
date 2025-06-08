@@ -69,7 +69,6 @@ const ReviewInMoreDialog = ({ onCommentFilter, comment }) => {
 
         <DialogContent>
           <Box display="flex" gap={2}>
-            {/* 🟨 Filter 30% */}
             <Box width="30%">
               <StarFilter
                 comment={comment}
