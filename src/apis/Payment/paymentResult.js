@@ -1,6 +1,6 @@
 
 import axios from "axios";
-import { BASE_URL } from "../constants/api.constant";
+import { BASE_URL } from "../../constants/api.constant";
 
 export const fetchPaymentResult = async (queryString) => {
   try {

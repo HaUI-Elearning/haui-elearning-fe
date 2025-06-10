@@ -100,7 +100,7 @@ const Login = () => {
           <button
             type="button"
             className="back-button"
-            onClick={() => navigate('/')}
+            onClick={() => navigate("/")}
             aria-label="Back to Sign In"
           >
             <IoIosArrowBack /> Back Home

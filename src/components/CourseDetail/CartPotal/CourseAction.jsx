@@ -7,6 +7,7 @@ import FavoriteBorderIcon from "@mui/icons-material/FavoriteBorder";
 
 import PropTypes from "prop-types";
 import { useCourseActions } from "../../../customHooks/useCourseAction";
+import { createVNPayPayment } from "../../../apis/Payment/createVNPayPayment";
 
 export const CourseActions = ({ course, setOpen }) => {
   const navigate = useNavigate();
@@ -19,8 +20,19 @@ export const CourseActions = ({ course, setOpen }) => {
     handleEnrollClick,
   } = useCourseActions(course);
 
-  const handleBuyNow = () => {
-    navigate("/checkout", { state: { course } });
+  const handleBuyNow = async () => {
+    try {
+      const courseIds = [course.courseId];
+      console.log("Course id in payment:", courseIds);
+      
+      const res = await createVNPayPayment(courseIds, false);
+      console.log("Link:", res.data.paymentUrl);
+      setTimeout(() => {
+        window.location.href = res.data.paymentUrl;
+      }, 1000);
+    } catch (error) {
+      console.error("Err when create order:", error);
+    }
   };
 
   const handleCartClickNoLogin = () => {
