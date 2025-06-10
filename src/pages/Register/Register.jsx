@@ -54,9 +54,9 @@ const Register = () => {
         <RegisterForm onSubmit={handleSubmit} />
 
         <div className="linkRegister">
-          <p>Bạn đã có tài khoản?</p>
+          <p>Already have an account?</p>
           <Link to="/signIn" className="dangky">
-            Đăng Nhập
+            Sign In
           </Link>
         </div>
       </div>

@@ -9,7 +9,7 @@ import { useDispatch, useSelector } from "react-redux";
 import RenderStar from "../Course/RenderStar/RenderStar";
 import LoyaltyIcon from "@mui/icons-material/Loyalty";
 import { addToFavoritesApi } from "../../store/favoritesSlice";
-import { createVNPayPayment } from "../../apis/createVNPayPayment";
+import { createVNPayPayment } from "../../apis/Payment/createVNPayPayment";
 function MyCart() {
   const dispatch = useDispatch();
   const courses = useSelector((state) => state.cart.items);
@@ -67,7 +67,7 @@ function MyCart() {
     try {
       const courseIds = courseDetails.map((c) => c.courseId);
       console.log("Course id in paymenr:", courseIds);
-      const res = await createVNPayPayment(courseIds);
+      const res = await createVNPayPayment(courseIds, true);
       console.log("Link:", res.data.paymentUrl);
       setTimeout(() => {
         window.location.href = res.data.paymentUrl;

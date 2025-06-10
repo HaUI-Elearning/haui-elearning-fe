@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { FaUser, FaLock } from "react-icons/fa";
 import { MdEmail } from "react-icons/md";
 
-import InputField from "../../common/InputField"; // component input đã tạo bên trên
+import InputField from "../../common/InputField";
 import { registerSchema } from "../../utils/registerValidate/";
 import { yupResolver } from "@hookform/resolvers/yup";
 import PropTypes from "prop-types";
@@ -22,7 +22,7 @@ const RegisterForm = ({ onSubmit }) => {
       <InputField
         control={control}
         name="username"
-        placeholder="Tên đăng nhập"
+        placeholder="Username"
         icon={FaUser}
       />
       {errors.username && <p className="errorMsg">{errors.username.message}</p>}
@@ -31,7 +31,7 @@ const RegisterForm = ({ onSubmit }) => {
       <InputField
         control={control}
         name="password"
-        placeholder="Mật khẩu"
+        placeholder="Password"
         type="password"
         icon={FaLock}
       />
@@ -41,7 +41,7 @@ const RegisterForm = ({ onSubmit }) => {
       <InputField
         control={control}
         name="confirmPassword"
-        placeholder="Xác nhận mật khẩu"
+        placeholder="Confirm Password"
         type="password"
         icon={FaLock}
       />
@@ -62,14 +62,14 @@ const RegisterForm = ({ onSubmit }) => {
       <InputField
         control={control}
         name="name"
-        placeholder="Tên đầy đủ"
+        placeholder="Full name"
         icon={FaUser}
       />
       {errors.name && <p className="errorMsg">{errors.name.message}</p>}
       <br />
 
       <button type="submit" className="button-register">
-        ĐĂNG KÝ
+        Sign Up
       </button>
     </form>
   );

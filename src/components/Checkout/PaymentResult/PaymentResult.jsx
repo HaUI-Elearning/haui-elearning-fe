@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { Box, Typography, Snackbar, Alert } from "@mui/material";
 import CircularProgress from "@mui/material/CircularProgress";
 import { fetchCartItems } from "../../../store/cartSlice";
-import { fetchPaymentResult } from "../../../apis/paymentResult";
+import { fetchPaymentResult } from "../../../apis/Payment/paymentResult";
 import paymentSuccess from "../../../assets/images/paymentsuccess.jpg";
 import paymentFail from "../../../assets/images/paymentfail.jpg";
 

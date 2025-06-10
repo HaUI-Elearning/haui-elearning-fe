@@ -22,6 +22,7 @@ const CourseList = ({ courses, currentPage, setCurrentPage, totalPages, totalRes
     const handleCourseClick = (courseId) => {
         navigate(`/courses/${courseId}`);
     };
+    console.log("Course res:", courses)
     return (
         <div>
             <h4>Result: {totalResult}</h4>
