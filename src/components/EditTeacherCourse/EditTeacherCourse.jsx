@@ -29,6 +29,7 @@ const EditTeacherCourse = () => {
   const [categories, setCategories] = useState([]);
   const [categoryId, setCategoryId] = useState("");
   const [loading, setLoading] = useState(false);
+  const [approvalStatus, setApprovalStatus] = useState("");
 
   const inputRef = useRef();
   const navigate = useNavigate();
@@ -58,6 +59,7 @@ const EditTeacherCourse = () => {
         );
 
         const course = courseRes.data.data;
+        setApprovalStatus(course.approvalStatus);
         setName(course.name);
         setDescription(course.description);
         setContent(course.contents);
@@ -105,18 +107,21 @@ const EditTeacherCourse = () => {
     const formData = new FormData();
     if (thumbnail) formData.append("file", thumbnail);
 
+    // ✅ Chọn đúng API dựa theo approvalStatus
+    let updateApi = "http://localhost:8080/api/v1/Teacher/Course/Update";
+    if (approvalStatus === "rejected") {
+      updateApi =
+        "http://localhost:8080/api/v1/Teacher/Course/Update/ToApproval";
+    }
+
     try {
       setLoading(true);
-      await axios.put(
-        `http://localhost:8080/api/v1/Teacher/Course/Update?${params}`,
-        formData,
-        {
-          headers: {
-            "Content-Type": "multipart/form-data",
-            Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-          },
-        }
-      );
+      await axios.put(`${updateApi}?${params}`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        },
+      });
       toast.success("Cập nhật khóa học thành công!");
       navigate("/teacher");
     } catch (error) {

@@ -30,6 +30,8 @@ import ScrollToTop from "./components/ScrollToTop";
 import AccessDeniedPage from "./pages/AccessDeniedPage/AccessDenied";
 import NotFoundPage from "./pages/NotFoundPage/NotFound";
 import EnrollPage from "./pages/BuyAndEnrollCourse/Enroll/EnrollPage";
+import CourseStatisticsTable from "./pages/CourseStatisticsTable/CourseStatisticsTable";
+import DashboardTeacher from "./pages/DashboardTeacher/DashboardTeacher";
 
 function App() {
   const router = useRoutes([
@@ -133,6 +135,10 @@ function App() {
     {
       path: "/teacher/edit-course/:courseId",
       element: <EditTeacherCourse />,
+    },
+    {
+      path:'/my-revenue',
+      element:<DashboardTeacher/>
     },
 
     {

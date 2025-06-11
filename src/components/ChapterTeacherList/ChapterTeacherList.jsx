@@ -14,6 +14,9 @@ import {
   DialogContentText,
   DialogActions,
   Button,
+  Typography,
+  TextField,
+  CircularProgress,
 } from "@mui/material";
 import CourseList1 from "../../assets/images/course-list-basic-1.png";
 import "./ChapterTeacherList.scss";
@@ -25,6 +28,7 @@ import EditChapterDialog from "./EditChapterDialog";
 import AddChapterDialog from "./AddChapterDialog";
 import { deleteChapter, getAllChapter } from "../../apis/chapter.api";
 import { getLessonsByChapter } from "../../apis/lesson.api";
+import axios from "axios";
 
 const ChapterTeacherList = () => {
   // Các state để điều khiển UI
@@ -42,6 +46,18 @@ const ChapterTeacherList = () => {
   const [lessonsByChapter, setLessonsByChapter] = useState({});
   const [lessonToDelete, setLessonToDelete] = useState(null);
   const [openConfirmLessonDialog, setOpenConfirmLessonDialog] = useState(false);
+  const [rejectReason, setRejectReason] = useState("");
+  const [loadingReason, setLoadingReason] = useState(false);
+  const [showRejectForm, setShowRejectForm] = useState(false);
+  const [openDialog, setOpenDialog] = useState(false);
+
+  const handleOpenDialog = () => {
+    setOpenDialog(true);
+  };
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false);
+  };
 
   const navigate = useNavigate();
   const { id } = useParams();
@@ -71,6 +87,35 @@ const ChapterTeacherList = () => {
 
     fetchCourse();
   }, []);
+  useEffect(() => {
+    const fetchRejectReason = async () => {
+      if (course?.data?.approvalStatus === "rejected") {
+        try {
+          const token = localStorage.getItem("accessToken");
+          setLoadingReason(true);
+          const response = await axios.get(
+            `http://localhost:8080/api/v1/Teacher/Course/Reason/Reject?courseId=${id}`,
+            {
+            headers: {
+              Authorization: `Bearer ${token}`,
+              "Content-Type": "application/json",
+            },
+          }
+            
+          );
+          console.log("respon tu choi",response.data)
+          setRejectReason(response.data); // có thể là response.data.reason tùy backend
+        } catch (error) {
+          console.error("Lỗi khi lấy lý do bị từ chối:", error);
+          setRejectReason("Không thể lấy lý do từ chối.");
+        } finally {
+          setLoadingReason(false);
+        }
+      }
+    };
+
+    fetchRejectReason();
+  }, [course, id]);
   useEffect(() => {
     const fetchChapters = async () => {
       try {
@@ -171,7 +216,7 @@ const ChapterTeacherList = () => {
     }
   };
 
-  const handleEditEditCourse = () => {
+  const handleEditCourse = () => {
     navigate(`/teacher/edit-course/${id}`);
   };
   const handleAddLesson = (chapterId) => {
@@ -220,15 +265,106 @@ const ChapterTeacherList = () => {
         </div>
 
         <div className="btn-container">
-          <button className="edit-course-button" onClick={handleEditEditCourse}>
-            SỬA KHOÁ HỌC
-          </button>
-          <button
-            className="cancel-course-button"
+          {/* Nếu trạng thái là approved */}
+          {course?.data?.approvalStatus === "approved" && (
+            <Button
+              variant="contained"
+              color="primary"
+              onClick={handleEditCourse}
+              sx={{
+                padding: "10px 20px",
+                fontSize: "14px",
+                minWidth: "120px",
+                height: "40px",
+                borderRadius: "8px",
+                marginTop: 2,
+                marginLeft: 2,
+                
+              }}
+            >
+              SỬA KHÓA HỌC
+            </Button>
+          )}
+
+          {/* Nếu trạng thái là rejected */}
+          {course?.data?.approvalStatus === "rejected" && (
+            <>
+              <Button
+                variant="contained"
+                color="primary"
+                onClick={handleOpenDialog}
+                 sx={{
+                padding: "10px 20px",
+                fontSize: "14px",
+                minWidth: "120px",
+                height: "40px",
+                borderRadius: "8px",
+                marginTop: 2,
+                marginLeft: 2,
+                
+              }}
+              >
+                TỪ CHỐI
+              </Button>
+
+              <Dialog
+                open={openDialog}
+                onClose={handleCloseDialog}
+                fullWidth
+                maxWidth="sm"
+              >
+                <DialogTitle sx={{ color: "red" }}>
+                  Khóa học của bạn đã bị từ chối
+                </DialogTitle>
+                <DialogContent dividers>
+                  {loadingReason ? (
+                    <CircularProgress size={24} />
+                  ) : (
+                    <TextField
+                      label="Lý do từ chối"
+                      multiline
+                      fullWidth
+                      rows={4}
+                      value={rejectReason}
+                      InputProps={{
+                        readOnly: true,
+                      }}
+                    />
+                  )}
+                </DialogContent>
+                <DialogActions>
+                  <Button
+                    onClick={handleEditCourse}
+                    variant="contained"
+                    color="primary"
+                  >
+                    SỬA KHÓA HỌC
+                  </Button>
+                  <Button onClick={handleCloseDialog} color="inherit">
+                    Đóng
+                  </Button>
+                </DialogActions>
+              </Dialog>
+            </>
+          )}
+
+          {/* Nút hủy bỏ luôn hiện */}
+          <Button
+            variant="outlined"
+            color="secondary"
             onClick={() => navigate("/teacher")}
+            sx={{
+              padding: "8px 20px", // padding bên trong nút
+              fontSize: "14px", // cỡ chữ
+              minWidth: "120px", // độ rộng tối thiểu
+              height: "40px", // chiều cao
+              marginLeft: 2,
+              marginTop: 2,
+              borderRadius: "8px",
+            }}
           >
             HUỶ BỎ
-          </button>
+          </Button>
         </div>
       </div>
 

@@ -14,7 +14,7 @@ const TeacherHome = () => {
     <div className="teacher-home">
       <div className="top-bar">
         <button className="add-course-btn" onClick={handleAddCourse}>
-          Thêm Khóa Học
+          Add Course
         </button>
       </div>
 
