@@ -110,3 +110,9 @@
     font-size: 24px;
   }
 }
+.menu-content{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  gap: 30px;
+}
