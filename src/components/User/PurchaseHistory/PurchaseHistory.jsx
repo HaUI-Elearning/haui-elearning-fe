@@ -7,13 +7,15 @@ import {
   TableCell,
   TableRow,
   Button,
+  Chip,
 } from "@mui/material";
-import { arrayToDate } from "../../../../utils/formatDateArrayToDDMMYYYY";
-
-import { fetchOrders } from "../../../../apis/OrderHistory/getAllOrder";
-import { fetchOrderDetail } from "../../../../apis/OrderHistory/getOrderDetail";
-import PurchaseFilters from "../../PurchaseHistory/PurchaseFilter/PurchaseFilter";
-import PurchaseView from "../../PurchaseHistory/PurchaseView/PurchaseView";
+import { arrayToDate } from "../../../utils/formatDateArrayToDDMMYYYY";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
+import CancelIcon from "@mui/icons-material/Cancel";
+import { fetchOrders } from "../../../apis/OrderHistory/getAllOrder";
+import { fetchOrderDetail } from "../../../apis/OrderHistory/getOrderDetail";
+import PurchaseFilters from "./PurchaseFilter/PurchaseFilter";
+import PurchaseView from "./PurchaseView/PurchaseView";
 import styles from "./styles";
 
 const PurchaseHistory = () => {
@@ -108,7 +110,26 @@ const PurchaseHistory = () => {
 
               <TableCell>{order.totalAmount?.toLocaleString()}₫</TableCell>
               <TableCell>{order.courses?.length || 0}</TableCell>
-              <TableCell>{order.payment?.status}</TableCell>
+              <TableCell>
+                <Chip
+                  label={
+                    order.payment?.status === "success" ? "Success" : "Fail"
+                  }
+                  color={
+                    order.payment?.status === "success" ? "success" : "error"
+                  }
+                  icon={
+                    order.payment?.status === "success" ? (
+                      <CheckCircleOutlineIcon />
+                    ) : (
+                      <CancelIcon />
+                    )
+                  }
+                  variant="outlined"
+                  size="small"
+                  sx={{ fontWeight: "bold" }}
+                />
+              </TableCell>
               <TableCell>
                 <Button
                   variant="outlined"

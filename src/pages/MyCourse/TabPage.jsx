@@ -4,7 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import WishList from "../../components/User/WishList/WishList";
 import MyLearning from "../../components/User/MyLearning/MyLearning";
 import NotFoundPage from "../NotFoundPage/NotFound";
-import PurchaseHistory from "../../components/User/MyProfile/PurchaseHistory/PurchaseHistory";
+import PurchaseHistory from "../../components/User/PurchaseHistory/PurchaseHistory";
 
 const TABS = [
   {
