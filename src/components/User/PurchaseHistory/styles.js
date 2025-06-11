@@ -2,7 +2,7 @@ const styles = {
   common: {
     backgroundColor: "#A435F0",
     color: "#fff",
-    padding: "12px 32px",
+    padding: "12px 22px",
     fontWeight: "bold",
     fontSize: "1rem",
     borderRadius: "12px",
@@ -15,7 +15,7 @@ const styles = {
   view: {
     backgroundColor: "#fff",
     color: "#A435F0",
-    padding: "12px 32px",
+    padding: "12px 22px",
     fontWeight: "bold",
     fontSize: "1rem",
     borderRadius: "12px",
@@ -37,4 +37,4 @@ const styles = {
   },
 };
 
-export default styles
+export default styles;
