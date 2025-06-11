@@ -71,6 +71,16 @@
     text-decoration: underline;
     color: gray;
   }
+    .back-button {
+      border: none;
+      background: none;
+      font-size: 14px;
+      color: gray;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
 }
 
 .logo img {

@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-//import { getAllItemCategories } from "../../apis/categories";
 import { Link } from "react-router-dom";
 import axios from "axios";
 
