@@ -41,8 +41,9 @@ const AddChapterDialog = ({ courseId, chapters, setChapters }) => {
       setDescription("");
       setPosition("");
     } catch (error) {
-      console.error(error);
-      toast.error("Error while adding chapter");
+      const apiError = error?.response?.data?.error || "Error while adding chapter";
+      console.log(apiError)
+      toast.error(apiError);
     } finally {
       setLoading(false);
     }

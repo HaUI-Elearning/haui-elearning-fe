@@ -22,7 +22,7 @@ const Footer = () => {
     <footer className="footer">
       <div className="footer-container">
         <div className="footer-section">
-          <h3>Udemy Business</h3>
+          <h3>HauiLearning Business</h3>
           <ul>
             <li>{t('footer1')}</li>
             <li>{t('footer2')}</li>
@@ -63,10 +63,10 @@ const Footer = () => {
       </div>
       <div className="footer-bottom">
         <div className="footer-logo">
-          <img src={Logo} alt="Udemy Logo" />
+         
         </div>
         <div className="footer-copyright">
-          © 2024 Udemy, Inc.
+          © 2024 HauiLearning, Inc.
         </div>
       </div>
     </footer>

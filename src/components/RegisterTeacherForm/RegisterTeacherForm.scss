@@ -52,6 +52,25 @@
         }
       }
     }
+    .button-group {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    .back-btn {
+      background-color: #ccc;
+      color: #333;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    .back-btn:hover {
+      background-color: #bbb;
+    }
 
     .submit-btn {
       align-self: center;
@@ -59,14 +78,14 @@
       font-size: 16px;
       font-weight: bold;
       color: white;
-      background: linear-gradient(135deg, #a435f0,  #b158ed);
+      background: linear-gradient(135deg, #a435f0, #b158ed);
       border: none;
       border-radius: 8px;
       cursor: pointer;
       transition: background 0.3s ease;
 
       &:hover {
-        background: linear-gradient(135deg,  #a435f0,  #7720b1);
+        background: linear-gradient(135deg, #a435f0, #7720b1);
       }
     }
   }

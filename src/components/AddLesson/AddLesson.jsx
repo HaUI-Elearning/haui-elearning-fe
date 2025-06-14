@@ -56,7 +56,7 @@ const AddLesson = () => {
       toast.success("Lesson added successfully!");
       navigate(-1);
     } catch (error) {
-      toast.error(error.response?.data?.message || "An error occurred.");
+      toast.error(error.response?.data?.error || "An error occurred.");
     } finally {
       setLoading(false);
     }

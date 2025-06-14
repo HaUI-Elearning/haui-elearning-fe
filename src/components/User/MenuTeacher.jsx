@@ -29,14 +29,14 @@ function MenuTeacher() {
 
     const handleLogoutClick = () => {
         Swal.fire({
-            title: 'Xác nhận đăng xuất',
-            text: 'Bạn có chắc chắn muốn đăng xuất không?',
+            title: 'Confirm logout',
+            text: 'Are you sure you want to log out?',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Đăng xuất',
-            cancelButtonText: 'Hủy'
+            confirmButtonText: 'Logout',
+            cancelButtonText: 'Cancel'
         }).then((result) => {
             if (result.isConfirmed) {
                 dispatch(logout());
