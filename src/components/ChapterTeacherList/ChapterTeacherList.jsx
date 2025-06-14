@@ -31,7 +31,7 @@ import { getLessonsByChapter } from "../../apis/lesson.api";
 import axios from "axios";
 
 const ChapterTeacherList = () => {
-  // Các state để điều khiển UI
+  // UI control states
   const [openSection, setOpenSection] = useState(null);
   const [isCreatingSubFolder, setIsCreatingSubFolder] = useState(false);
   const [isEditingSection, setIsEditingSection] = useState(false);
@@ -81,12 +81,13 @@ const ChapterTeacherList = () => {
         const data = await response.json();
         setCourse(data);
       } catch (error) {
-        console.error("Lỗi khi fetch course:", error);
+        console.error("Error fetching course:", error);
       }
     };
 
     fetchCourse();
   }, []);
+  
   useEffect(() => {
     const fetchRejectReason = async () => {
       if (course?.data?.approvalStatus === "rejected") {
@@ -96,18 +97,17 @@ const ChapterTeacherList = () => {
           const response = await axios.get(
             `http://localhost:8080/api/v1/Teacher/Course/Reason/Reject?courseId=${id}`,
             {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-Type": "application/json",
-            },
-          }
-            
+              headers: {
+                Authorization: `Bearer ${token}`,
+                "Content-Type": "application/json",
+              },
+            }
           );
-          console.log("respon tu choi",response.data)
-          setRejectReason(response.data); // có thể là response.data.reason tùy backend
+          console.log("Reject response", response.data)
+          setRejectReason(response.data);
         } catch (error) {
-          console.error("Lỗi khi lấy lý do bị từ chối:", error);
-          setRejectReason("Không thể lấy lý do từ chối.");
+          console.error("Error fetching rejection reason:", error);
+          setRejectReason("Unable to fetch rejection reason.");
         } finally {
           setLoadingReason(false);
         }
@@ -116,6 +116,7 @@ const ChapterTeacherList = () => {
 
     fetchRejectReason();
   }, [course, id]);
+  
   useEffect(() => {
     const fetchChapters = async () => {
       try {
@@ -123,7 +124,7 @@ const ChapterTeacherList = () => {
         const res = await getAllChapter(id);
         setChapters(res.data.data);
       } catch (err) {
-        console.error("Lỗi khi gọi API chương:", err);
+        console.error("Error fetching chapters:", err);
       } finally {
         setLoading(false);
       }
@@ -131,6 +132,7 @@ const ChapterTeacherList = () => {
 
     fetchChapters();
   }, [id]);
+  
   const handleDeleteChapter = (chapterId) => {
     setChapterToDelete(chapterId);
     setOpenConfirmDialog(true);
@@ -141,15 +143,16 @@ const ChapterTeacherList = () => {
       const token = localStorage.getItem("accessToken");
       await deleteChapter(id, chapterToDelete, token);
       setChapters((prev) => prev.filter((c) => c.id !== chapterToDelete));
-      toast.success("Xóa chương thành công!");
+      toast.success("Chapter deleted successfully!");
     } catch (err) {
       console.error(err);
-      toast.error("Xóa chương thất bại!");
+      toast.error("Failed to delete chapter!");
     } finally {
       setOpenConfirmDialog(false);
       setChapterToDelete(null);
     }
   };
+  
   const handleDeleteLesson = (lessonId, chapterId) => {
     setLessonToDelete({ lessonId, chapterId });
     setOpenConfirmLessonDialog(true);
@@ -172,10 +175,10 @@ const ChapterTeacherList = () => {
       );
 
       if (!res.ok) {
-        throw new Error("Xóa bài học thất bại");
+        throw new Error("Failed to delete lesson");
       }
 
-      // Cập nhật lại danh sách bài học trong state
+      // Update lessons in state
       setLessonsByChapter((prev) => {
         const updatedLessons = prev[chapterId]?.filter(
           (lesson) => lesson.lessonId !== lessonId
@@ -186,15 +189,16 @@ const ChapterTeacherList = () => {
         };
       });
 
-      toast.success("Xóa bài học thành công!");
+      toast.success("Lesson deleted successfully!");
     } catch (err) {
       console.error(err);
-      toast.error("Xóa bài học thất bại!");
+      toast.error("Failed to delete lesson!");
     } finally {
       setOpenConfirmLessonDialog(false);
       setLessonToDelete(null);
     }
   };
+  
   const handleToggleSection = async (idx, chapterId) => {
     if (openSection === idx) {
       setOpenSection(null);
@@ -209,8 +213,8 @@ const ChapterTeacherList = () => {
             [chapterId]: res.data.data,
           }));
         } catch (err) {
-          console.error("Lỗi khi lấy lesson:", err);
-          toast.error("Không có bài học nào");
+          console.error("Error fetching lessons:", err);
+          toast.error("No lessons found");
         }
       }
     }
@@ -219,14 +223,16 @@ const ChapterTeacherList = () => {
   const handleEditCourse = () => {
     navigate(`/teacher/edit-course/${id}`);
   };
+  
   const handleAddLesson = (chapterId) => {
     navigate(`/teacher/addLesson/${chapterId}`);
   };
+  
   const handleEditLesson = (chapterId, lessonId) => {
     navigate(`/teacher/editLesson/${chapterId}/${lessonId}`);
   };
 
-  // Hàm giả để xác định media type (ảnh/video)
+  // Function to determine media type (image/video)
   const determineMediaType = (url = "") => {
     const imageExtensions = [".jpg", ".jpeg", ".png", ".gif"];
     const videoExtensions = [".mp4", ".avi", ".mov", ".mkv"];
@@ -250,11 +256,11 @@ const ChapterTeacherList = () => {
             <img
               className="course-img"
               src={course?.data?.thumbnail}
-              alt="Khóa học"
+              alt="Course"
             />
           )}
           {determineMediaType(course?.data?.thumbnail) === "empty" && (
-            <img src={CourseList1} alt="Khóa học" className="course-img" />
+            <img src={CourseList1} alt="Course" className="course-img" />
           )}
         </div>
         <h2 style={{ color: "#f37335" }}>{course?.data?.name}</h2>
@@ -265,7 +271,7 @@ const ChapterTeacherList = () => {
         </div>
 
         <div className="btn-container">
-          {/* Nếu trạng thái là approved */}
+          {/* If status is approved */}
           {course?.data?.approvalStatus === "approved" && (
             <Button
               variant="contained"
@@ -279,32 +285,30 @@ const ChapterTeacherList = () => {
                 borderRadius: "8px",
                 marginTop: 2,
                 marginLeft: 2,
-                
               }}
             >
-              SỬA KHÓA HỌC
+              EDIT COURSE
             </Button>
           )}
 
-          {/* Nếu trạng thái là rejected */}
+          {/* If status is rejected */}
           {course?.data?.approvalStatus === "rejected" && (
             <>
               <Button
                 variant="contained"
                 color="primary"
                 onClick={handleOpenDialog}
-                 sx={{
-                padding: "10px 20px",
-                fontSize: "14px",
-                minWidth: "120px",
-                height: "40px",
-                borderRadius: "8px",
-                marginTop: 2,
-                marginLeft: 2,
-                
-              }}
+                sx={{
+                  padding: "10px 20px",
+                  fontSize: "14px",
+                  minWidth: "120px",
+                  height: "40px",
+                  borderRadius: "8px",
+                  marginTop: 2,
+                  marginLeft: 2,
+                }}
               >
-                TỪ CHỐI
+                REJECTED
               </Button>
 
               <Dialog
@@ -314,14 +318,14 @@ const ChapterTeacherList = () => {
                 maxWidth="sm"
               >
                 <DialogTitle sx={{ color: "red" }}>
-                  Khóa học của bạn đã bị từ chối
+                  Your course has been rejected
                 </DialogTitle>
                 <DialogContent dividers>
                   {loadingReason ? (
                     <CircularProgress size={24} />
                   ) : (
                     <TextField
-                      label="Lý do từ chối"
+                      label="Rejection Reason"
                       multiline
                       fullWidth
                       rows={4}
@@ -338,32 +342,32 @@ const ChapterTeacherList = () => {
                     variant="contained"
                     color="primary"
                   >
-                    SỬA KHÓA HỌC
+                    EDIT COURSE
                   </Button>
                   <Button onClick={handleCloseDialog} color="inherit">
-                    Đóng
+                    Close
                   </Button>
                 </DialogActions>
               </Dialog>
             </>
           )}
 
-          {/* Nút hủy bỏ luôn hiện */}
+          {/* Cancel button always visible */}
           <Button
             variant="outlined"
             color="secondary"
             onClick={() => navigate("/teacher")}
             sx={{
-              padding: "8px 20px", // padding bên trong nút
-              fontSize: "14px", // cỡ chữ
-              minWidth: "120px", // độ rộng tối thiểu
-              height: "40px", // chiều cao
+              padding: "8px 20px",
+              fontSize: "14px",
+              minWidth: "120px",
+              height: "40px",
               marginLeft: 2,
               marginTop: 2,
               borderRadius: "8px",
             }}
           >
-            HUỶ BỎ
+            CANCEL
           </Button>
         </div>
       </div>
@@ -407,7 +411,7 @@ const ChapterTeacherList = () => {
                           style={{ cursor: "pointer", color: "red" }}
                           onClick={(e) => {
                             e.stopPropagation();
-                            handleDeleteChapter(chapter.id); // Mở Dialog
+                            handleDeleteChapter(chapter.id);
                           }}
                         />
                       </div>
@@ -444,7 +448,7 @@ const ChapterTeacherList = () => {
                         ))
                       ) : (
                         <div className="section-item">
-                          <p>Chưa có bài học nào</p>
+                          <p>No lessons yet</p>
                         </div>
                       )}
                     </div>
@@ -453,17 +457,17 @@ const ChapterTeacherList = () => {
               ))
             ) : (
               <div className="box-not-courses">
-                <p>Chưa có chương nào được tạo.</p>
+                <p>No chapters created yet.</p>
               </div>
             )}
             <Dialog
               open={openConfirmLessonDialog}
               onClose={() => setOpenConfirmLessonDialog(false)}
             >
-              <DialogTitle>Xác nhận xóa bài học</DialogTitle>
+              <DialogTitle>Confirm Lesson Deletion</DialogTitle>
               <DialogContent>
                 <DialogContentText>
-                  Bạn có chắc chắn muốn xóa bài học này không?
+                  Are you sure you want to delete this lesson?
                 </DialogContentText>
               </DialogContent>
               <DialogActions>
@@ -471,14 +475,14 @@ const ChapterTeacherList = () => {
                   onClick={() => setOpenConfirmLessonDialog(false)}
                   color="primary"
                 >
-                  Hủy
+                  Cancel
                 </Button>
                 <Button
                   onClick={confirmDeleteLesson}
                   color="error"
                   variant="contained"
                 >
-                  Xóa
+                  Delete
                 </Button>
               </DialogActions>
             </Dialog>
@@ -487,10 +491,10 @@ const ChapterTeacherList = () => {
               open={openConfirmDialog}
               onClose={() => setOpenConfirmDialog(false)}
             >
-              <DialogTitle>Xác nhận xóa chương</DialogTitle>
+              <DialogTitle>Confirm Chapter Deletion</DialogTitle>
               <DialogContent>
                 <DialogContentText>
-                  Bạn có chắc chắn muốn xóa chương này không?
+                  Are you sure you want to delete this chapter?
                 </DialogContentText>
               </DialogContent>
               <DialogActions>
@@ -498,14 +502,14 @@ const ChapterTeacherList = () => {
                   onClick={() => setOpenConfirmDialog(false)}
                   color="primary"
                 >
-                  Hủy
+                  Cancel
                 </Button>
                 <Button
                   onClick={confirmDeleteChapter}
                   color="error"
                   variant="contained"
                 >
-                  Xóa
+                  Delete
                 </Button>
               </DialogActions>
             </Dialog>

@@ -33,7 +33,7 @@ const TeacherAccess = () => {
       onClick={handleClick}
       style={{ cursor: "pointer", fontWeight: "bold" }}
     >
-      <p className="name-teacher">Giảng Viên</p>
+      <p className="name-teacher">Teacher</p>
     </div>
   );
 };

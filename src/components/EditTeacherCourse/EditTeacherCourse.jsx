@@ -18,7 +18,7 @@ import axios from "axios";
 import bgImage from "../../assets/images/b2.jpg";
 
 const EditTeacherCourse = () => {
-  const { courseId } = useParams(); // Lấy courseId từ URL
+  const { courseId } = useParams(); // Get courseId from URL
   console.log(courseId);
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -44,7 +44,7 @@ const EditTeacherCourse = () => {
 
         const token = localStorage.getItem("accessToken");
         if (!token) {
-          toast.error("Bạn chưa đăng nhập hoặc token hết hạn");
+          toast.error("You are not logged in or your token has expired");
           return;
         }
 
@@ -64,10 +64,10 @@ const EditTeacherCourse = () => {
         setDescription(course.description);
         setContent(course.contents);
         setPrice(course.price);
-        setCategoryId(course.categoryId); // sau khi categories đã có
-        setThumbnailUrl(course.thumbnail); // thêm dòng này
+        setCategoryId(course.categoryId); // after categories are loaded
+        setThumbnailUrl(course.thumbnail); // add this line
       } catch (error) {
-        toast.error("Không thể tải dữ liệu");
+        toast.error("Failed to load data");
       }
     };
 
@@ -81,17 +81,17 @@ const EditTeacherCourse = () => {
       !content.trim() ||
       !String(price).trim()
     ) {
-      toast.error("Vui lòng nhập đầy đủ thông tin.");
+      toast.error("Please fill in all required fields.");
       return;
     }
     if (!categoryId) {
-      toast.error("Vui lòng chọn danh mục.");
+      toast.error("Please select a category.");
       return;
     }
 
     const priceNumber = Number(price);
     if (isNaN(priceNumber) || priceNumber < 0) {
-      toast.error("Giá phải là số hợp lệ và không âm.");
+      toast.error("Price must be a valid positive number.");
       return;
     }
 
@@ -107,7 +107,7 @@ const EditTeacherCourse = () => {
     const formData = new FormData();
     if (thumbnail) formData.append("file", thumbnail);
 
-    // ✅ Chọn đúng API dựa theo approvalStatus
+    // ✅ Select the correct API based on approvalStatus
     let updateApi = "http://localhost:8080/api/v1/Teacher/Course/Update";
     if (approvalStatus === "rejected") {
       updateApi =
@@ -122,10 +122,10 @@ const EditTeacherCourse = () => {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
       });
-      toast.success("Cập nhật khóa học thành công!");
+      toast.success("Course updated successfully!");
       navigate("/teacher");
     } catch (error) {
-      toast.error(error.response?.data?.message || "Đã có lỗi xảy ra");
+      toast.error(error.response?.data?.message || "An error occurred");
     } finally {
       setLoading(false);
     }
@@ -133,7 +133,7 @@ const EditTeacherCourse = () => {
 
   return (
     <Box sx={{ position: "relative", minHeight: "100vh", overflow: "hidden" }}>
-      {/* Ảnh nền */}
+      {/* Background image */}
       <Box
         sx={{
           position: "absolute",
@@ -159,7 +159,7 @@ const EditTeacherCourse = () => {
           zIndex: 2,
         }}
       />
-      {/* Nội dung */}
+      {/* Content */}
       <Box
         display="flex"
         justifyContent="center"
@@ -186,18 +186,18 @@ const EditTeacherCourse = () => {
               gutterBottom
               color="primary"
             >
-              Chỉnh sửa khóa học
+              Edit Course
             </Typography>
 
             <Box display="flex" flexDirection="column" gap={2}>
               <TextField
-                label="Tên khóa học"
+                label="Course name"
                 fullWidth
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
               <TextField
-                label="Mô tả"
+                label="Description"
                 fullWidth
                 multiline
                 minRows={3}
@@ -205,24 +205,24 @@ const EditTeacherCourse = () => {
                 onChange={(e) => setDescription(e.target.value)}
               />
               <TextField
-                label="Nội dung"
+                label="Content"
                 fullWidth
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
               />
               <TextField
-                label="Giá"
+                label="Price"
                 type="number"
                 fullWidth
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
               />
               <FormControl fullWidth>
-                <InputLabel id="category-select-label">Danh mục</InputLabel>
+                <InputLabel id="category-select-label">Category</InputLabel>
                 <Select
                   labelId="category-select-label"
                   value={categoryId}
-                  label="Danh mục"
+                  label="Category"
                   onChange={(e) => setCategoryId(e.target.value)}
                 >
                   {categories.map((category) => (
@@ -237,7 +237,7 @@ const EditTeacherCourse = () => {
               </FormControl>
 
               <Button variant="outlined" component="label">
-                Chọn ảnh mới (nếu muốn thay)
+                Choose new image (optional)
                 <input
                   type="file"
                   hidden
@@ -249,7 +249,7 @@ const EditTeacherCourse = () => {
               {!thumbnail && thumbnailUrl && (
                 <Box mt={1}>
                   <Typography variant="body2" color="text.secondary">
-                    Link ảnh hiện tại:{" "}
+                    Current image:{" "}
                     <a
                       href={thumbnailUrl}
                       target="_blank"
@@ -263,7 +263,7 @@ const EditTeacherCourse = () => {
 
               {thumbnail && (
                 <Typography variant="body2" color="text.secondary">
-                  Đã chọn: {thumbnail.name}
+                  Selected: {thumbnail.name}
                 </Typography>
               )}
 
@@ -273,7 +273,7 @@ const EditTeacherCourse = () => {
                   color="inherit"
                   onClick={() => navigate("/teacher")}
                 >
-                  Hủy
+                  Cancel
                 </Button>
                 <Button
                   variant="contained"
@@ -286,7 +286,7 @@ const EditTeacherCourse = () => {
                     ) : null
                   }
                 >
-                  {loading ? "Đang cập nhật..." : "Cập nhật khóa học"}
+                  {loading ? "Updating..." : "Update Course"}
                 </Button>
               </Box>
             </Box>

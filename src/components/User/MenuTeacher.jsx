@@ -86,7 +86,7 @@ function MenuTeacher() {
                     </Grid>
                     <ul style={{ listStyleType: 'none', padding: 0, margin: 0 }}>
                         {[
-                            { text: "Public profile", path: "/my-profile" },
+                            
                             { text: "Revenue statistics", path: "/my-revenue" },
                             { text: "Log out", path: null, onClick: handleLogoutClick }, 
                         ].map((item, index) => (

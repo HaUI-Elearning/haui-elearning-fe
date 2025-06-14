@@ -1,4 +1,4 @@
-import { useState, useRef ,useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import {
   Box,
   Button,
@@ -38,7 +38,7 @@ const CreateNewCourse = () => {
         );
         setCategories(response.data.data);
       } catch (error) {
-        toast.error("Không thể tải danh mục");
+        toast.error("Failed to load categories");
       }
     };
 
@@ -46,7 +46,7 @@ const CreateNewCourse = () => {
   }, []);
 
   const handleSubmit = async () => {
-    // Kiểm tra trường trống
+    // Validate empty fields
     if (
       !name.trim() ||
       !description.trim() ||
@@ -54,18 +54,18 @@ const CreateNewCourse = () => {
       !price.trim() ||
       !thumbnail
     ) {
-      toast.error("Vui lòng nhập đầy đủ thông tin.");
+      toast.error("Please fill in all required fields.");
       return;
     }
     if (!categoryId) {
-      toast.error("Vui lòng chọn danh mục.");
+      toast.error("Please select a category.");
       return;
     }
 
-    // Kiểm tra price là số dương
+    // Validate price is positive number
     const priceNumber = Number(price);
     if (isNaN(priceNumber) || priceNumber < 0) {
-      toast.error("Giá phải là số hợp lệ và không âm.");
+      toast.error("Price must be a valid positive number.");
       return;
     }
 
@@ -89,10 +89,10 @@ const CreateNewCourse = () => {
           },
         }
       );
-      toast.success("Thêm khóa học thành công!");
+      toast.success("Course created successfully!");
       navigate("/teacher");
     } catch (error) {
-      toast.error(error.response?.data?.message || "Đã có lỗi xảy ra");
+      toast.error(error.response?.data?.message || "An error occurred");
     } finally {
       setLoading(false);
     }
@@ -100,7 +100,7 @@ const CreateNewCourse = () => {
 
   return (
     <Box sx={{ position: "relative", minHeight: "100vh", overflow: "hidden" }}>
-      {/* Ảnh nền */}
+      {/* Background image */}
       <Box
         sx={{
           position: "absolute",
@@ -115,7 +115,7 @@ const CreateNewCourse = () => {
         }}
       />
 
-      {/* Overlay màu đen mờ */}
+      {/* Dark overlay */}
       <Box
         sx={{
           position: "absolute",
@@ -128,7 +128,7 @@ const CreateNewCourse = () => {
         }}
       />
 
-      {/* Nội dung chính */}
+      {/* Main content */}
       <Box
         display="flex"
         justifyContent="center"
@@ -155,12 +155,12 @@ const CreateNewCourse = () => {
               gutterBottom
               color="primary"
             >
-              Tạo Khóa Học Mới
+              Create New Course
             </Typography>
 
             <Box display="flex" flexDirection="column" gap={2}>
               <TextField
-                label="Tên khóa học"
+                label="Course name"
                 fullWidth
                 value={name}
                 onChange={(e) => setName(e.target.value)}
@@ -168,7 +168,7 @@ const CreateNewCourse = () => {
               />
 
               <TextField
-                label="Mô tả"
+                label="Description"
                 fullWidth
                 multiline
                 minRows={3}
@@ -178,7 +178,7 @@ const CreateNewCourse = () => {
               />
 
               <TextField
-                label="Nội dung"
+                label="Content"
                 fullWidth
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
@@ -186,7 +186,7 @@ const CreateNewCourse = () => {
               />
 
               <TextField
-                label="Giá"
+                label="Price"
                 type="number"
                 fullWidth
                 value={price}
@@ -198,11 +198,11 @@ const CreateNewCourse = () => {
                 fullWidth
                 sx={{ backgroundColor: "#fafafa", borderRadius: 2 }}
               >
-                <InputLabel id="category-select-label">Danh mục</InputLabel>
+                <InputLabel id="category-select-label">Category</InputLabel>
                 <Select
                   labelId="category-select-label"
                   value={categoryId}
-                  label="Danh mục"
+                  label="Category"
                   onChange={(e) => setCategoryId(e.target.value)}
                 >
                   {categories.map((category) => (
@@ -231,7 +231,7 @@ const CreateNewCourse = () => {
                   },
                 }}
               >
-                Chọn ảnh thumbnail
+                Choose thumbnail
                 <input
                   type="file"
                   hidden
@@ -243,7 +243,7 @@ const CreateNewCourse = () => {
 
               {thumbnail && (
                 <Typography variant="body2" color="text.secondary">
-                  Đã chọn: {thumbnail.name}
+                  Selected: {thumbnail.name}
                 </Typography>
               )}
 
@@ -257,7 +257,7 @@ const CreateNewCourse = () => {
                     textTransform: "none",
                   }}
                 >
-                  Hủy
+                  Cancel
                 </Button>
                 <Button
                   variant="contained"
@@ -280,7 +280,7 @@ const CreateNewCourse = () => {
                     },
                   }}
                 >
-                  {loading ? "Đang tạo..." : "Tạo khóa học"}
+                  {loading ? "Creating..." : "Create Course"}
                 </Button>
               </Box>
             </Box>

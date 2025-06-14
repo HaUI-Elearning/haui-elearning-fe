@@ -14,9 +14,8 @@ import axios from "axios";
 import bgImage from "../../assets/images/b2.jpg";
 
 const EditLesson = () => {
-  const {chapterId, lessonId } = useParams(); // lấy id bài học từ url param
+  const { chapterId, lessonId } = useParams();
   const navigate = useNavigate();
-  console.log(chapterId, lessonId); 
 
   const [title, setTitle] = useState("");
   const [position, setPosition] = useState("");
@@ -25,7 +24,6 @@ const EditLesson = () => {
   const [loading, setLoading] = useState(false);
   const [loadingData, setLoadingData] = useState(true);
 
-  // Load dữ liệu bài học khi component mount
   useEffect(() => {
     const fetchLesson = async () => {
       try {
@@ -40,14 +38,11 @@ const EditLesson = () => {
         const data = res.data.data;
         setTitle(data.title || "");
         setPosition(data.position?.toString() || "");
-        // Lưu ý: videoFile, pdfFile không thể set trực tiếp từ file,
-        // nếu bạn muốn show tên file, có thể dùng data.videoFileName hoặc tương tự nếu có
         setLoadingData(false);
       } catch (error) {
         console.error("Fetch lesson failed:", error);
-        toast.error("Lấy dữ liệu bài học thất bại");
+        toast.error("Failed to load lesson data");
         setLoadingData(false);
-        
       }
     };
     fetchLesson();
@@ -55,12 +50,12 @@ const EditLesson = () => {
 
   const handleSubmit = async () => {
     if (!title.trim() || !position.trim()) {
-      toast.error("Vui lòng nhập đầy đủ thông tin.");
+      toast.error("Please fill in all required fields.");
       return;
     }
 
     if (isNaN(Number(position)) || Number(position) < 1) {
-      toast.error("Vị trí bài học phải là số nguyên dương.");
+      toast.error("Lesson position must be a positive integer.");
       return;
     }
 
@@ -84,10 +79,10 @@ const EditLesson = () => {
           },
         }
       );
-      toast.success("Cập nhật bài học thành công!");
+      toast.success("Lesson updated successfully!");
       navigate(-1);
     } catch (error) {
-      toast.error(error.response?.data?.message || "Cập nhật thất bại");
+      toast.error(error.response?.data?.message || "Update failed");
     } finally {
       setLoading(false);
     }
@@ -158,12 +153,12 @@ const EditLesson = () => {
               gutterBottom
               color="primary"
             >
-              Sửa Bài Học
+              Edit Lesson
             </Typography>
 
             <Box display="flex" flexDirection="column" gap={2}>
               <TextField
-                label="Tiêu đề bài học"
+                label="Lesson Title"
                 fullWidth
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
@@ -171,7 +166,7 @@ const EditLesson = () => {
               />
 
               <TextField
-                label="Vị trí bài học"
+                label="Lesson Position"
                 type="number"
                 fullWidth
                 value={position}
@@ -195,7 +190,7 @@ const EditLesson = () => {
                   },
                 }}
               >
-                Chọn file video (nếu muốn thay đổi)
+                Choose video file (optional)
                 <input
                   type="file"
                   hidden
@@ -205,7 +200,7 @@ const EditLesson = () => {
               </Button>
               {videoFile && (
                 <Typography variant="body2" color="text.secondary">
-                  Đã chọn: {videoFile.name}
+                  Selected: {videoFile.name}
                 </Typography>
               )}
 
@@ -224,7 +219,7 @@ const EditLesson = () => {
                   },
                 }}
               >
-                Chọn file PDF (nếu muốn thay đổi)
+                Choose PDF file (optional)
                 <input
                   type="file"
                   hidden
@@ -234,7 +229,7 @@ const EditLesson = () => {
               </Button>
               {pdfFile && (
                 <Typography variant="body2" color="text.secondary">
-                  Đã chọn: {pdfFile.name}
+                  Selected: {pdfFile.name}
                 </Typography>
               )}
 
@@ -246,7 +241,7 @@ const EditLesson = () => {
                   sx={{ borderRadius: 2, textTransform: "none" }}
                   disabled={loading}
                 >
-                  Hủy
+                  Cancel
                 </Button>
                 <Button
                   variant="contained"
@@ -265,7 +260,7 @@ const EditLesson = () => {
                     "&:hover": { backgroundColor: "#1565c0" },
                   }}
                 >
-                  {loading ? "Đang cập nhật..." : "Cập nhật bài học"}
+                  {loading ? "Updating..." : "Update Lesson"}
                 </Button>
               </Box>
             </Box>

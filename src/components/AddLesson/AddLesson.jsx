@@ -14,7 +14,7 @@ import axios from "axios";
 import bgImage from "../../assets/images/b2.jpg";
 
 const AddLesson = () => {
-  const { chapterId } = useParams(); 
+  const { chapterId } = useParams();
   const navigate = useNavigate();
 
   const [title, setTitle] = useState("");
@@ -24,19 +24,17 @@ const AddLesson = () => {
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async () => {
-    console.log("chapterId:", chapterId);
     if (
       !title.trim() ||
       !position.trim() ||
-      !videoFile ||
-      !pdfFile
+      (!videoFile && !pdfFile)
     ) {
-      toast.error("Vui lòng nhập đầy đủ thông tin.");
+      toast.error("Please fill in all required fields.");
       return;
     }
 
     if (isNaN(Number(position)) || Number(position) < 1) {
-      toast.error("Vị trí bài học phải là số nguyên dương.");
+      toast.error("Lesson position must be a positive integer.");
       return;
     }
 
@@ -55,10 +53,10 @@ const AddLesson = () => {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
       });
-      toast.success("Thêm bài học thành công!");
-      navigate(-1); // hoặc trang bạn muốn quay lại
+      toast.success("Lesson added successfully!");
+      navigate(-1);
     } catch (error) {
-      toast.error(error.response?.data?.message || "Đã có lỗi xảy ra");
+      toast.error(error.response?.data?.message || "An error occurred.");
     } finally {
       setLoading(false);
     }
@@ -116,12 +114,12 @@ const AddLesson = () => {
               gutterBottom
               color="primary"
             >
-              Thêm Bài Học Mới
+              Add New Lesson
             </Typography>
 
             <Box display="flex" flexDirection="column" gap={2}>
               <TextField
-                label="Tiêu đề bài học"
+                label="Lesson Title"
                 fullWidth
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
@@ -129,7 +127,7 @@ const AddLesson = () => {
               />
 
               <TextField
-                label="Vị trí bài học"
+                label="Lesson Position"
                 type="number"
                 fullWidth
                 value={position}
@@ -153,7 +151,7 @@ const AddLesson = () => {
                   },
                 }}
               >
-                Chọn file video
+                Upload Video File
                 <input
                   type="file"
                   hidden
@@ -163,7 +161,7 @@ const AddLesson = () => {
               </Button>
               {videoFile && (
                 <Typography variant="body2" color="text.secondary">
-                  Đã chọn: {videoFile.name}
+                  Selected: {videoFile.name}
                 </Typography>
               )}
 
@@ -182,7 +180,7 @@ const AddLesson = () => {
                   },
                 }}
               >
-                Chọn file PDF
+                Upload PDF File
                 <input
                   type="file"
                   hidden
@@ -192,7 +190,7 @@ const AddLesson = () => {
               </Button>
               {pdfFile && (
                 <Typography variant="body2" color="text.secondary">
-                  Đã chọn: {pdfFile.name}
+                  Selected: {pdfFile.name}
                 </Typography>
               )}
 
@@ -200,10 +198,10 @@ const AddLesson = () => {
                 <Button
                   variant="outlined"
                   color="inherit"
-                  onClick={() => navigate(-1)} // Quay lại trang trước
+                  onClick={() => navigate(-1)}
                   sx={{ borderRadius: 2, textTransform: "none" }}
                 >
-                  Hủy
+                  Cancel
                 </Button>
                 <Button
                   variant="contained"
@@ -222,7 +220,7 @@ const AddLesson = () => {
                     "&:hover": { backgroundColor: "#1565c0" },
                   }}
                 >
-                  {loading ? "Đang thêm..." : "Thêm bài học"}
+                  {loading ? "Submitting..." : "Add Lesson"}
                 </Button>
               </Box>
             </Box>

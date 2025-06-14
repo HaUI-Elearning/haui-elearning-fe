@@ -19,32 +19,30 @@ const AddChapterDialog = ({ courseId, chapters, setChapters }) => {
 
   const handleAdd = async () => {
     if (!title.trim()) {
-      toast.error("Tên chương không được để trống!");
+      toast.error("Chapter title must not be empty!");
       return;
     }
 
     const posNumber = Number(position);
     if (!posNumber || posNumber < 1 || !Number.isInteger(posNumber)) {
-      toast.error("Position phải là số nguyên dương!");
+      toast.error("Position must be a positive integer!");
       return;
     }
 
     setLoading(true);
     try {
-      const res = await addChapter(courseId, title, description, posNumber);
+      await addChapter(courseId, title, description, posNumber);
       const resAll = await getAllChapter(courseId);
       setChapters(resAll.data.data);
 
-      
-
-      toast.success("Thêm chương thành công!");
+      toast.success("Chapter added successfully!");
       setOpen(false);
       setTitle("");
       setDescription("");
       setPosition("");
     } catch (error) {
       console.error(error);
-      toast.error("Lỗi khi thêm chương");
+      toast.error("Error while adding chapter");
     } finally {
       setLoading(false);
     }
@@ -56,7 +54,7 @@ const AddChapterDialog = ({ courseId, chapters, setChapters }) => {
   return (
     <>
       <Button variant="contained" onClick={() => setOpen(true)}>
-        Thêm Folder
+        Add Folder
       </Button>
 
       <Dialog
@@ -64,19 +62,19 @@ const AddChapterDialog = ({ courseId, chapters, setChapters }) => {
         onClose={() => setOpen(false)}
         disableEscapeKeyDown={false}
       >
-        <DialogTitle>Thêm Chương Mới</DialogTitle>
+        <DialogTitle>Add New Chapter</DialogTitle>
         <DialogContent>
           <TextField
             autoFocus
             margin="dense"
-            label="Tên chương"
+            label="Chapter Title"
             fullWidth
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
           <TextField
             margin="dense"
-            label="Mô tả"
+            label="Description"
             fullWidth
             multiline
             rows={3}
@@ -92,13 +90,13 @@ const AddChapterDialog = ({ courseId, chapters, setChapters }) => {
             onChange={(e) => setPosition(e.target.value)}
             inputProps={{ min: 1, step: 1 }}
             error={isInvalidPosition}
-            helperText={isInvalidPosition ? "Phải là số nguyên dương" : ""}
+            helperText={isInvalidPosition ? "Must be a positive integer" : ""}
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => setOpen(false)}>Hủy</Button>
+          <Button onClick={() => setOpen(false)}>Cancel</Button>
           <Button variant="contained" onClick={handleAdd} disabled={loading}>
-            {loading ? "Đang thêm..." : "Thêm"}
+            {loading ? "Adding..." : "Add"}
           </Button>
         </DialogActions>
       </Dialog>
