@@ -232,11 +232,14 @@ const CourseListTeacher = () => {
               >
                 Delete
               </MenuItem>
-              <MenuItem
+              
+              {course.approvalStatus === "approved" && (
+                <MenuItem
                 onClick={() => handleMenuAction("view", course.courseId)}
               >
                 View Details
               </MenuItem>
+              )}
               {course.approvalStatus === "approved" && (
                 <MenuItem
                   onClick={() => {
