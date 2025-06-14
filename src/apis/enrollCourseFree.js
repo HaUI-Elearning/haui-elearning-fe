@@ -15,7 +15,6 @@ export const enrollCourse = async (courseId) => {
         },
       }
     );
-    console.log("res enroll", response);
     return response.data.data;
   } catch (error) {
     throw error.response?.data || error;

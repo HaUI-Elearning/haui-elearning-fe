@@ -9,10 +9,8 @@ export const getCourseById = async (courseId) => {
       headers: accessToken ? { Authorization: `Bearer ${accessToken}` } : {},
     });
 
-    console.log("Course data:", res.data.data);
     return res.data.data;
   } catch (error) {
-    console.error("Lỗi khi lấy thông tin khóa học:", error);
     throw error || "Lỗi không xác định!";
   }
 };
