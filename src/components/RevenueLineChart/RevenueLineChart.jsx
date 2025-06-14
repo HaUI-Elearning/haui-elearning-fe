@@ -28,7 +28,7 @@ const RevenueLineChart = () => {
         );
         setCourses(response.data.data.courses || []);
       } catch (error) {
-        console.error("Lỗi lấy dữ liệu doanh thu:", error.response?.data || error.message);
+        console.error("Error fetching revenue data:", error.response?.data || error.message);
       } finally {
         setLoading(false);
       }
@@ -48,11 +48,11 @@ const RevenueLineChart = () => {
       }}
     >
       <h2 style={{ marginBottom: 24, fontWeight: "bold", fontSize: 24 }}>
-        📈 Doanh thu theo khóa học (Biểu đồ đường)
+        📈 Course Revenue (Line Chart)
       </h2>
 
       {loading ? (
-        <p style={{ color: "#888" }}>Đang tải dữ liệu...</p>
+        <p style={{ color: "#888" }}>Loading data...</p>
       ) : (
         <ResponsiveContainer width="100%" height={350}>
           <LineChart
@@ -67,7 +67,7 @@ const RevenueLineChart = () => {
             <Line
               type="monotone"
               dataKey="revenue"
-              name="Doanh thu"
+              name="Revenue"
               stroke="#1976d2"
               strokeWidth={3}
               activeDot={{ r: 8 }}

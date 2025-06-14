@@ -32,13 +32,13 @@ const EditChapterDialog = ({ open, onClose, courseId, chapter, setChapters }) =>
 
   const handleUpdate = async () => {
     if (!title.trim()) {
-      toast.error("Tên chương không được để trống!");
+      toast.error("Chapter name cannot be empty!");
       return;
     }
 
     const posNumber = Number(position);
     if (!posNumber || posNumber < 1 || !Number.isInteger(posNumber)) {
-      toast.error("Position phải là số nguyên dương!");
+      toast.error("Position must be a positive integer!");
       return;
     }
 
@@ -49,11 +49,11 @@ const EditChapterDialog = ({ open, onClose, courseId, chapter, setChapters }) =>
       const resAll = await getAllChapter(courseId);
       setChapters(resAll.data.data);
 
-      toast.success("Cập nhật chương thành công!");
+      toast.success("Chapter updated successfully!");
       handleClose();
     } catch (error) {
       console.error(error);
-      toast.error("Lỗi khi cập nhật chương");
+      toast.error("Error updating chapter");
     } finally {
       setLoading(false);
     }
@@ -64,19 +64,19 @@ const EditChapterDialog = ({ open, onClose, courseId, chapter, setChapters }) =>
 
   return (
     <Dialog open={open} onClose={handleClose}>
-      <DialogTitle>Chỉnh Sửa Chương</DialogTitle>
+      <DialogTitle>Edit Chapter</DialogTitle>
       <DialogContent>
         <TextField
           autoFocus
           margin="dense"
-          label="Tên chương"
+          label="Chapter Name"
           fullWidth
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
         <TextField
           margin="dense"
-          label="Mô tả"
+          label="Description"
           fullWidth
           multiline
           rows={3}
@@ -92,13 +92,13 @@ const EditChapterDialog = ({ open, onClose, courseId, chapter, setChapters }) =>
           onChange={(e) => setPosition(e.target.value)}
           inputProps={{ min: 1, step: 1 }}
           error={isInvalidPosition}
-          helperText={isInvalidPosition ? "Phải là số nguyên dương" : ""}
+          helperText={isInvalidPosition ? "Must be a positive integer" : ""}
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose} disabled={loading}>Hủy</Button>
+        <Button onClick={handleClose} disabled={loading}>Cancel</Button>
         <Button variant="contained" onClick={handleUpdate} disabled={loading}>
-          {loading ? "Đang cập nhật..." : "Cập nhật"}
+          {loading ? "Updating..." : "Update"}
         </Button>
       </DialogActions>
     </Dialog>

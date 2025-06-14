@@ -20,7 +20,7 @@ const HeaderTeacher = () => {
             
             <SearchBar />
             <div className="back-home" onClick={goBack}>
-                Học Viên
+                Student
             </div>
             <MenuTeacher/>
             
