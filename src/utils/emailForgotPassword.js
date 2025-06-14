@@ -22,10 +22,15 @@ export const resetPasswordSchema = yup
     password: yup
       .string()
       .required("Please enter a new password")
-      .min(6, "Password must be at least 6 characters"),
+      .min(8, "Password must be at least 8 characters")
+      .max(30, "Password must be at most 30 characters")
+      .matches(
+        /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[^a-zA-Z0-9]).+$/,
+        "Password must contain uppercase, lowercase, number, and special character"
+      ),
     confirmPassword: yup
       .string()
-      .oneOf([yup.ref("password")], "Passwords do not match")
-      .required("Please confirm your password"),
+      .required("Please confirm your password")
+      .oneOf([yup.ref("password")], "Passwords do not match"),
   })
   .required();
