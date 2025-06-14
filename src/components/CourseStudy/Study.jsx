@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Overview from "./Overview/Overview";
 import Reviews from "./Review/ReviewTab";
 import VideoPlayer from "./VideoPlayer/VideoPlayer";
@@ -6,13 +6,17 @@ import ChapterList from "./ChapterList/ChapterList";
 import styles from "./styles";
 import PropTypes from "prop-types";
 
-const Study = (props) => {
-  console.log("Course data from Study:", props);
+const Study = ({ course }) => {
+  const [courseOverview, setCourseOverview] = useState(course);
+
+  useEffect(() => {
+    setCourseOverview(course);
+  }, [course]);
 
   const tabs = ["Overview", "Reviews"];
   const tabComponents = {
-    Overview: <Overview course={props} />,
-    Reviews: <Reviews course={props}/>,
+    Overview: <Overview course={course} />,
+    Reviews: <Reviews courseId={courseOverview.courseId} />,
   };
   const [activeTab, setActiveTab] = useState("Overview");
   const [selectedVideo, setSelectedVideo] = useState(null);
@@ -52,7 +56,7 @@ const Study = (props) => {
 
       <div style={styles.sidebar}>
         <ChapterList
-          chapters={props.course.chapters || []}
+          chapters={course.chapters || []}
           onLessonClick={handleLessonClick}
         />
       </div>
@@ -60,8 +64,7 @@ const Study = (props) => {
   );
 };
 Study.propTypes = {
-  course: PropTypes.object,
+  course: PropTypes.any,
 };
 
 export default Study;
-

@@ -6,21 +6,22 @@ import { formatDayMonthYear } from "../../../utils/dateFomatter";
 import styles from "./styles";
 
 const Overview = ({ course = {} }) => {
+  console.log("Course overview:", course)
   return (
     <div style={styles.wrapper}>
       <h1 style={styles.title}>
-        {course.course?.name || "Course Title Not Available"}
+        {course?.name || "Course Title Not Available"}
       </h1>
 
       <div style={styles.ratingWrapper}>
         <div style={styles.starGroup}>
-          <span>{course.course.star}</span>
+          <span>{course.star}</span>
           <span style={{ color: "#B36B00", fontSize: 18 }}>★</span>
           <span style={{ color: "B36B00" }}>rating</span>
         </div>
 
         <div style={styles.starGroup}>
-          <span>🕒 {course.course.hour}</span>
+          <span>🕒 {course.hour}</span>
           <span style={{ color: "#B36B00", fontSize: 15 }}>
             hours learning{" "}
           </span>
@@ -29,7 +30,8 @@ const Overview = ({ course = {} }) => {
 
       <div style={styles.updatedDate}>
         <span>
-          ⏰ Last updated: {formatDayMonthYear(course.course.createdAt)}
+          ⏰ Last updated: {formatDayMonthYear(
+            course.createdAt)}
         </span>
       </div>
 
@@ -43,7 +45,7 @@ const Overview = ({ course = {} }) => {
 
       <div style={styles.description}>
         <Typography variant="body1">
-          {course.course?.description ||
+          {course?.description ||
             "No description available for this course."}
         </Typography>
       </div>
@@ -58,7 +60,7 @@ const Overview = ({ course = {} }) => {
             container
             sx={{ border: "1px solid #ccc", padding: 2, borderRadius: 1 }}
           >
-            {course?.course.contents?.split(";").map((content) => {
+            {course.contents?.split(";").map((content) => {
               const trimmed = content.trim();
               if (!trimmed) return null;
 

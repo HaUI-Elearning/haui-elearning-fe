@@ -19,10 +19,10 @@ const ReviewDialog = ({
   onClose,
   rating,
   setRating,
-  comment,
-  setComment,
+  userReview, //review cua user o text
+  setUserReview,
   isEditMode,
-  myReview,
+  myReview,// review cua user khi da co trong db
   onAdd,
   onUpdate,
   onDelete,
@@ -97,9 +97,9 @@ const ReviewDialog = ({
             multiline
             rows={3}
             fullWidth
-            value={comment}
+            value={userReview}
             onChange={(e) => {
-              if (isEditMode || !myReview) setComment(e.target.value);
+              if (isEditMode || !myReview) setUserReview(e.target.value);
             }}
             sx={{ mt: 2 }}
             InputProps={{ readOnly: !isEditMode && !!myReview }}
@@ -163,8 +163,8 @@ ReviewDialog.propTypes = {
   onClose: PropTypes.func,
   rating: PropTypes.number,
   setRating: PropTypes.func,
-  comment: PropTypes.any,
-  setComment: PropTypes.func,
+  userReview: PropTypes.any,
+  setUserReview: PropTypes.func,
   isEditMode: PropTypes.bool,
   myReview: PropTypes.any,
   onAdd: PropTypes.func,
