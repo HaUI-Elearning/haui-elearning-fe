@@ -148,7 +148,7 @@ const ReviewDialog = ({
           countdown > 1 ? "s" : ""
         }`}
         action={
-          <Button color="secondary" size="small" onClick={handleUndoDelete}>
+          <Button  size="small" onClick={handleUndoDelete}>
             UNDO
           </Button>
         }
