@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "../../store/userSlice";
 import LogoutIcon from "@mui/icons-material/Logout";
 import WarningAmberOutlinedIcon from "@mui/icons-material/WarningAmberOutlined";
+import getInitials from "../../utils/getInitial";
 
 function MenuUser() {
   const [openMenu, setOpenMenu] = useState(false);
@@ -24,6 +25,7 @@ function MenuUser() {
   const dispatch = useDispatch();
   const userInfo = useSelector((state) => state.user.userInfo);
   const parseInfo = JSON.parse(userInfo);
+  const fullName= parseInfo.name
   const navigate = useNavigate();
 
   const handleMouseEnter = () => {
@@ -65,7 +67,7 @@ function MenuUser() {
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
       >
-        TL
+        {getInitials(fullName)}
       </Avatar>
 
       {openMenu && (
@@ -81,11 +83,12 @@ function MenuUser() {
             width: "250px",
             padding: "10px",
             right: "10px",
+            border: "1px solid black",
           }}
         >
           <Grid container alignItems="center" padding={1}>
             <Grid item>
-              <Avatar>TL</Avatar>
+              <Avatar>{getInitials(fullName)}</Avatar>
             </Grid>
             <Grid item marginLeft={1}>
               <Typography>{parseInfo.name}</Typography>
