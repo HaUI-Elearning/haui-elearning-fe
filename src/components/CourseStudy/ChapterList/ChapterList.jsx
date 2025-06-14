@@ -16,13 +16,14 @@ const ChapterList = ({ chapters = [], onLessonClick }) => {
     return <Typography>No chapters available</Typography>;
   }
 
+  console.log("Chapter:", chapters)
   return (
-    <Box sx={{ padding: 2, width: 300 }}>
+    <Box sx={{ padding: 2, width: 400 }}>
       {chapters.map((chapter, chapterIndex) => (
         <Box key={`chapter-${chapterIndex}`} sx={{ marginBottom: 2 }}>
           <Breadcrumbs aria-label="chapter-breadcrumbs">
             <Typography variant="h6" fontWeight="bold">
-              📚 {chapter.title}
+              📚 {chapter.title}: {chapter.description}
             </Typography>
           </Breadcrumbs>
 
