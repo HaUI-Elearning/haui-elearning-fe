@@ -90,7 +90,9 @@ const CreateNewCourse = () => {
         }
       );
       toast.success("Course created successfully!");
-      navigate("/teacher");
+      setTimeout(() => {
+        navigate("/teacher");
+      }, 2000);
     } catch (error) {
       toast.error(error.response?.data?.message || "An error occurred");
     } finally {

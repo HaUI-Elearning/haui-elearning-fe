@@ -128,7 +128,7 @@ const CourseListTeacher = () => {
   };
 
   const handleDeleteCourse = async (courseId) => {
-    const confirmed = window.confirm("Bạn có chắc muốn xóa khóa học này?");
+    const confirmed = window.confirm("Are you sure you want to delete this course?");
     if (!confirmed) return;
 
     try {
@@ -146,16 +146,16 @@ const CourseListTeacher = () => {
         prevCourses.filter((course) => course.courseId !== courseId)
       );
 
-      toast.success("Xóa khóa học thành công!");
+      toast.success("Course deleted successfully!");
     } catch (err) {
       console.error("Lỗi khi xóa khóa học:", err.response?.data || err.message);
-      toast.error("Không thể xóa khóa học. Vui lòng thử lại!");
+      toast.error("Unable to delete course. Please try again!");
     }
   };
 
   return (
     <div className="course-list">
-      <ToastContainer position="top-right" autoClose={3000} />
+      
       {courses.length > 0 ? (
         courses.map((course) => (
           <Card key={course.courseId} className="course-card">
@@ -255,7 +255,7 @@ const CourseListTeacher = () => {
           <div className="not-courses">
             <img src={math} alt="" />
           </div>
-          <p>Hiện tại chưa có khoá học nào!!</p>
+          <p>There are currently no courses !!</p>
         </div>
       )}
       {/* … sau khi render danh sách courses hết */}
@@ -266,7 +266,7 @@ const CourseListTeacher = () => {
   fullWidth
   maxWidth="md"
 >
-  <DialogTitle>Danh sách người học</DialogTitle>
+  <DialogTitle>List User</DialogTitle>
   <DialogContent dividers>
     {loadingParticipants ? (
       <Box display="flex" justifyContent="center" my={2}>
@@ -277,8 +277,8 @@ const CourseListTeacher = () => {
         <Table aria-label="participants table">
           <TableHead>
             <TableRow>
-              <TableCell><strong>Tên người học</strong></TableCell>
-              <TableCell align="center"><strong>Thời gian đăng ký</strong></TableCell>
+              <TableCell><strong>Name User</strong></TableCell>
+              <TableCell align="center"><strong>Registration period</strong></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -304,12 +304,12 @@ const CourseListTeacher = () => {
         </Table>
       </TableContainer>
     ) : (
-      <Typography>Hiện chưa có học viên nào.</Typography>
+      <Typography>There are no students yet.</Typography>
     )}
   </DialogContent>
   <DialogActions>
     <Button onClick={handleCloseParticipantsDialog} color="primary">
-      Đóng
+      Cancel
     </Button>
   </DialogActions>
 </Dialog>
