@@ -45,7 +45,7 @@ const ChapterList = ({ chapters = [], onLessonClick }) => {
                     component="button"
                     underline="hover"
                     color="primary"
-                    onClick={() => onLessonClick(lesson.videoUrl)}
+                    onClick={() => onLessonClick(lesson.videoURL)}
                     sx={{ display: "flex", alignItems: "center", gap: 1 }}
                   >
                     <PlayCircleIcon fontSize="small" />
