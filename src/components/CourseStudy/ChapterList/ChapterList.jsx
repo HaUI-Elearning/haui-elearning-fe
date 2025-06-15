@@ -16,7 +16,7 @@ const ChapterList = ({ chapters = [], onLessonClick }) => {
     return <Typography>No chapters available</Typography>;
   }
 
-  console.log("Chapter:", chapters)
+  console.log("Chapter:", chapters);
   return (
     <Box sx={{ padding: 2, width: 400 }}>
       {chapters.map((chapter, chapterIndex) => (
@@ -40,16 +40,20 @@ const ChapterList = ({ chapters = [], onLessonClick }) => {
                   bgcolor: "#f5f5f5",
                 }}
               >
-                <Link
-                  component="button"
-                  underline="hover"
-                  color="primary"
-                  onClick={() => onLessonClick(lesson.videoURL)}
-                  sx={{ display: "flex", alignItems: "center", gap: 1 }}
-                >
-                  <PlayCircleIcon fontSize="small" />
-                  {lesson.title}
-                </Link>
+                {lesson.videoUrl ? (
+                  <Link
+                    component="button"
+                    underline="hover"
+                    color="primary"
+                    onClick={() => onLessonClick(lesson.videoUrl)}
+                    sx={{ display: "flex", alignItems: "center", gap: 1 }}
+                  >
+                    <PlayCircleIcon fontSize="small" />
+                    {lesson.title}
+                  </Link>
+                ) : (
+                  <Typography>{lesson.title}</Typography>
+                )}
 
                 {lesson.pdfURL && (
                   <Button

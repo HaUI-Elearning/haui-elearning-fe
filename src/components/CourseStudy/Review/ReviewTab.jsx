@@ -8,7 +8,7 @@ import ReviewDialog from "./ReviewDialog/ReviewDialog";
 import AllReviewStudy from "./AllReviewStudy/AllReviewStudy";
 import "./Review.css";
 import styles from "./ReviewDialog/styles";
-const Reviews = ({ courseId }) => {
+const Reviews = ({ courseId, isAuthor }) => {
   const user = JSON.parse(useSelector((state) => state.user.userInfo));
   const userId = user.userId;
 
@@ -56,28 +56,31 @@ const Reviews = ({ courseId }) => {
       setRating(myReview?.rating || 0);
     }
   }, [dialogOpen, myReview]);
-  
+
   return (
     <Box mt={4}>
-      <Button variant="contained" sx={styles.common} onClick={openDialog}>
-        {myReview ? "View your review" : "Add your review"}
-      </Button>
+      {!isAuthor && (
+        <div>
+          <Button variant="contained" sx={styles.common} onClick={openDialog}>
+            {myReview ? "View your review" : "Add your review"}
+          </Button>
 
-      <ReviewDialog
-        open={dialogOpen}
-        onClose={closeDialog}
-        rating={rating}
-        setRating={setRating}
-        userReview={userReview}
-        setUserReview={setUserReview}
-        isEditMode={isEditMode}
-        myReview={myReview}
-        onAdd={onAdd}
-        onUpdate={onUpdate}
-        onDelete={onDelete}
-        toggleEdit={() => setIsEditMode(true)}
-      />
-
+          <ReviewDialog
+            open={dialogOpen}
+            onClose={closeDialog}
+            rating={rating}
+            setRating={setRating}
+            userReview={userReview}
+            setUserReview={setUserReview}
+            isEditMode={isEditMode}
+            myReview={myReview}
+            onAdd={onAdd}
+            onUpdate={onUpdate}
+            onDelete={onDelete}
+            toggleEdit={() => setIsEditMode(true)}
+          />
+        </div>
+      )}
       <Box mt={4}>
         <AllReviewStudy
           comments={listReview.map((r) => ({
@@ -93,6 +96,7 @@ const Reviews = ({ courseId }) => {
 
 Reviews.propTypes = {
   courseId: PropTypes.any,
+  isAuthor: PropTypes.any,
 };
 
 export default Reviews;

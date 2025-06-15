@@ -24,7 +24,7 @@ function MyProfile() {
   const [index, setIndex] = useState(0);
   const [name, setName] = useState(parseInfo.name);
   const [introduce, setIntroduce] = useState(parseInfo.introduce);
-  const maxWords = 500;
+  const maxWords = 150;
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
   useEffect(() => {

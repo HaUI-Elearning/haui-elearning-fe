@@ -16,7 +16,7 @@ const Study = ({ course }) => {
   const tabs = ["Overview", "Reviews"];
   const tabComponents = {
     Overview: <Overview course={course} />,
-    Reviews: <Reviews courseId={courseOverview.courseId} />,
+    Reviews: <Reviews courseId={courseOverview.courseId} isAuthor={courseOverview.authorCourse} />,
   };
   const [activeTab, setActiveTab] = useState("Overview");
   const [selectedVideo, setSelectedVideo] = useState(null);
