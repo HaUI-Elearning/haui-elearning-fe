@@ -37,21 +37,23 @@ export default function PaymentResult() {
           ).unwrap();
           const updatedCart = result.payload || [];
           localStorage.setItem("cartItems", JSON.stringify(updatedCart));
-
-          setOpenSnackbar(true);
-
-          setTimeout(() => {
-            window.location.replace("/");
-          }, 4000);
         } else {
           setStatus("error");
-          setOpenSnackbar(true);
         }
+
+        setOpenSnackbar(true);
+
+        setTimeout(() => {
+          window.location.replace("/");
+        }, 2000);
       } catch (err) {
-        console.error("Error when checking order status:", err);
-        setMessage("Transaction failed or an error occurred!");
+        console.error("Payment verification error:", err);
+        setMessage(`Transaction failed: ${err}`);
         setStatus("error");
         setOpenSnackbar(true);
+        setTimeout(() => {
+          window.location.replace("/");
+        }, 2000);
       }
     };
 
@@ -97,7 +99,7 @@ export default function PaymentResult() {
         >
           {status === "success"
             ? "Payment successful! Redirecting to homepage..."
-            : "Payment failed! Please try again."}
+            : "Payment failed! Redirecting to homepage..."}
         </Alert>
       </Snackbar>
     </Box>

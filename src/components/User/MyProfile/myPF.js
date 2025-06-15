@@ -6,7 +6,7 @@ const styles = {
         backgroundPosition: 'center',
         borderRadius: '8px',
         color: '#333',
-        height: '100vh',
+        minHeight: '100vh',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'space-between',

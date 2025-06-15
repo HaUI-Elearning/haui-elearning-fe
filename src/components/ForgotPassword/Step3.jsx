@@ -35,7 +35,6 @@ export default function Step3({ onChangePass, changePassLoading, onBack, onResen
       <h1 className="title">Create new password</h1>
       <p className="description">
         Your new password must be different from your previous passwords.
-        <br></br> It should be at least 6 characters.
       </p>
 
       <InputField
@@ -56,7 +55,9 @@ export default function Step3({ onChangePass, changePassLoading, onBack, onResen
         type="password"
         defaultValue=""
       />
-      {errors.confirm && <p className="errorMsg">{errors.confirm.message}</p>}
+      {errors.confirmPassword && (
+        <p className="errorMsg">{errors.confirmPassword.message}</p>
+      )}
 
       <Box sx={{ display: "flex", justifyContent: "space-between", mt: 3 }}>
         <button

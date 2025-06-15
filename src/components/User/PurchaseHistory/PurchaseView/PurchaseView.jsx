@@ -12,15 +12,16 @@ import {
 import PropTypes from "prop-types";
 import { useRef } from "react";
 import { formatMoney } from "../../../../utils/moneyFomatter";
-import "./styles.css";
+import "./styles.css"; // import file CSS
 import styles from "../PurchaseFilter/styles";
+
 const formatDate = (dateArray) => {
   const [y, m, d, h, min, s] = dateArray;
   return `${d}/${m}/${y} ${h}:${min}:${s}`;
 };
 
 const PurchaseView = ({ open, onClose, orderDetail }) => {
-  const { orderStatus, totalAmount, payment, courses } = orderDetail || {};
+  const { totalAmount, payment, courses } = orderDetail || {};
   const pdfRef = useRef();
 
   const handleExportPDF = () => {
@@ -69,11 +70,19 @@ const PurchaseView = ({ open, onClose, orderDetail }) => {
       </DialogTitle>
 
       <DialogContent dividers>
-        {/* Dùng ref bao toàn bộ phần cần in */}
         <div ref={pdfRef}>
           <Box mb={2}>
             <Typography variant="subtitle1">
-              <strong>Order Status:</strong> {orderStatus}
+              <strong>Order Status:</strong>{" "}
+              <span
+                style={{
+                  color: payment?.status === "success" ? "#2e7d32" : "#d32f2f",
+                  fontWeight: "bold",
+                  textTransform: "uppercase",
+                }}
+              >
+                {payment?.status}
+              </span>
             </Typography>
             <Typography variant="subtitle1">
               <strong>Total Amount:</strong> {formatMoney(totalAmount)}
@@ -116,7 +125,11 @@ const PurchaseView = ({ open, onClose, orderDetail }) => {
       </DialogContent>
 
       <DialogActions>
-        <Button variant="contained" onClick={handleExportPDF} sx={styles.common}>
+        <Button
+          variant="contained"
+          onClick={handleExportPDF}
+          sx={styles.common}
+        >
           📤 Export to PDF
         </Button>
       </DialogActions>

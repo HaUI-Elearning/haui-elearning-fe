@@ -1,36 +1,50 @@
 .purchase-item {
   display: flex;
-  gap: 16px;
   align-items: flex-start;
+  gap: 12px;
 }
 
 .purchase-thumbnail {
-  width: 100px;
-  height: 70px;
+  width: 80px;
+  height: 80px;
   object-fit: cover;
   border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 }
 
 .purchase-item-details {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 4px;
 }
 
 .purchase-item-name {
   font-weight: bold;
   font-size: 16px;
+  color: #333;
 }
 
-.purchase-item-author,
-.purchase-item-price,
-.purchase-item-hour {
+.purchase-item-author {
   font-size: 14px;
-  color: #555;
+  color: #666;
+}
+
+.purchase-item-price {
+  font-size: 14px;
+  font-weight: 500;
+  color: #2e7d32;
 }
 
 .hr {
+  margin-top: 12px;
   border: none;
-  border-top: 1px solid #eee;
-  margin: 12px 0;
+  border-bottom: 1px dashed #ccc;
+}
+
+@media print {
+  .purchase-thumbnail {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
 }

@@ -24,7 +24,7 @@ export const CourseActions = ({ course, setOpen }) => {
     try {
       const courseIds = [course.courseId];
       console.log("Course id in payment:", courseIds);
-      
+
       const res = await createVNPayPayment(courseIds, false);
       console.log("Link:", res.data.paymentUrl);
       setTimeout(() => {
@@ -63,7 +63,7 @@ export const CourseActions = ({ course, setOpen }) => {
         <>
           <Box sx={styles.box1}>
             <Button
-              sx={styles.cart1}
+              sx={styles.cart2}
               style={{ height: "50px" }}
               onClick={handleCartClick}
             >
@@ -111,13 +111,7 @@ export const CourseActions = ({ course, setOpen }) => {
         <>
           <Box sx={styles.box1}>
             <Button
-              sx={{
-                backgroundColor: "rgb(192, 66, 206)",
-                padding: "18px",
-                color: "#fff",
-                width: "90%",
-                fontWeight: "bold",
-              }}
+              sx={styles.cart1}
               style={{ height: "50px" }}
               onClick={handleCartClickNoLogin}
             >
