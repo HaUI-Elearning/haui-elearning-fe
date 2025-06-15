@@ -19,10 +19,10 @@ const ReviewDialog = ({
   onClose,
   rating,
   setRating,
-  userReview, //review cua user o text
+  userReview,
   setUserReview,
   isEditMode,
-  myReview,// review cua user khi da co trong db
+  myReview,
   onAdd,
   onUpdate,
   onDelete,
@@ -31,15 +31,14 @@ const ReviewDialog = ({
   const [isPendingDelete, setIsPendingDelete] = useState(false);
   const [countdown, setCountdown] = useState(5);
   const [intervalId, setIntervalId] = useState(null);
+  const [error, setError] = useState("");
 
   const handleDeleteClick = () => {
     setIsPendingDelete(true);
     setCountdown(5);
-
     const id = setInterval(() => {
       setCountdown((prev) => prev - 1);
     }, 1000);
-
     setIntervalId(id);
   };
 
@@ -60,6 +59,15 @@ const ReviewDialog = ({
   useEffect(() => {
     return () => clearInterval(intervalId);
   }, [intervalId]);
+
+  const validateReview = () => {
+    if (!rating || userReview.trim() === "") {
+      setError("⚠️ Please provide both a rating and a review.");
+      return false;
+    }
+    setError("");
+    return true;
+  };
 
   let dialogTitle = "";
   if (isEditMode) {
@@ -104,11 +112,18 @@ const ReviewDialog = ({
             sx={{ mt: 2 }}
             InputProps={{ readOnly: !isEditMode && !!myReview }}
           />
+          {error && <p style={{ color: "red", marginTop: "8px" }}>{error}</p>}
         </DialogContent>
 
         <DialogActions>
           {!myReview && (
-            <Button onClick={onAdd} sx={styles.common} variant="contained">
+            <Button
+              onClick={() => {
+                if (validateReview()) onAdd();
+              }}
+              sx={styles.common}
+              variant="contained"
+            >
               Save
             </Button>
           )}
@@ -135,7 +150,13 @@ const ReviewDialog = ({
           )}
 
           {myReview && isEditMode && (
-            <Button onClick={onUpdate} sx={styles.common} variant="contained">
+            <Button
+              onClick={() => {
+                if (validateReview()) onUpdate();
+              }}
+              sx={styles.common}
+              variant="contained"
+            >
               Update
             </Button>
           )}
@@ -148,7 +169,7 @@ const ReviewDialog = ({
           countdown > 1 ? "s" : ""
         }`}
         action={
-          <Button  size="small" onClick={handleUndoDelete}>
+          <Button size="small" onClick={handleUndoDelete}>
             UNDO
           </Button>
         }
