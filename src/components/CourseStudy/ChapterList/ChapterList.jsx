@@ -40,7 +40,7 @@ const ChapterList = ({ chapters = [], onLessonClick }) => {
                   bgcolor: "#f5f5f5",
                 }}
               >
-                {lesson.videoUrl ? (
+                {lesson.videoURL ? (
                   <Link
                     component="button"
                     underline="hover"
