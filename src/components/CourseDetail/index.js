@@ -119,6 +119,9 @@ const styles = {
       color: "#fff",
     },
   },
+
+
+  
     cart2: {
     backgroundColor: "rgb(192, 66, 206)",
     padding: "18px",
