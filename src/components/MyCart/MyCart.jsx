@@ -37,7 +37,7 @@ function MyCart() {
           );
           setCourseDetails(details.filter((detail) => detail !== null));
         } catch (error) {
-          console.error("Error fetching course details:", error);
+          console.error("Error fetching course details: ", error);
         }
       };
 
@@ -66,14 +66,14 @@ function MyCart() {
   const handleContinueWithVNPay = async () => {
     try {
       const courseIds = courseDetails.map((c) => c.courseId);
-      console.log("Course id in paymenr:", courseIds);
+      console.log("Course id in payment:", courseIds);
       const res = await createVNPayPayment(courseIds, true);
       console.log("Link:", res.data.paymentUrl);
       setTimeout(() => {
         window.location.href = res.data.paymentUrl;
       }, 1000);
     } catch (error) {
-      console.error("Err when create order:", error);
+      console.error("Error when create order:", error);
     }
   };
   return (
