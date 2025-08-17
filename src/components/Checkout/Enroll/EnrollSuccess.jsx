@@ -8,6 +8,8 @@ import { useNavigate } from "react-router-dom";
 const EnrollSuccess = ({ enrolledCourse }) => {
   const navigate = useNavigate();
 
+  
+
   return (
     <Container sx={styles.container}>
       <Box
