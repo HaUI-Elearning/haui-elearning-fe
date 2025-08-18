@@ -47,6 +47,16 @@ const PurchaseView = ({ open, onClose, orderDetail }) => {
     });
   };
 
+
+  let orderStatusText = "Không xác định";
+  if (payment?.status === "success") {
+    orderStatusText = "Thành công";
+  } else if (payment?.status === "failed") {
+    orderStatusText = "Thất bại";
+  } else if (payment?.status === "pending") {
+    orderStatusText = "Đang xử lý";
+  }
+
   return (
     <Dialog
       open={open}
@@ -60,7 +70,7 @@ const PurchaseView = ({ open, onClose, orderDetail }) => {
       }}
     >
       <DialogTitle>
-        Purchase Details
+        Chi tiết đơn hàng
         <Button
           onClick={onClose}
           sx={{ position: "absolute", right: 8, top: 8 }}
@@ -73,7 +83,7 @@ const PurchaseView = ({ open, onClose, orderDetail }) => {
         <div ref={pdfRef}>
           <Box mb={2}>
             <Typography variant="subtitle1">
-              <strong>Order Status:</strong>{" "}
+              <strong>Trạng thái đơn hàng:</strong>{" "}
               <span
                 style={{
                   color: payment?.status === "success" ? "#2e7d32" : "#d32f2f",
@@ -81,25 +91,25 @@ const PurchaseView = ({ open, onClose, orderDetail }) => {
                   textTransform: "uppercase",
                 }}
               >
-                {payment?.status}
+                {orderStatusText}
               </span>
             </Typography>
             <Typography variant="subtitle1">
-              <strong>Total Amount:</strong> {formatMoney(totalAmount)}
+              <strong>Tổng tiền:</strong> {formatMoney(totalAmount)}
             </Typography>
             <Typography variant="subtitle1">
-              <strong>Payment Date:</strong>{" "}
+              <strong>Ngày mua:</strong>{" "}
               {payment?.paymentDate && formatDate(payment.paymentDate)}
             </Typography>
             <Typography variant="subtitle1">
-              <strong>Transaction ID:</strong> {payment?.txnRef}
+              <strong>Mã giao dịch:</strong> {payment?.txnRef}
             </Typography>
           </Box>
 
           <Divider sx={{ my: 2 }} />
 
           <Typography variant="h6" gutterBottom>
-            📚 Purchased Courses:
+            📚 Các khóa học đã mua:
           </Typography>
           {courses?.map((item) => (
             <Box key={item.courseId} mb={2}>
@@ -130,7 +140,7 @@ const PurchaseView = ({ open, onClose, orderDetail }) => {
           onClick={handleExportPDF}
           sx={styles.common}
         >
-          📤 Export to PDF
+          📤 Xuất ra PDF
         </Button>
       </DialogActions>
     </Dialog>

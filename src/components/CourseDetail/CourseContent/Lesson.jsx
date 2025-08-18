@@ -32,15 +32,17 @@ const AllLesson = ({ data }) => {
 
   return (
     <div style={{ marginBottom: "35px" }}>
-      <Typography variant="h5" sx={styles.typo1}>📚 Course Content</Typography>
+      <Typography variant="h5" sx={styles.typo1}>
+        📚 Nội dung khóa học
+      </Typography>
 
       <Typography
         variant="body2"
         color="textSecondary"
         style={{ paddingTop: "7px", fontSize: "18px", marginBottom: "5px" }}
       >
-        {totalChapters} chapters | {totalLectures} lectures |{" "}
-        {formatDuration(totalTimeInSeconds)} total
+        {totalChapters} phần | {totalLectures} bài giảng |{" "}
+        {formatDuration(totalTimeInSeconds)} tổng thời lượng
       </Typography>
 
       <Box sx={{ border: "1px solid black" }}>
@@ -74,14 +76,16 @@ const AllLesson = ({ data }) => {
                   ))
                 ) : (
                   <Typography variant="body2" color="text.secondary">
-                    No lessons available in this chapter.
+                    Không có bài giảng nào trong chương này.
                   </Typography>
                 )}
               </AccordionDetails>
             </Accordion>
           ))
         ) : (
-          <Typography variant="body1">🚫 No chapter data available.</Typography>
+          <Typography variant="body1">
+            Không có dữ liệu.
+          </Typography>
         )}
       </Box>
     </div>

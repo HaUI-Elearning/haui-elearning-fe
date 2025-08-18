@@ -19,7 +19,7 @@ const CourseItem = ({ loading, error, courses }) => {
   return (
     <Container>
       <Typography variant="h4" gutterBottom>
-        What to learn next?
+        Lĩnh vực sẽ học tiếp theo
       </Typography>
       <Course courses={courses} />
     </Container>

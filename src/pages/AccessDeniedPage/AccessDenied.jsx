@@ -24,8 +24,7 @@ const AccessDeniedPage = () => {
       />
 
       <Typography variant="body1" color="textSecondary" gutterBottom>
-        You do not have permission to view this course. Please make sure you are
-        enrolled.
+        Bạn không có quyền truy cập khóa học này. Vui lòng đảm bảo bạn đã ghi danh.
       </Typography>
       <Button
         variant="contained"
@@ -43,7 +42,7 @@ const AccessDeniedPage = () => {
         }}
         onClick={() => navigate("/")}
       >
-        Back to Homepage
+        Quay lại trang chủ
       </Button>
     </Box>
   );

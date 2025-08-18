@@ -70,7 +70,7 @@ function TooltipFilter({ course = {} }) {
             style={{ height: "50px" }}
             onClick={() => navigate(`/courses/learn/${course.courseId}`)}
           >
-            Learn Now
+            Học ngay
           </Button>
         </Box>
       );
@@ -82,7 +82,7 @@ function TooltipFilter({ course = {} }) {
             style={{ height: "50px" }}
             onClick={handleCartClick}
           >
-            {isInCart ? "Go to Cart" : "Add to Cart"}
+            {isInCart ? "Xem giỏ hàng" : "Thêm vào giỏ hàng"}
           </Button>
           <Box sx={styles.circle} onClick={handleFavoriteClick}>
             {isFavorited ? (
@@ -101,7 +101,7 @@ function TooltipFilter({ course = {} }) {
             sx={styles.cartEroll}
             style={{ height: "50px" }}
           >
-            Enroll Now
+            Ghi danh ngay
           </Button>
         </Box>
       );
@@ -111,7 +111,7 @@ function TooltipFilter({ course = {} }) {
   }
   return (
     <Box>
-      <Typography sx={styles.title}>What you will learn </Typography>
+      <Typography sx={styles.title}>Nội dung bài học: </Typography>
       <ul>
         {course.contents
           .split(";")

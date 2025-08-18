@@ -55,7 +55,7 @@ function NewestCources({ course = [] }) {
                                         color: 'green',
                                         fontSize: '0.875rem',
                                     }}>
-                                        Updated at: {formatMonthYear(course.createdAt)}</Typography>
+                                        Cập nhật vào: {formatMonthYear(course.createdAt)}</Typography>
                                     <Typography variant='body2' sx={styles.courseAuthor}>
                                         {course.author}
                                     </Typography>

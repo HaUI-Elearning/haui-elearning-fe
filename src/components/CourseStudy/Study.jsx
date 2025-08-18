@@ -13,12 +13,12 @@ const Study = ({ course }) => {
     setCourseOverview(course);
   }, [course]);
 
-  const tabs = ["Overview", "Reviews"];
+  const tabs = ["Tổng quan", "Đánh giá"];
   const tabComponents = {
-    Overview: <Overview course={course} />,
-    Reviews: <Reviews courseId={courseOverview.courseId} isAuthor={courseOverview.authorCourse} />,
+    "Tổng quan": <Overview course={course} />,
+    "Đánh giá": <Reviews courseId={courseOverview.courseId} isAuthor={courseOverview.authorCourse} />,
   };
-  const [activeTab, setActiveTab] = useState("Overview");
+  const [activeTab, setActiveTab] = useState("Tổng quan");
   const [selectedVideo, setSelectedVideo] = useState(null);
 
   const handleLessonClick = (videoUrl) => {
@@ -49,7 +49,7 @@ const Study = ({ course }) => {
           </div>
 
           <div style={styles.tabContent}>
-            {tabComponents[activeTab] || <p>No content for {activeTab}</p>}
+            {tabComponents[activeTab] || <p>Không có nội dung cho {activeTab}</p>}
           </div>
         </div>
       </div>

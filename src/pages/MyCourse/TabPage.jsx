@@ -8,13 +8,13 @@ import PurchaseHistory from "../../components/User/PurchaseHistory/PurchaseHisto
 
 const TABS = [
   {
-    label: "All Courses",
+    label: "Tất cả",
     path: "/my-course/my-learning",
     content: <MyLearning />,
   },
-  { label: "Wishlist", path: "/my-course/my-wishlist", content: <WishList /> },
+  { label: "Mong muốn", path: "/my-course/my-wishlist", content: <WishList /> },
   {
-    label: "Order History",
+    label: "Lịch sử mua hàng",
     path: "/my-course/purchase-history",
     content: <PurchaseHistory />,
   },
@@ -54,7 +54,7 @@ function TabPage() {
         }}
       >
         <Typography variant="h4" sx={{ fontWeight: "bold", textAlign: "Left" }}>
-          My Learning
+          Học tập
         </Typography>
         <Container sx={{ paddingTop: "20px" }}>
           <Tabs

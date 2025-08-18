@@ -15,10 +15,10 @@ const ReviewInDetail = ({ comment = {}, onCommentFilter }) => {
     <div>
       <Typography variant="h5" className="course-rating">
         <Star className="star-icon" />
-        <span className="text-cmt">{comment.avgRatting} course rating</span>
+        <span className="text-cmt">{comment.avgRatting} xếp hạng khóa học</span>
         <span className="dot">·</span>
         <span className="text-cmt">
-          {comment.listReview?.length ?? 0} ratings
+          {comment.listReview?.length ?? 0} xếp hạng
         </span>
       </Typography>
 
@@ -69,7 +69,7 @@ const ReviewInDetail = ({ comment = {}, onCommentFilter }) => {
                         className="toggle-btn"
                         onClick={() => setExpanded((prev) => !prev)}
                       >
-                        {expanded ? "Less ▲" : "More ▼"}
+                        {expanded ? "Thu gọn ▲" : "Xem thêm ▼"}
                       </button>
                     )}
                   </div>
@@ -84,7 +84,7 @@ const ReviewInDetail = ({ comment = {}, onCommentFilter }) => {
           ></ReviewInMoreDialog>
         </Container>
       ) : (
-        <p className="no-review">No reviews yet </p>
+        <p className="no-review">Khóa học này hiện chưa có đánh giá. </p>
       )}
     </div>
   );

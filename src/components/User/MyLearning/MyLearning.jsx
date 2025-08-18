@@ -79,7 +79,7 @@ function MyLearning() {
                       {item.star.toFixed(1)}
                     </Typography>
                   </Box>
-                  <Typography>{item.hour} hours total</Typography>
+                  <Typography>{item.hour} giờ học</Typography>
                   <Typography variant="body2" sx={styles.price}>
                     {formatCurrency(item.price)}
                   </Typography>
@@ -98,7 +98,7 @@ function MyLearning() {
         </>
       ) : (
         <Typography variant="h6" sx={styles.noItemText}>
-          {t("You haven’t joined any courses yet.")}
+          {t("Bạn chưa tham gia khóa học nào.")}
         </Typography>
       )}
     </Box>

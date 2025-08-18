@@ -62,7 +62,7 @@ const Reviews = ({ courseId, isAuthor }) => {
       {!isAuthor && (
         <div>
           <Button variant="contained" sx={styles.common} onClick={openDialog}>
-            {myReview ? "View your review" : "Add your review"}
+            {myReview ? "Xem đánh giá của bạn" : "Viết đánh giá của bạn"}
           </Button>
 
           <ReviewDialog
@@ -85,7 +85,7 @@ const Reviews = ({ courseId, isAuthor }) => {
         <AllReviewStudy
           comments={listReview.map((r) => ({
             ...r,
-            name: r.userId === userId ? "You" : r.name,
+            name: r.userId === userId ? "Bạn" : r.name,
           }))}
           onSelectReview={() => {}}
         />

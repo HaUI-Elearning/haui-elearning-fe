@@ -24,25 +24,25 @@ const VerifySignUpForm = ({
 
   let resendButtonContent;
   if (resendLoading) {
-    resendButtonContent = "Is resending...";
+    resendButtonContent = "Đang gửi lại..";
   } else if (countdown > 0) {
-    resendButtonContent = `Resend OTP in ${countdown}s`;
+    resendButtonContent = `Gửi lại OTP sau ${countdown}s`;
   } else {
-    resendButtonContent = <span className="resend">Resend OTP</span>;
+    resendButtonContent = <span className="resend">Gửi lại mã OTP</span>;
   }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)} noValidate>
-      <h1 className="title">Check Your Inbox</h1>
+      <h1 className="title">Kiểm tra hộp thư</h1>
       <p className="description">
-        Enter the 6-digit code we sent to your email to finish your sign up.
+        Vui lòng nhập mã 6 số gửi đến email để hoàn tất đăng ký.
       </p>
       <input type="hidden" {...register("otp")} />
       <OtpInput length={6} onChange={handleOtpChange} />
       {errors.otp && <p className="errorMsg">{errors.otp.message}</p>}
       <br />
       <button type="submit" className="button-submit">
-        {loading ? "Is submitting..." : "Submit"}
+        {loading ? "Đang gửi..." : "Gửi"}
       </button>
 
       <button

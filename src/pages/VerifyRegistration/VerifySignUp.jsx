@@ -40,14 +40,14 @@ const VerifySignUp = () => {
       console.log("Verification successful!", res);
       setSnackbar({
         open: true,
-        message: "Verification successful! Please log in again.",
+        message: "Xác thực thành công. Vui lòng đăng nhập lại.",
         severity: "success",
       });
       localStorage.removeItem("email");
       setTimeout(() => navigate("/signIn"), 2000);
     } catch (err) {
       console.error("Verification error:", err);
-      const message = err || "Verification failed!";
+      const message = "Xác thực thất bại!";
       setSnackbar({
         open: true,
         message,

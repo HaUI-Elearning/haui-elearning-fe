@@ -14,7 +14,7 @@ const BreadcrumbsComp = ({ course, onHomeClick }) => {
         onClick={onHomeClick}
       >
         <HomeIcon sx={{ mr: 0.5 }} fontSize="inherit" />
-        Home
+        Trang chủ
       </MuiLink>
       <Typography sx={styles.grainText}>
         <PlayLessonIcon sx={{ mr: 0.5 }} fontSize="inherit" />

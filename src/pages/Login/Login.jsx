@@ -70,24 +70,24 @@ const Login = () => {
         if (res.status === 200) {
           
           const { accessToken } = res.data.data;
-          console.log("ACCCCC" ,accessToken);
+
           localStorage.setItem("accessToken", accessToken);
           localStorage.removeItem("email")
           dispatch(setUser({ accessToken }));
 
-          showSnackbar("Login successful!");
+          showSnackbar("Đăng nhập thành công!");
 
           setTimeout(() => navigate("/"), 2000);
         }
       } catch (err) {
         const mess = err.response.data.error;
         if (mess === "user not verify") {
-          showSnackbar("Your account is not verified yet", "error");
+          showSnackbar("Tài khoản của bạn chưa được xác minh.", "error");
           setTimeout(() => navigate("/verify-email"), 2000);
           return;
         }
 
-        showSnackbar("Incorrect username or password!", "error");
+        showSnackbar("Sai tài khoản hoặc mật khẩu", "error");
       }
     },
     [dispatch, navigate, showSnackbar]
@@ -103,7 +103,7 @@ const Login = () => {
             onClick={() => navigate("/")}
             aria-label="Back to Sign In"
           >
-            <IoIosArrowBack /> Back Home
+            <IoIosArrowBack /> Quay về trang chủ
           </button>
         </div>
 
@@ -122,7 +122,7 @@ const Login = () => {
                 <Field
                   type="text"
                   name="username"
-                  placeholder="User name"
+                  placeholder="Tên đăng nhập"
                   autoComplete="off"
                   required
                 />
@@ -140,7 +140,7 @@ const Login = () => {
                 <Field
                   type="password"
                   name="password"
-                  placeholder="Password"
+                  placeholder="Mật khẩu"
                   required
                 />
                 <span className="icon">
@@ -155,18 +155,18 @@ const Login = () => {
 
               <div className="forgot-password">
                 <Link to="/forgot-password">
-                  <i>Forgot password?</i>
+                  <i>Quên mật khẩu?</i>
                 </Link>
               </div>
 
               <button type="submit" className="button">
-                Sign in
+                Đăng nhập
               </button>
 
               <div className="linkRegister">
-                <p>Do not have an account?</p>
+                <p>Chưa có tài khoản?</p>
                 <Link to="/signUp" className="dangky">
-                  Sign up
+                  Đăng ký ngay
                 </Link>
               </div>
             </Form>

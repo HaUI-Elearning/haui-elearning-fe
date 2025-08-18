@@ -15,10 +15,10 @@ const AuthButtons = () => {
       ) : (
         <div className="navbar-buttons">
           <button className="login-button" onClick={() => navigate("/signIn")}>
-            {t("header2")}
+            {t("Đăng nhập")}
           </button>
           <button className="signup-button" onClick={() => navigate("/signUp")}>
-            {t("header3")}
+            {t("Đăng ký")}
           </button>
         </div>
       )}

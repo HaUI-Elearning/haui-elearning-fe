@@ -90,10 +90,10 @@ const PurchaseHistory = () => {
           <TableRow sx={styles.headRow}>
             <TableCell sx={styles.headCell}>ID</TableCell>
             <TableCell sx={styles.headCell}>TRN</TableCell>
-            <TableCell sx={styles.headCell}>Order Date</TableCell>
-            <TableCell sx={styles.headCell}>Total Amount</TableCell>
-            <TableCell sx={styles.headCell}>Quantity courses</TableCell>
-            <TableCell sx={styles.headCell}>Status</TableCell>
+            <TableCell sx={styles.headCell}>Ngày mua</TableCell>
+            <TableCell sx={styles.headCell}>Tổng tiền</TableCell>
+            <TableCell sx={styles.headCell}>Số lượng khóa học</TableCell>
+            <TableCell sx={styles.headCell}>Trạng thái</TableCell>
             <TableCell sx={styles.headCell}></TableCell>
           </TableRow>
         </TableHead>
@@ -113,7 +113,7 @@ const PurchaseHistory = () => {
               <TableCell>
                 <Chip
                   label={
-                    order.payment?.status === "success" ? "Success" : "Fail"
+                    order.payment?.status === "success" ? "Thành công" : "Thất bại"
                   }
                   color={
                     order.payment?.status === "success" ? "success" : "error"
@@ -137,7 +137,7 @@ const PurchaseHistory = () => {
                   onClick={() => handleViewClick(order.payment?.paymentId)}
                   sx={styles.view}
                 >
-                  VIEW
+                  Xem chi tiết
                 </Button>
               </TableCell>
             </TableRow>

@@ -18,8 +18,8 @@ const styles = {
       display: "flex",
       alignItems: "center",
       color: "#B36B00",
-      fontWeight: 600,
-      gap: 5,
+      fontWeight: 400,
+      gap: 3,
     },
     hour: {
       fontWeight: 700,

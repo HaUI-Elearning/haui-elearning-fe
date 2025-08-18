@@ -13,7 +13,7 @@ import PictureAsPdfIcon from "@mui/icons-material/PictureAsPdf";
 const ChapterList = ({ chapters = [], onLessonClick }) => {
   if (!chapters || chapters.length === 0) {
     console.warn("No chapters available");
-    return <Typography>No chapters available</Typography>;
+    return <Typography>Không có bài giảng.</Typography>;
   }
 
   console.log("Chapter:", chapters);
@@ -62,7 +62,7 @@ const ChapterList = ({ chapters = [], onLessonClick }) => {
                     startIcon={<PictureAsPdfIcon />}
                     onClick={() => window.open(lesson.pdfURL, "_blank")}
                   >
-                    Resource PDF
+                    Tài nguyên PDF
                   </Button>
                 )}
               </Box>

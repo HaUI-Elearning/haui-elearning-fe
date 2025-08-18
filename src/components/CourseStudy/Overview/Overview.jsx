@@ -10,50 +10,45 @@ const Overview = ({ course = {} }) => {
   return (
     <div style={styles.wrapper}>
       <h1 style={styles.title}>
-        {course?.name || "Course Title Not Available"}
+        {course?.name || "Tiêu đề khóa học không có sẵn"}
       </h1>
 
       <div style={styles.ratingWrapper}>
         <div style={styles.starGroup}>
           <span>{course.star}</span>
           <span style={{ color: "#B36B00", fontSize: 18 }}>★</span>
-          <span style={{ color: "B36B00" }}>rating</span>
         </div>
 
         <div style={styles.starGroup}>
           <span>🕒 {course.hour}</span>
-          <span style={{ color: "#B36B00", fontSize: 15 }}>
-            hours learning{" "}
-          </span>
+          <span style={{ color: "#B36B00", fontSize: 15 }}>giờ học </span>
         </div>
       </div>
 
       <div style={styles.updatedDate}>
         <span>
-          ⏰ Last updated: {formatDayMonthYear(
-            course.createdAt)}
+          ⏰ Lần cập nhật gần đây nhất: {formatDayMonthYear(course.createdAt)}
         </span>
       </div>
 
       <div style={styles.langWrapper}>
         <span>🌐 English</span>
-        <span>📝 English [Auto]</span>
+        <span>📝 English [Tự động]</span>
         <span>
-          📱 Available on <strong>iOS</strong> & <strong>Android</strong>
+          📱 Tương thích trên <strong>iOS</strong> & <strong>Android</strong>
         </span>
       </div>
 
       <div style={styles.description}>
         <Typography variant="body1">
-          {course?.description ||
-            "No description available for this course."}
+          {course?.description || "Không có mô tả nào cho khóa học này."}
         </Typography>
       </div>
 
       <Grid2 container spacing={2}>
         <Grid2 xs={12}>
           <Typography variant="h5" sx={styles.learnTitle}>
-            Description
+            Mô tả
           </Typography>
 
           <Grid2

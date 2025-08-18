@@ -10,7 +10,7 @@ function Introduce({ detail = {} }) {
     return (
         <div style={styles.container}>
             <Typography variant='h5' sx={styles.title}>
-                All {detail.name} courses
+                Tất cả khóa học về {detail.name}
             </Typography>
             <Typography variant='body2' style={styles.description}>
                 Programming courses cover various topics, from beginner-friendly languages like

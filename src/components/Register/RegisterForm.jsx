@@ -22,7 +22,7 @@ const RegisterForm = ({ onSubmit }) => {
       <InputField
         control={control}
         name="username"
-        placeholder="Username"
+        placeholder="Tên đăng nhập"
         icon={FaUser}
       />
       {errors.username && <p className="errorMsg">{errors.username.message}</p>}
@@ -31,7 +31,7 @@ const RegisterForm = ({ onSubmit }) => {
       <InputField
         control={control}
         name="password"
-        placeholder="Password"
+        placeholder="Mật khẩu"
         type="password"
         icon={FaLock}
       />
@@ -41,7 +41,7 @@ const RegisterForm = ({ onSubmit }) => {
       <InputField
         control={control}
         name="confirmPassword"
-        placeholder="Confirm Password"
+        placeholder="Nhập lại mật khẩu"
         type="password"
         icon={FaLock}
       />
@@ -62,14 +62,14 @@ const RegisterForm = ({ onSubmit }) => {
       <InputField
         control={control}
         name="name"
-        placeholder="Full name"
+        placeholder="Họ và tên"
         icon={FaUser}
       />
       {errors.name && <p className="errorMsg">{errors.name.message}</p>}
       <br />
 
       <button type="submit" className="button-register">
-        Sign Up
+       Đăng ký
       </button>
     </form>
   );

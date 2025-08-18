@@ -19,7 +19,7 @@ const Home = () => {
       setCourses(res.data);
     } catch (error) {
       console.error("Error fetching courses:", error);
-      setError("Failed to load courses");
+      setError("Tải khóa học thất bại");
     } finally {
       setLoading(false);
     }

@@ -109,7 +109,7 @@ const FavoriteIcon = () => {
                       borderRadius: "8px",
                     }}
                   >
-                    <h3>Your Wishlist is empty</h3>
+                    <h3>Danh sách mong muốn trống</h3>
                     <button
                       style={{
                         marginTop: "5px",
@@ -124,7 +124,7 @@ const FavoriteIcon = () => {
                       }}
                       onClick={() => navigate("/")}
                     >
-                      Explore more courses
+                      Khám phá các khóa học khác
                     </button>
                   </div>
                 )}
@@ -132,7 +132,7 @@ const FavoriteIcon = () => {
               {favoriteItems.length > 0 && (
                 <div className="navigate-button">
                   <button onClick={() => navigate("/my-course/my-wishlist")}>
-                    Go to whishlist
+                    Chuyển đến mong muốn
                   </button>
                 </div>
               )}
@@ -145,16 +145,16 @@ const FavoriteIcon = () => {
                 border: "1px solid #f5c6cb",
                 borderRadius: "5px",
                 textAlign: "center",
-                fontSize: "18px",
+                fontSize: "15px",
                 fontWeight: "bolder",
               }}
             >
-              <p>Sign in to use this feature</p>
+              <p>Đăng nhập để sử dụng tính năng này</p>
               <button
                 onClick={() => navigate("/signIn")}
                 style={{ fontSize: "14px", padding: "5px", marginTop: "5px" }}
               >
-                Sign in
+                Đăng nhập
               </button>
             </div>
           )}

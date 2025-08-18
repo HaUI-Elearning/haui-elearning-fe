@@ -24,16 +24,16 @@ const Step1 = ({ onNext, onSend, sendLoading }) => {
       onSubmit={handleSubmit(async (data) => {
         const ok = await onSend(data);
         if (ok) {
-          onNext();}
+          onNext();
+        }
       })}
       noValidate
       className="form-step"
     >
-      <h1 className="title">Forgot password?</h1>
+      <h1 className="title">Quên mật khẩu?</h1>
       <p className="description">
-        No worries! Just enter your email address and we will send you an OTP to
-        reset your password.
-        <br></br> If you dont see it, please check your spam folder.
+        Đừng lo, hãy nhập email để nhận mã OTP đặt lại mật khẩu.
+        <br></br> Nếu bạn không thấy, vui lòng kiểm tra trong thư mục Spam.
       </p>
       <InputField
         control={control}
@@ -46,7 +46,7 @@ const Step1 = ({ onNext, onSend, sendLoading }) => {
       {errors.email && <p className="errorMsg">{errors.email.message}</p>}
       <br />
       <button type="submit" className="button-sendotp">
-        {sendLoading ? "Is sending..." : "Get OTP"}
+        {sendLoading ? "Đang gửi..." : "Nhận mã OTP"}
       </button>
       <div>
         <ArrowBackIcon
@@ -59,7 +59,7 @@ const Step1 = ({ onNext, onSend, sendLoading }) => {
             navigate("/signIn");
           }}
         >
-          Back to login
+          Quay về đăng nhập
         </button>
       </div>
     </form>

@@ -10,14 +10,14 @@ const CurrentFilters = ({ filters, resetFilters }) => {
                 variant="h6"
                 sx={styles.typo1}
             >
-                Current Filters:
+                Bộ lọc hiện tại:
             </Typography>
             <Typography
                 sx={styles.typo2}
             >
-                {filters.isPaid ? `Price: ${filters.isPaid === 'true' ? 'Paid' : 'Free'}` : 'Price: All'}<br />
-                {filters.hourRange.length > 0 ? `Duration: ${filters.hourRange.join(', ')}` : 'Duration: All'}<br />
-                {filters.starRating ? `Rating: ${filters.starRating}` : 'Rating: All'}
+                {filters.isPaid ? `Giá: ${filters.isPaid === 'true' ? 'Trả phí' : 'Miễn phí'}` : 'Giá: Tất cả'}<br />
+                {filters.hourRange.length > 0 ? `Thời lượng: ${filters.hourRange.join(', ')}` : 'Thời lượng: Tất cả'}<br />
+                {filters.starRating ? `Xếp hạng: ${filters.starRating}` : 'Xếp hạng: Tất cả'}
             </Typography>
             <Button
                 variant="outlined"
@@ -25,7 +25,7 @@ const CurrentFilters = ({ filters, resetFilters }) => {
                 onClick={resetFilters}
                 sx={styles.button}
             >
-                Clear Filters
+                Xóa bộ lọc
             </Button>
         </Box>
     );

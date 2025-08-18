@@ -69,7 +69,7 @@ export default function PaymentResult() {
       {status === "loading" ? (
         <>
           <CircularProgress />
-          <Typography variant="h6">⏳ Verifying payment...</Typography>
+          <Typography variant="h6">⏳Đang xác minh thanh toán...</Typography>
         </>
       ) : (
         <>
@@ -79,7 +79,9 @@ export default function PaymentResult() {
             style={styles.image}
           />
           <Typography variant="h5" fontWeight={600}>
-            {status === "success" ? "Payment successful!" : "Payment failed!"}
+            {status === "success"
+              ? "Thanh toán thành công!"
+              : "Thanh toán thất bại!"}
           </Typography>
           <Typography variant="body1" color="text.secondary">
             {message}
@@ -98,8 +100,8 @@ export default function PaymentResult() {
           sx={styles.alert}
         >
           {status === "success"
-            ? "Payment successful! Redirecting to homepage..."
-            : "Payment failed! Redirecting to homepage..."}
+            ? "Thanh toán thành công! Đang chuyển hướng về trang chủ..."
+            : "Thanh toán thất bại! Đang chuyển hướng về trang chủ..."}
         </Alert>
       </Snackbar>
     </Box>

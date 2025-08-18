@@ -32,9 +32,9 @@ export default function Step3({ onChangePass, changePassLoading, onBack, onResen
 
   return (
     <form onSubmit={handleSubmit(submitHandler)} noValidate>
-      <h1 className="title">Create new password</h1>
+      <h1 className="title">Tạo mật khẩu mới</h1>
       <p className="description">
-        Your new password must be different from your previous passwords.
+        Mật khẩu mới của bạn nên khác với những mật khẩu đã dùng trước đây.
       </p>
 
       <InputField
@@ -65,7 +65,7 @@ export default function Step3({ onChangePass, changePassLoading, onBack, onResen
           type="submit"
           disabled={changePassLoading}
         >
-          {changePassLoading ? "Is submitting..." : "Submit"}
+          {changePassLoading ? "Đang gửi..." : "Gửi"}
         </button>
       </Box>
     </form>

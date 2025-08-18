@@ -17,13 +17,13 @@ LearnMore.propTypes = {
 function LearnMore({ handleClickOpen, handleClose, open }) {
   return (
     <Box sx={{ border: "1px solid black", padding: "15px" }}>
-      <Typography variant="h5" sx={{ fontWeight: "bolder"}}>
+      <Typography variant="h5" sx={{ fontWeight: "bolder" }}>
         {" "}
-        Top companies offer this course to their employees
+        Các công ty hàng đầu cung cấp khóa học này cho nhân viên của họ
       </Typography>
       <Typography sx={{ color: "grey", display: "inline" }}>
-        This course was selected for our collection of top-rated courses trusted
-        by businesses worldwide.
+        Khóa học này đã được chọn cho bộ sưu tập các khóa học được đánh giá cao
+        mà các doanh nghiệp trên toàn thế giới tin tưởng.
       </Typography>
       <button
         type="button"
@@ -40,7 +40,7 @@ function LearnMore({ handleClickOpen, handleClose, open }) {
         }}
         aria-label="Learn more about top-rated courses"
       >
-        Learn more
+        Tìm hiểu thêm
       </button>
       <Box
         display="flex"
@@ -117,7 +117,7 @@ function LearnMore({ handleClickOpen, handleClose, open }) {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
-            Close
+            Đóng
           </Button>
         </DialogActions>
       </Dialog>

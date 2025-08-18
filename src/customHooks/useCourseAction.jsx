@@ -54,7 +54,7 @@ export const useCourseActions = (course) => {
         state: { enrolledCourse },
       });
     } catch (error) {
-      alert("Fail to enroll course: " + (error.message || "Error occurred"));
+      alert("Ghi danh khóa học thất bại. Lỗi:" + (error.message || "Có lỗi xuất hiện"));
     }
   };
 

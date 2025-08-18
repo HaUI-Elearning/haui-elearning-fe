@@ -37,9 +37,9 @@ function Search({ searchTerm, loading, courses }) {
 
     return (
         <Container sx={{ marginTop: '20px' }}>
-            <h1 style={{ marginBottom: '30px' }}> {courses.length} results for ``{searchTerm}``:</h1>
+            <h1 style={{ marginBottom: '30px' }}> {courses.length} kết quả cho ``{searchTerm}``:</h1>
             {loading ? (
-                <div>Loading...</div>
+                <div>Đang tải...</div>
             ) : (
                 <ul style={{ listStyleType: 'none', padding: 0, margin: 0 }}>
                     {currentCourses.length > 0 ? (
@@ -66,9 +66,9 @@ function Search({ searchTerm, loading, courses }) {
                                             <RenderStar numStars={courseItem.star} />
                                         </Box>
                                         <Typography variant="body2">
-                                            {courseItem.hour} total hours
-                                            <DotIcon /><span>All level</span>
-                                            <DotIcon /><span>Subtitles</span>
+                                            {courseItem.hour} giờ học
+                                            <DotIcon /><span>Tất cả trình độ</span>
+                                            <DotIcon /><span>Có phụ đề</span>
                                         </Typography>
                                     </Grid>
                                     <Grid item md={2}>
@@ -98,17 +98,17 @@ function Search({ searchTerm, loading, courses }) {
                     disabled={currentPage === 1}
                     onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
                 >
-                    Previous
+                    Trang trước
                 </Button>
                 <Typography variant="body1" sx={{ marginLeft: '10px', marginRight: '10px' }}>
-                    Page {currentPage} of {totalPages}
+                    {currentPage} of {totalPages}
                 </Typography>
                 <Button
                     variant="contained"
                     disabled={currentPage === totalPages}
                     onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
                 >
-                    Next
+                    Trang sau
                 </Button>
             </Box>
         </Container>

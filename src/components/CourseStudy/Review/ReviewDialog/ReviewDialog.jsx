@@ -62,7 +62,7 @@ const ReviewDialog = ({
 
   const validateReview = () => {
     if (!rating || userReview.trim() === "") {
-      setError("⚠️ Please provide both a rating and a review.");
+      setError("Vui lòng cung cấp cả đánh giá sao và nhận xét.");
       return false;
     }
     setError("");
@@ -71,11 +71,11 @@ const ReviewDialog = ({
 
   let dialogTitle = "";
   if (isEditMode) {
-    dialogTitle = "Edit your review";
+    dialogTitle = "Chỉnh sửa đánh giá của bạn";
   } else if (myReview) {
-    dialogTitle = "View your review";
+    dialogTitle = "Xem đánh giá của bạn";
   } else {
-    dialogTitle = "Add your review";
+    dialogTitle = "Thêm đánh giá của bạn";
   }
 
   return (
@@ -101,7 +101,7 @@ const ReviewDialog = ({
             readOnly={!isEditMode && !!myReview}
           />
           <TextField
-            label="Write your review here"
+            label="Viết đánh giá tại đây:"
             multiline
             rows={3}
             fullWidth
@@ -124,7 +124,7 @@ const ReviewDialog = ({
               sx={styles.common}
               variant="contained"
             >
-              Save
+              Lưu
             </Button>
           )}
 
@@ -135,7 +135,7 @@ const ReviewDialog = ({
                 sx={styles.common}
                 variant="contained"
               >
-                Edit
+                Chỉnh sửa
               </Button>
               <Button
                 onClick={handleDeleteClick}
@@ -157,7 +157,7 @@ const ReviewDialog = ({
               sx={styles.common}
               variant="contained"
             >
-              Update
+              Cập nhật
             </Button>
           )}
         </DialogActions>
@@ -170,7 +170,7 @@ const ReviewDialog = ({
         }`}
         action={
           <Button size="small" onClick={handleUndoDelete}>
-            UNDO
+            Hoàn tác
           </Button>
         }
         anchorOrigin={{ vertical: "bottom", horizontal: "center" }}

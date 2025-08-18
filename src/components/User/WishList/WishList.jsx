@@ -83,7 +83,7 @@ function WishList() {
                       {item.star.toFixed(1)}
                     </Typography>
                   </Box>
-                  <Typography>{item.hour} hours total</Typography>
+                  <Typography>{item.hour} giờ học</Typography>
                   <Typography variant="body2" sx={styles.price}>
                     {formatCurrency(item.price)}
                   </Typography>

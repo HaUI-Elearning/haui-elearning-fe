@@ -23,10 +23,10 @@ const FilterSection = ({ filters, setFilters, sortOption, setSortOption }) => {
 
     return (
         <Box sx={styles.box1}>
-            <Typography sx={styles.typo}>Filters:</Typography>
+            <Typography sx={styles.typo}>Bộ lọc:</Typography>
             <Accordion sx={styles.accordion}>
                 <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                    <Typography sx={styles.typo1}>Price</Typography>
+                    <Typography sx={styles.typo1}>Giá</Typography>
                 </AccordionSummary>
                 <AccordionDetails sx={styles.accordionDetails}>
                     <label>
@@ -38,7 +38,7 @@ const FilterSection = ({ filters, setFilters, sortOption, setSortOption }) => {
                             onChange={handleFilterChange}
                             style={styles.input}
                         />
-                        Paid
+                        Trả phí
                     </label>
                     <br></br>
                     <label>
@@ -50,16 +50,16 @@ const FilterSection = ({ filters, setFilters, sortOption, setSortOption }) => {
                             onChange={handleFilterChange}
                             style={styles.input}
                         />
-                        Free
+                        Miễn phí
                     </label>
                 </AccordionDetails>
             </Accordion>
             <Accordion sx={styles.accordion}>
                 <AccordionSummary expandIcon={<ExpandMoreIcon />} style={styles.accordionSummary}>
-                    <Typography sx={styles.typo1}>Duration</Typography>
+                    <Typography sx={styles.typo1}>Thời lượng</Typography>
                 </AccordionSummary>
                 <AccordionDetails style={styles.accordionDetails}>
-                    {['3-6', '6-9', '9-12', 'more'].map((range) => (
+                    {['3-6', '6-9', '9-12', 'Lâu hơn'].map((range) => (
                         <div key={range}>
                             <label >
                                 <input
@@ -81,7 +81,7 @@ const FilterSection = ({ filters, setFilters, sortOption, setSortOption }) => {
             </Accordion>
             <Accordion style={styles.accordion}>
                 <AccordionSummary expandIcon={<ExpandMoreIcon />} style={styles.accordionSummary}>
-                    <Typography sx={styles.typo1} >Ratings</Typography>
+                    <Typography sx={styles.typo1} >Xếp hạng</Typography>
                 </AccordionSummary>
                 <AccordionDetails style={styles.accordionDetails}>
                     {['3', '4', '5'].map((rating) => (
@@ -98,7 +98,7 @@ const FilterSection = ({ filters, setFilters, sortOption, setSortOption }) => {
                                 {[...Array(5)].map((_, index) => (
                                     index < rating ? <StarIcon key={index} sx={{ color: 'gold' }} fontSize="17px" /> : <StarBorderIcon key={index} sx={{ color: 'gray' }} fontSize="17px" />
                                 ))}
-                                <Typography component="span" sx={{ ml: 0.5 }}>{rating} & up</Typography>
+                                <Typography component="span" sx={{ ml: 0.5 }}>Từ {rating} trở lên</Typography>
                             </label>
                         </div>
 
@@ -106,7 +106,7 @@ const FilterSection = ({ filters, setFilters, sortOption, setSortOption }) => {
                 </AccordionDetails>
             </Accordion>
             <Box>
-                <Typography sx={styles.typo}>Sort:</Typography>
+                <Typography sx={styles.typo}>Sắp xếp:</Typography>
             </Box>
             <select
                 value={sortOption}
@@ -121,9 +121,9 @@ const FilterSection = ({ filters, setFilters, sortOption, setSortOption }) => {
                     fontSize:'17px'
                 }}
             >
-                <option value="all-course">All courses</option>
-                <option value="highest-rate">Highest rating</option>
-                <option value="newest">Newest</option>
+                <option value="all-course">Tất cả</option>
+                <option value="highest-rate">Xếp hạng cao nhất</option>
+                <option value="newest">Mới nhất</option>
             </select>
         </Box>
     );

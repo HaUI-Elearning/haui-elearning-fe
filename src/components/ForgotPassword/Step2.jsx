@@ -31,9 +31,9 @@ const Step2 = ({
 
   let resendButtonContent =
     countdown > 0 ? (
-      `Resend OTP in ${countdown}s`
+      `Nhận lại mã OTP sau ${countdown}s`
     ) : (
-      <span className="resend">Resend OTP</span>
+      <span className="resend">Nhận lại mã OTP</span>
     );
 
   return (
@@ -45,11 +45,11 @@ const Step2 = ({
       })}
       noValidate
     >
-      <h1 className="title">Check Your Inbox</h1>
+      <h1 className="title">Kiểm tra hộp thư</h1>
       <p className="description">
-        Enter the 6‑digit code we sent to{" "}
+        Nhập mã 6 số mà chúng tôi đã gửi đến {" "}
         <span className="email">{emailUser}</span>
-        <br /> to verify your email first.
+        <br /> để xác minh Email của bạn trước.
       </p>
 
       <input type="hidden" {...register("otp")} />
@@ -58,7 +58,7 @@ const Step2 = ({
       {errors.otp && <p className="errorMsg">{errors.otp.message}</p>}
 
       <button type="submit" className="button-submitotp">
-        {verifyLoading ? "Is submitting..." : "Verify OTP"}
+        {verifyLoading ? "Đang xác minh..." : "Xác minh mã OTP"}
       </button>
 
       <button
@@ -83,7 +83,7 @@ const Step2 = ({
             navigate("/signIn");
           }}
         >
-          Back to login
+          Quay lại đăng nhập
         </button>
       </div>
     </form>

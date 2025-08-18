@@ -13,7 +13,7 @@ const PurchaseFilters = ({
   return (
     <Box sx={{ display: "flex", gap: 2, mb: 3 }}>
       <TextField
-        label="From Date"
+        label="Từ ngày"
         type="date"
         InputLabelProps={{ shrink: true }}
         value={fromDate}
@@ -21,7 +21,7 @@ const PurchaseFilters = ({
         fullWidth
       />
       <TextField
-        label="To Date"
+        label="Đến ngày"
         type="date"
         InputLabelProps={{ shrink: true }}
         value={toDate}
@@ -29,18 +29,18 @@ const PurchaseFilters = ({
         fullWidth
       />
       <TextField
-        label="Status"
+        label="Trạng thái"
         select
         value={status}
         onChange={(e) => setStatus(e.target.value)}
         fullWidth
       >
-        <MenuItem value="">All</MenuItem>
-        <MenuItem value="success">Success</MenuItem>
-        <MenuItem value="failed">Failed</MenuItem>
+        <MenuItem value="">Tất cả</MenuItem>
+        <MenuItem value="success">Thành công</MenuItem>
+        <MenuItem value="failed">Thất bại</MenuItem>
       </TextField>
       <Button variant="contained" sx={styles.common} onClick={onClear}>
-        Clear
+        Đặt lại
       </Button>
     </Box>
   );
