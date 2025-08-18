@@ -38,7 +38,7 @@ function RenderToolTipContent({ course = {} }) {
             sx={styles.cartEroll}
             onClick={() => navigate(`/courses/learn/${course.courseId}`)}
           >
-            Learn Now
+           Học ngay
           </Button>
         </Box>
       );
@@ -50,7 +50,7 @@ function RenderToolTipContent({ course = {} }) {
             style={{ height: "50px" }}
             onClick={handleCartClick}
           >
-            {isInCart ? "Go to Cart" : "Add to Cart"}
+            {isInCart ? "Xem giỏ hàng" : "Thêm vào giỏ hàng"}
           </Button>
           <Box sx={styles.circle} onClick={handleFavoriteClick}>
             {isFavorited ? (
@@ -70,7 +70,7 @@ function RenderToolTipContent({ course = {} }) {
             style={{ height: "50px" }}
             onClick={handleEnrollClick}
           >
-            Enroll Now
+            Ghi danh ngay
           </Button>
         </Box>
       );
@@ -85,15 +85,15 @@ function RenderToolTipContent({ course = {} }) {
         {course.name}
       </Typography>
       <Typography>
-        <span style={styles.typo1}>Updated: </span>
+        <span style={styles.typo1}>Cập nhật: </span>
         <span style={styles.typo2}>{formatMonthYear(course.createdAt)}</span>
       </Typography>
       <Typography variant="body2" sx={styles.hour}>
-        {course.hour} total hours
+        {course.hour} giờ học
         <DotIcon />
-        <span>All level</span>
+        <span>Tất cả trình độ</span>
         <DotIcon />
-        <span>Subtitles</span>
+        <span>Có phụ đề</span>
       </Typography>
       <Typography variant="body2" sx={{ fontSize: "16px" }}>
         {course.description}

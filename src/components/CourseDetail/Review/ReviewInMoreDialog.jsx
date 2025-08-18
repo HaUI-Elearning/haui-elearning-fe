@@ -34,7 +34,7 @@ const ReviewInMoreDialog = ({ onCommentFilter, comment }) => {
   return (
     <>
       <button className="view-all-reviews" onClick={() => setOpen(true)}>
-        Show More
+        Xem thêm
       </button>
 
       <Dialog
@@ -52,10 +52,10 @@ const ReviewInMoreDialog = ({ onCommentFilter, comment }) => {
         <DialogTitle>
           <h1 className="course-rating">
             <Star className="star-icon" />
-            <span className="text-cmt">{comment.avgRatting} course rating</span>
+            <span className="text-cmt">{comment.avgRatting} xếp hạng khóa học</span>
             <span className="dot">·</span>
             <span className="text-cmt">
-              {comment.listReview?.length ?? 0} ratings
+              {comment.listReview?.length ?? 0} xếp hạng
             </span>
           </h1>
           <IconButton

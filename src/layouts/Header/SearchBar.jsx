@@ -86,7 +86,7 @@ const SearchBar = () => {
             </button>
             <input
                 type="text"
-                placeholder={t('header1')}
+                placeholder={t('Tìm kiếm gì đó')}
                 className="search-input"
                 value={searchTerm}
                 onChange={handleInputChange}

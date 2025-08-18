@@ -79,9 +79,9 @@ function MyCart() {
   return (
     <Container style={styles.container}>
       <Box sx={styles.BoxTilte}>
-        <Typography sx={styles.typoTitle}>Shopping Cart</Typography>
+        <Typography sx={styles.typoTitle}>Giỏ hàng</Typography>
         <Typography sx={styles.typoTotalCart}>
-          {courses.length} courses in cart
+          {courses.length} khóa học
         </Typography>
       </Box>
       <Grid container spacing={1}>
@@ -102,24 +102,27 @@ function MyCart() {
                   <Grid item xs={4} style={styles.courseDetails}>
                     <Typography sx={styles.typo1}>{course.name}</Typography>
                     <Typography sx={styles.typo2}>
-                      By {course.author}
+                      Tạo bởi {course.author}
                     </Typography>
                     <Box sx={styles.typo1}>
                       {course.star}
                       <RenderStar numStars={course.star}></RenderStar>
                     </Box>
                     <Typography sx={styles.typo2}>
-                      {course.hour} total hours | All levels
+                      {course.hour} giờ học | Tất cả trình độ
                     </Typography>
                   </Grid>
                   <Grid item xs={3}>
-                    <Button onClick={() => handleRemoveCourse(course.courseId)}>
-                      Remove
+                    <Button
+                      onClick={() => handleRemoveCourse(course.courseId)}                       
+                    >
+                      Xóa
                     </Button>
                     <Button
                       onClick={() => handleMoveToWishlist(course.courseId)}
+                
                     >
-                      Move to wishlist
+                      Chuyển vào mong muốn
                     </Button>
                   </Grid>
                   <Grid item xs={2}>
@@ -133,7 +136,7 @@ function MyCart() {
             </Grid>
             <Grid item xs={3}>
               <Paper sx={styles.totalPaper}>
-                <Typography sx={styles.typo2}>Total: </Typography>
+                <Typography sx={styles.typo2}>Tổng tiền: </Typography>
                 <Typography sx={styles.typo3}>
                   {formatMoney(totalPrice)}
                 </Typography>
@@ -141,7 +144,7 @@ function MyCart() {
                   style={styles.checkoutButton}
                   onClick={handleContinueWithVNPay}
                 >
-                  Checkout
+                  Thanh toán
                 </Button>
               </Paper>
             </Grid>

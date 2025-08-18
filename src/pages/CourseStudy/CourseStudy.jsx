@@ -43,7 +43,7 @@ const CourseStudy = () => {
       {course? (
         <Study course={course}  />
       ) : (
-        <p>Loading...</p>
+        <p>Đang tải...</p>
       )}
     </div>
   );

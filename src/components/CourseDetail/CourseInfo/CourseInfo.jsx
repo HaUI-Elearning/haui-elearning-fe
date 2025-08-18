@@ -14,7 +14,7 @@ const CourseInfo = ({ course }) => {
                 <RenderStar numStars={course.star} />
             </Box>
             <Typography sx={styles.author} component="span">
-                <span>Created by: </span>
+                <span>Tạo bởi: </span>
                 <Box component="span" sx={{ color: '#6699FF' }}>
                     {course.author}
                 </Box>
@@ -23,7 +23,7 @@ const CourseInfo = ({ course }) => {
                 <Box>
                     <UpdateIcon />
                 </Box>
-                <Box>Last updated: {formatDayMonthYear(course.createdAt)}</Box>
+                <Box>Lần cập nhật gần đây nhất: {formatDayMonthYear(course.createdAt)}</Box>
             </Typography>
         </Box>
     );

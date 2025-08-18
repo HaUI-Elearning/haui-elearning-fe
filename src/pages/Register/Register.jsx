@@ -26,7 +26,7 @@ const Register = () => {
       console.log("Registration successful:", res);
       setSnackbar({
         open: true,
-        message: "Registration successful!",
+        message: "Đăng ký thành công!",
         severity: "success",
       });
       setTimeout(() => navigate("/verify-email"), 2000);
@@ -54,9 +54,9 @@ const Register = () => {
         <RegisterForm onSubmit={handleSubmit} />
 
         <div className="linkRegister">
-          <p>Already have an account?</p>
+          <p>Đã có tài khoản?</p>
           <Link to="/signIn" className="dangky">
-            Sign In
+            Đăng nhập ngay
           </Link>
         </div>
       </div>

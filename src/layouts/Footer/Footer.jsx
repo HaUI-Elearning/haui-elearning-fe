@@ -1,5 +1,4 @@
 import './Footer.scss'
-import Logo from '../../assets/images/logo2.png'
 import '../../i18n';
 import { useTranslation } from 'react-i18next';
 import { useState } from 'react';

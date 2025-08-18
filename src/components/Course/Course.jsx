@@ -27,7 +27,7 @@ const Course = ({ courses = [] }) => {
       {courses.map((category) => (
         <div key={category.categoryId}>
           <Typography variant="h5" sx={styles.sectionTitle}>
-            Top course in {category.name}
+          Các khóa học hàng đầu về {category.name}
           </Typography>
           <Slider {...settings}>
             {category.courseCategories.map((course) => (

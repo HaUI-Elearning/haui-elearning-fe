@@ -97,12 +97,15 @@ function MenuUser() {
           </Grid>
           <ul style={{ listStyleType: "none", padding: 0, margin: 0 }}>
             {[
-              { text: "Public profile", path: "/my-profile" },
-              { text: "My learning", path: "/my-course/my-learning" },
-              { text: "My cart", path: "/cart" },
-              { text: "Wishlist", path: "/my-course/my-wishlist" },
-              { text: "Purchase history", path: "/my-course/purchase-history" },
-              { text: "Log out", path: null, onClick: handleLogoutClick },
+              { text: "Hồ sơ cá nhân", path: "/my-profile" },
+              { text: "Học tập", path: "/my-course/my-learning" },
+              { text: "Giỏ hàng", path: "/cart" },
+              { text: "Mong muốn", path: "/my-course/my-wishlist" },
+              {
+                text: "Lịch sử mua hàng",
+                path: "/my-course/purchase-history",
+              },
+              { text: "Đăng xuất", path: null, onClick: handleLogoutClick },
             ].map((item) => (
               <li
                 key={item.text}
@@ -174,7 +177,7 @@ function MenuUser() {
             color: "text.primary",
           }}
         >
-          Are you sure?
+          Bạn có chắc chắn không?
         </DialogTitle>
 
         <DialogContent sx={{ px: 3 }}>
@@ -185,8 +188,7 @@ function MenuUser() {
               color: "text.secondary",
             }}
           >
-            You will be logged out of your account. Any unsaved progress may be
-            lost.
+            Bạn sẽ bị đăng xuất khỏi tài khoản!
           </DialogContentText>
         </DialogContent>
 
@@ -210,7 +212,7 @@ function MenuUser() {
               fontSize: "0.95rem",
             }}
           >
-            Cancel
+           Ở lại
           </Button>
 
           <Button
@@ -227,7 +229,7 @@ function MenuUser() {
               fontSize: "0.95rem",
             }}
           >
-            Log out
+           Đăng xuất
           </Button>
         </DialogActions>
       </Dialog>

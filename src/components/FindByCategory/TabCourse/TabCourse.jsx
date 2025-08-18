@@ -12,32 +12,30 @@ function TabCourse({course=[]}) {
         setValue(newValue);
     };
     return (
-        <>
-            <Box sx={{ width: '100%', marginTop: '10px' }}>
-                <Typography variant="h5" fontWeight='bolder'>Courses to get you started</Typography>
-                <Typography sx={{ color: 'grey' }}>Explore courses from experienced, real-world experts</Typography>
-                <Tabs
-                    value={value}
-                    onChange={handleChange}
-                    textColor="secondary"
-                    indicatorColor="secondary"
-                    aria-label="secondary tabs example"
-                >
-                    <Tab value="one" label="Most popular" />
-                    <Tab value="two" label="Newest cources" />
-                </Tabs>
-            </Box>
-            {
-                value === 'one' && (
-                    <AllCourseInCategory course={course}></AllCourseInCategory>
-                )
-            }
-            {
-                value === "two" && (
-                    <NewestCources course={course} />
-                )
-            }
-        </>
+      <>
+        <Box sx={{ width: "100%", marginTop: "10px" }}>
+          <Typography variant="h5" fontWeight="bolder">
+            Các khóa học giúp bạn bắt đầu
+          </Typography>
+          <Typography sx={{ color: "grey" }}>
+            Khám phá các khóa học từ những chuyên gia giàu kinh nghiệm thực tế
+          </Typography>
+          <Tabs
+            value={value}
+            onChange={handleChange}
+            textColor="secondary"
+            indicatorColor="secondary"
+            aria-label="secondary tabs example"
+          >
+            <Tab value="one" label="Phổ biến nhất" />
+            <Tab value="two" label="Mới nhất" />
+          </Tabs>
+        </Box>
+        {value === "one" && (
+          <AllCourseInCategory course={course}></AllCourseInCategory>
+        )}
+        {value === "two" && <NewestCources course={course} />}
+      </>
     );
 }
 

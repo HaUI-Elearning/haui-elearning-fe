@@ -23,10 +23,7 @@ export const CourseActions = ({ course, setOpen }) => {
   const handleBuyNow = async () => {
     try {
       const courseIds = [course.courseId];
-      console.log("Course id in payment:", courseIds);
-
       const res = await createVNPayPayment(courseIds, false);
-      console.log("Link:", res.data.paymentUrl);
       setTimeout(() => {
         window.location.href = res.data.paymentUrl;
       }, 1000);
@@ -54,7 +51,7 @@ export const CourseActions = ({ course, setOpen }) => {
             style={{ height: "50px" }}
             onClick={() => navigate(`/courses/learn/${course.courseId}`)}
           >
-            Learn Now
+            Học ngay
           </Button>
         </Box>
       );
@@ -67,7 +64,7 @@ export const CourseActions = ({ course, setOpen }) => {
               style={{ height: "50px" }}
               onClick={handleCartClick}
             >
-              {isInCart ? "Go to Cart" : "Add to Cart"}
+              {isInCart ? "Xem giỏ hàng" : "Thêm vào giỏ hàng"}
             </Button>
             <Box sx={styles.circle} onClick={handleFavoriteClick}>
               {isFavorited ? (
@@ -86,7 +83,7 @@ export const CourseActions = ({ course, setOpen }) => {
               style={{ height: "50px" }}
               onClick={handleBuyNow}
             >
-              Buy now
+              Mua ngay
             </Button>
           </Box>
         </>
@@ -100,7 +97,7 @@ export const CourseActions = ({ course, setOpen }) => {
             style={{ height: "50px" }}
             onClick={handleEnrollClick}
           >
-            Enroll Now
+            Ghi danh ngay
           </Button>
         </Box>
       );
@@ -115,7 +112,7 @@ export const CourseActions = ({ course, setOpen }) => {
               style={{ height: "50px" }}
               onClick={handleCartClickNoLogin}
             >
-              Add to Cart
+              Thêm vào giỏ hàng
             </Button>
           </Box>
           <Box sx={styles.box1}>
@@ -125,7 +122,7 @@ export const CourseActions = ({ course, setOpen }) => {
               style={{ height: "50px" }}
               onClick={handleBuyClickNologin}
             >
-              Buy now
+              Mua ngay
             </Button>
           </Box>
         </>
@@ -139,7 +136,7 @@ export const CourseActions = ({ course, setOpen }) => {
             style={{ height: "50px" }}
             onClick={handleBuyClickNologin}
           >
-            Enroll Now
+            Ghi danh ngay
           </Button>
         </Box>
       );

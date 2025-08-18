@@ -31,7 +31,7 @@ const CategoryItem = () => {
   }, []);
 
   if (loading) {
-    return <p className="category-title">Categories</p>;
+    return <p className="category-title">Danh mục</p>;
   }
 
   if (error) {
@@ -40,7 +40,7 @@ const CategoryItem = () => {
 
   return (
     <div className="navbar-category-wrapper">
-      <p className="category-title">Categories</p>
+      <p className="category-title">Danh mục</p>
       <div className="category-menu">
         {categories.map((category) => (
           <p key={category.categoryId} className="category-item">

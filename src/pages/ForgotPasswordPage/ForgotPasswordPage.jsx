@@ -47,7 +47,7 @@ const ForgotPassPage = () => {
       setCountdown(60);
       setSnackbar({
         open: true,
-        message: "Send OTP successful.",
+        message: "Đã gửi mã OTP.",
         severity: "success",
       });
 
@@ -60,11 +60,11 @@ const ForgotPassPage = () => {
         err.error ===
         "Bạn đã gửi quá số lần OTP cho FORGOT_PASSWORD trong ngày."
       ) {
-        message = "Oops! You've hit the daily limit for OTP requests.";
+        message = "Bạn đã gửi quá số lần OTP cho FORGOT_PASSWORD trong ngày.";
       } else if (err.error === "Email does not exist..") {
-        message = "Email does not exist. Please check again.";
+        message = "Email không tồn tại. Vui lòng kiểm tra lại.";
       } else if (err.error === "User not verify") {
-        message = "Please go to verify your account first.";
+        message = "Hãy xác thực tài khoản của bạn trước.";
 
         setTimeout(() => {
           const resendTo = localStorage.getItem("email");
@@ -74,7 +74,7 @@ const ForgotPassPage = () => {
           navigate("/verify-email");
         }, 2000);
       } else {
-        message = "Failed to resend OTP!";
+        message = "Gửi lại mã OTP thất bại";
       }
       setSnackbar({
         open: true,
@@ -100,7 +100,7 @@ const ForgotPassPage = () => {
 
       setSnackbar({
         open: true,
-        message: "OTP resend successful!",
+        message: "Đã gửi lại mã OTP!",
         severity: "success",
       });
       setCountdown(60);
@@ -112,16 +112,16 @@ const ForgotPassPage = () => {
         err.error ===
         "Bạn đã gửi quá số lần OTP cho FORGOT_PASSWORD trong ngày."
       ) {
-        message = "Oops! You've hit the daily limit for OTP requests.";
+        message = "Bạn đã gửi quá số lần OTP cho FORGOT_PASSWORD trong ngày.";
       } else if (
         err === "Account not verified. Please verify your email first."
       ) {
-        message = "Please go to verify your account first.";
+        message = "Hãy xác thực tài khoản của bạn trước.";
         setTimeout(() => {
           navigate("/verify-email");
         }, 2000);
       } else {
-        message = "Failed to resend OTP!";
+        message = "Gửi lại mã OTP thất bại!";
       }
       setSnackbar({
         open: true,
@@ -150,14 +150,14 @@ const ForgotPassPage = () => {
       console.log("Verify successful!", res);
       setSnackbar({
         open: true,
-        message: "Verify successful.",
+        message: "Xác thực thành công.",
         severity: "success",
       });
       setOtpVerified(formData.otp);
       return true;
     } catch (err) {
       console.error("Verify error:", err);
-      const message = err.error || "Verify failed!";
+      const message = "Xác thực thất bại! Vui lòng thử lại sau.";
       setSnackbar({
         open: true,
         message,
@@ -180,7 +180,7 @@ const ForgotPassPage = () => {
       console.log("Change password successful!Please sign in again!", res);
       setSnackbar({
         open: true,
-        message: "Change password successful! Please sign in again!",
+        message: "Đổi mật khẩu thành công! Vui lòng đăng nhập lại.",
         severity: "success",
       });
       localStorage.removeItem("email");
@@ -188,7 +188,8 @@ const ForgotPassPage = () => {
       return true;
     } catch (err) {
       console.error("Change error:", err);
-      const message = "OTP expried or invalid! Get new OTP!";
+      const message =
+        "Mã OTP đã hết hạn hoặc không hợp lệ! Vui lòng lấy mã OTP mới.";
       setSnackbar({
         open: true,
         message,

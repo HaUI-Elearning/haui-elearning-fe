@@ -106,7 +106,7 @@ const CartIcon = () => {
                       borderRadius: "8px",
                     }}
                   >
-                    <h3>Your cart is empty</h3>
+                    <h3>Giỏ hàng trống</h3>
                     <button
                       style={{
                         marginTop: "5px",
@@ -121,7 +121,7 @@ const CartIcon = () => {
                       }}
                       onClick={() => navigate("/")}
                     >
-                      Explore more courses
+                      Khám phá các khóa học khác
                     </button>
                   </div>
                 )}
@@ -129,7 +129,7 @@ const CartIcon = () => {
 
               {cartItems?.length > 0 && (
                 <div className="navigate-button">
-                  <button onClick={() => navigate("/cart")}>Go to Cart</button>
+                  <button onClick={() => navigate("/cart")}>Chuyển đến giỏ hàng</button>
                 </div>
               )}
             </>
@@ -141,16 +141,16 @@ const CartIcon = () => {
                 border: "1px solid #f5c6cb",
                 borderRadius: "5px",
                 textAlign: "center",
-                fontSize: "18px",
+                fontSize: "15px",
                 fontWeight: "bolder",
               }}
             >
-              <p>Sign in to use this feature</p>
+              <p>Đăng nhập để sử dụng tính năng này</p>
               <button
                 onClick={() => navigate("/signIn")}
                 style={{ fontSize: "14px", padding: "5px", marginTop: "5px" }}
               >
-                Sign in
+                Đăng nhập
               </button>
             </div>
           )}

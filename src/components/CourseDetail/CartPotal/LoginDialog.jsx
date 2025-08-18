@@ -19,18 +19,18 @@ export const LoginDialog = ({ open, setOpen }) => {
 
   return (
     <Dialog open={open} onClose={handleClose}>
-      <DialogTitle>Authentication Required</DialogTitle>
+      <DialogTitle>Yêu cầu xác thực</DialogTitle>
       <DialogContent>
         <DialogContentText>
-          You must log in to proceed. Do you want to log in now?
+          Bạn phải đăng nhập để tiếp tục. Bạn có muốn đăng nhập ngay bây giờ không?
         </DialogContentText>
       </DialogContent>
       <DialogActions>
         <Button onClick={handleClose} color="primary">
-          No
+          Hủy
         </Button>
         <Button onClick={handleYes} color="primary" autoFocus>
-          Yes
+          Đồng ý
         </Button>
       </DialogActions>
     </Dialog>

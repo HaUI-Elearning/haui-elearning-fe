@@ -24,29 +24,29 @@ export const CourseDetails = ({ chapter }) => {
   }, 0);
   return (
     <Box sx={styles1.box}>
-      <Typography sx={styles1.typography}>This course includes:</Typography>
+      <Typography sx={styles1.typography}>Khóa học này bao gồm:</Typography>
       <Box sx={styles1.iconAndTypo}>
         <AccessTimeIcon sx={styles1.icon} />
         <Typography>
           {" "}
-          {formatDuration(totalTimeInSeconds)} on-demand video
+          {formatDuration(totalTimeInSeconds)} giờ video theo yêu cầu
         </Typography>
       </Box>
       <Box sx={styles1.iconAndTypo}>
         <MenuBookIcon sx={styles1.icon} />
-        <Typography>{totalChapters} chapters</Typography>
+        <Typography>{totalChapters} phần</Typography>
       </Box>
       <Box sx={styles1.iconAndTypo}>
         <TvIcon sx={styles1.icon} />
-        <Typography>Access on mobile and TV</Typography>
+        <Typography>Truy cập trên thiết bị di động và TV</Typography>
       </Box>
       <Box sx={styles1.iconAndTypo}>
         <AllInclusiveIcon sx={styles1.icon} />
-        <Typography>Full lifetime access</Typography>
+        <Typography>Quyền truy cập đầy đủ suốt đời</Typography>
       </Box>
       <Box sx={styles1.iconAndTypo}>
         <VerifiedIcon sx={styles1.icon} />
-        <Typography>Certificate of completion</Typography>
+        <Typography>Giấy chứng nhận hoàn thành</Typography>
       </Box>
     </Box>
   );

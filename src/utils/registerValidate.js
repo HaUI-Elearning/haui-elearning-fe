@@ -1,18 +1,18 @@
-import * as yup from 'yup';
+import * as yup from "yup";
 
 export const registerSchema = yup.object().shape({
-  username: yup.string().required('Username is required'),
+  username: yup.string().required("Vui lòng nhập tên đăng nhập"),
   password: yup
     .string()
-    .min(6, 'Password must be at least 6 characters')
-    .required('Password is required'),
+    .min(6, "Mật khẩu phải có ít nhất 6 ký tự")
+    .required("Vui lòng nhập mật khẩu"),
   confirmPassword: yup
     .string()
-    .oneOf([yup.ref('password')], 'Passwords do not match')
-    .required('Confirm password is required'),
+    .oneOf([yup.ref("password")], "Mật khẩu xác nhận không khớp")
+    .required("Vui lòng xác nhận mật khẩu"),
   email: yup
     .string()
-    .email('Invalid email address')
-    .required('Email is required'),
-  name: yup.string().required('Full name is required'),
+    .email("Địa chỉ email không hợp lệ")
+    .required("Vui lòng nhập email"),
+  name: yup.string().required("Vui lòng nhập họ và tên"),
 });

@@ -7,7 +7,7 @@ const WhatYouWillLearn = ({ course }) => {
     return (
         <Grid2 container>
             <Grid2 sm={8} sx={styles.itemContents}>
-                <Typography variant="h5" sx={styles.learnTitle}>What you will learn</Typography>
+                <Typography variant="h5" sx={styles.learnTitle}>Nội dung bài học</Typography>
                 <Grid2 container spacing={2}>
                     {course?.contents?.split(';').map((content) => {
                         const trimmedContent = content.trim();

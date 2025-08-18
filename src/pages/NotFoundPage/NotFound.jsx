@@ -37,7 +37,7 @@ const NotFoundPage = () => {
           mb: 1,
         }}
       >
-        Oops! Page not found
+        Trang không tìm thấy!
       </Typography>
 
       <Typography
@@ -48,8 +48,8 @@ const NotFoundPage = () => {
           color: "text.secondary",
         }}
       >
-        We couldn’t find what you were looking for. <br />
-        It might be moved or no longer exists 🚫
+        Chúng tôi không tìm thấy nội dung bạn đang tìm. <br /> Nó có thể đã bị
+        di chuyển hoặc không còn tồn tại 🚫
       </Typography>
 
       <Button
@@ -66,7 +66,7 @@ const NotFoundPage = () => {
         }}
         onClick={() => navigate("/")}
       >
-        Back to Homepage
+       Quay lại trang chủ
       </Button>
     </Box>
   );

@@ -105,7 +105,7 @@ const Categories = () => {
       setCourses(res.data.data.result);
     } catch (error) {
       console.error("Error fetching courses:", error);
-      setError("Failed to load courses");
+      setError("Tải khóa học thất bại");
     } finally {
       setLoading(false);
     }
@@ -130,7 +130,7 @@ const Categories = () => {
     } catch (error) {
       console.error("Error fetching detail category:", error);
       navigate("*")
-      setError("Failed to load detail category");
+      setError("Tải thể loại thất bại");
     }
   }, [categoryId]);
 

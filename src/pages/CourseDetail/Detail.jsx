@@ -34,10 +34,13 @@ const CourseDetailPage = () => {
 
       const errorMsg = e.response?.data?.error || "";
 
-      if (errorMsg.includes("Course not found")) {
+      if (
+        errorMsg.includes("Course not found") ||
+        errorMsg.includes("course is not approved")
+      ) {
         navigate("*");
       } else {
-        setError("Failed to load courses");
+        setError("Tải khóa học thất bại");
       }
     } finally {
       setLoading(false);

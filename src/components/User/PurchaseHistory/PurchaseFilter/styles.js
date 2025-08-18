@@ -6,7 +6,7 @@ const styles = {
     fontWeight: "bold",
     fontSize: "1rem",
     borderRadius: "12px",
-
+    width:"300px",
     textTransform: "none",
     "&:hover": {
       backgroundColor: "#9228B3",

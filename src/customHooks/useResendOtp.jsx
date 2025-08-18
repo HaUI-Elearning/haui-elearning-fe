@@ -9,13 +9,13 @@ export default function useResendOtp() {
     try {
       setResendLoading(true);
       await resendOtpSignUp({ email });
-      notify("OTP resend successful!", "success");
+      notify("Đã gửi lại mã OTP!", "success");
       setCountdown(60);
     } catch (err) {
       const msg =
         err?.error === "Bạn đã gửi quá số lần OTP cho REGISTER trong ngày."
-          ? "You have sent too many OTPs for REGISTER today!"
-          : "Failed to resend OTP!";
+          ? "Bạn đã gửi quá nhiều mã OTP cho việc ĐĂNG KÝ trong hôm nay!"
+          : "Gửi lại mã OTP thất bại!";
       notify(msg, "error");
     } finally {
       setResendLoading(false);

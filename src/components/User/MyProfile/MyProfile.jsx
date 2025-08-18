@@ -73,12 +73,12 @@ function MyProfile() {
             accessToken: accessToken,
           })
         );
-        setSnackbarMessage("Information updated successfully!");
+        setSnackbarMessage("Cập nhật thông tin thành công!");
         setOpenSnackbar(true);
       }
     } catch (error) {
       console.error("Failed to update information:", error);
-      setSnackbarMessage("Error updating information! Please try again.");
+      setSnackbarMessage("Cập nhật thông tin thất bại. Vui long thử lại sau!");
       setOpenSnackbar(true);
     }
   };
@@ -88,20 +88,15 @@ function MyProfile() {
   return (
     <div style={styles.styleDiv}>
       <Box>
-        <Typography style={styles.stylesWelconTypo}>
-          Welcome to Profile
-        </Typography>
         <Typography style={styles.stylesHiNameTypo}>
-          <span>Hi, </span>
+          <span>Xin chào, </span>
           {displayText}
         </Typography>
         <Box style={styles.stylesBox}>
           <Typography style={styles.stylesPublicPF}>
-            <b>Public profile</b>
+            <b>Hồ sơ công khai</b>
             <br />
-            <span style={styles.stylesAddInfo}>
-              Add information about yourself
-            </span>
+            <span style={styles.stylesAddInfo}>Thêm thông tin về bạn</span>
           </Typography>
           <table style={styles.stylesTable}>
             <thead>
@@ -112,18 +107,18 @@ function MyProfile() {
             </thead>
             <tbody>
               <tr>
-                <td style={styles.stylesTd}>Fullname:</td>
+                <td style={styles.stylesTd}>Họ và tên:</td>
                 <td style={styles.stylesTd}>
                   <TextField
                     variant="outlined"
                     value={name || ""}
                     onChange={(e) => setName(e.target.value)}
-                    placeholder="Your name"
+                    placeholder="Tên của bạn"
                   />
                 </td>
               </tr>
               <tr>
-                <td style={styles.stylesTd}>User name:</td>
+                <td style={styles.stylesTd}>Tên đăng nhập:</td>
                 <td style={styles.stylesTd}>{parseInfo.username}</td>
               </tr>
               <tr>
@@ -131,7 +126,7 @@ function MyProfile() {
                 <td style={styles.stylesTd}>{parseInfo.email}</td>
               </tr>
               <tr>
-                <td style={styles.stylesTd}>Introduce:</td>
+                <td style={styles.stylesTd}>Giới thiệu ngắn:</td>
                 <td style={styles.stylesTd}>
                   <TextField
                     fullWidth
@@ -142,7 +137,7 @@ function MyProfile() {
                         setIntroduce(e.target.value);
                       }
                     }}
-                    placeholder="Introduce yourself"
+                    placeholder="Hãy chia sẻ đôi nét về bạn"
                     inputProps={{ maxLength: maxWords }}
                     multiline
                     rows={4}
@@ -152,12 +147,12 @@ function MyProfile() {
                     color="textSecondary"
                     style={{ marginTop: "5px" }}
                   >
-                    {introduce ? introduce.length : 0} / {maxWords} words
+                    {introduce ? introduce.length : 0} / {maxWords} ký tự
                   </Typography>
                 </td>
               </tr>
               <tr>
-                <td style={styles.stylesTd}>Joined at:</td>
+                <td style={styles.stylesTd}>Ngày tham gia:</td>
                 <td style={styles.stylesTd}>
                   {formatDayMonthYear(parseInfo.createdAt)}
                 </td>
@@ -171,7 +166,7 @@ function MyProfile() {
               onClick={handleSave}
               sx={styles.stylesButton}
             >
-              Save
+              Cập nhật
             </Button>
           </Box>
         </Box>

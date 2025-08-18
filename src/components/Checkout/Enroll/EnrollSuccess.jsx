@@ -61,7 +61,7 @@ const EnrollSuccess = ({ enrolledCourse }) => {
               navigate(`/courses/learn/${enrolledCourse.courseId}`)
             }
           >
-            LEARN NOW
+            HỌC NGAY
           </Button>
         </Box>
       </Box>
