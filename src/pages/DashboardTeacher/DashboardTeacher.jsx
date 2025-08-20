@@ -20,7 +20,7 @@ function DashboardTeacher() {
         onClick={() => navigate(-1)} // go back to previous page
         sx={{ mb: 3 }}
       >
-        Go Back
+        Quay lại
       </Button>
 
       {/* Course statistics table (MUI) */}

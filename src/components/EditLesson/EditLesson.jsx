@@ -153,12 +153,12 @@ const EditLesson = () => {
               gutterBottom
               color="primary"
             >
-              Edit Lesson
+              Sửa Bài Học
             </Typography>
 
             <Box display="flex" flexDirection="column" gap={2}>
               <TextField
-                label="Lesson Title"
+                label="Tên bài học"
                 fullWidth
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
@@ -166,7 +166,7 @@ const EditLesson = () => {
               />
 
               <TextField
-                label="Lesson Position"
+                label="Vị trí bài học"
                 type="number"
                 fullWidth
                 value={position}
@@ -190,7 +190,7 @@ const EditLesson = () => {
                   },
                 }}
               >
-                Choose video file (optional)
+                Chọn tệp video (không bắt buộc)
                 <input
                   type="file"
                   hidden
@@ -219,7 +219,7 @@ const EditLesson = () => {
                   },
                 }}
               >
-                Choose PDF file (optional)
+                Chọn tệp PDF (không bắt buộc)
                 <input
                   type="file"
                   hidden
@@ -229,7 +229,7 @@ const EditLesson = () => {
               </Button>
               {pdfFile && (
                 <Typography variant="body2" color="text.secondary">
-                  Selected: {pdfFile.name}
+                  Đã chọn: {pdfFile.name}
                 </Typography>
               )}
 
@@ -241,7 +241,7 @@ const EditLesson = () => {
                   sx={{ borderRadius: 2, textTransform: "none" }}
                   disabled={loading}
                 >
-                  Cancel
+                  Quay lại
                 </Button>
                 <Button
                   variant="contained"
@@ -260,7 +260,7 @@ const EditLesson = () => {
                     "&:hover": { backgroundColor: "#1565c0" },
                   }}
                 >
-                  {loading ? "Updating..." : "Update Lesson"}
+                  {loading ? "Đang cập nhật..." : "Cập nhật"}
                 </Button>
               </Box>
             </Box>

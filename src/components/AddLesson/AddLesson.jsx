@@ -53,10 +53,10 @@ const AddLesson = () => {
           Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
         },
       });
-      toast.success("Lesson added successfully!");
+      toast.success("Bài giảng đã được tạo thành công!");
       navigate(-1);
     } catch (error) {
-      toast.error(error.response?.data?.error || "An error occurred.");
+      toast.error(error.response?.data?.error || "Lỗi khi tạo bài giảng!");
     } finally {
       setLoading(false);
     }

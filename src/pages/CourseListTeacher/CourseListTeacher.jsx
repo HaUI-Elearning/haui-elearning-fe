@@ -76,7 +76,6 @@ const CourseListTeacher = () => {
 
   const fetchCourses = () => {
     if (!token) {
-      console.error("No access token found, redirecting to login...");
       window.location.href = "/login";
       return;
     }
@@ -128,7 +127,7 @@ const CourseListTeacher = () => {
   };
 
   const handleDeleteCourse = async (courseId) => {
-    const confirmed = window.confirm("Are you sure you want to delete this course?");
+    const confirmed = window.confirm("Bạn có chắc chắn muốn xóa khóa học này không?");
     if (!confirmed) return;
 
     try {
@@ -146,10 +145,10 @@ const CourseListTeacher = () => {
         prevCourses.filter((course) => course.courseId !== courseId)
       );
 
-      toast.success("Course deleted successfully!");
+      toast.success("Xóa khóa học thành công!");
     } catch (err) {
       console.error("Lỗi khi xóa khóa học:", err.response?.data || err.message);
-      toast.error("Unable to delete course. Please try again!");
+      toast.error("Không thể xóa khóa học.");
     }
   };
 
@@ -225,19 +224,19 @@ const CourseListTeacher = () => {
               <MenuItem
                 onClick={() => handleMenuAction("edit", course.courseId)}
               >
-                Edit
+                Chỉnh Sửa
               </MenuItem>
               <MenuItem
                 onClick={() => handleMenuAction("delete", course.courseId)}
               >
-                Delete
+                Xóa Khóa Học
               </MenuItem>
               
               {course.approvalStatus === "approved" && (
                 <MenuItem
                 onClick={() => handleMenuAction("view", course.courseId)}
               >
-                View Details
+                xem chi tiết
               </MenuItem>
               )}
               {course.approvalStatus === "approved" && (
@@ -247,7 +246,7 @@ const CourseListTeacher = () => {
                     handleMenuClose();
                   }}
                 >
-                  View Participant List
+                  Danh Sách Học Viên
                 </MenuItem>
               )}
             </Menu>
@@ -258,7 +257,7 @@ const CourseListTeacher = () => {
           <div className="not-courses">
             <img src={math} alt="" />
           </div>
-          <p>There are currently no courses !!</p>
+          <p>Hiện tại không có khóa học nào!!</p>
         </div>
       )}
       {/* … sau khi render danh sách courses hết */}
@@ -269,7 +268,7 @@ const CourseListTeacher = () => {
   fullWidth
   maxWidth="md"
 >
-  <DialogTitle>List User</DialogTitle>
+  <DialogTitle>Danh sách người học</DialogTitle>
   <DialogContent dividers>
     {loadingParticipants ? (
       <Box display="flex" justifyContent="center" my={2}>
@@ -280,8 +279,8 @@ const CourseListTeacher = () => {
         <Table aria-label="participants table">
           <TableHead>
             <TableRow>
-              <TableCell><strong>Name User</strong></TableCell>
-              <TableCell align="center"><strong>Registration period</strong></TableCell>
+              <TableCell><strong>Tên</strong></TableCell>
+              <TableCell align="center"><strong>Thời gian đăng ký</strong></TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -307,12 +306,12 @@ const CourseListTeacher = () => {
         </Table>
       </TableContainer>
     ) : (
-      <Typography>There are no students yet.</Typography>
+      <Typography>Chưa có sinh viên nào.</Typography>
     )}
   </DialogContent>
   <DialogActions>
     <Button onClick={handleCloseParticipantsDialog} color="primary">
-      Cancel
+      Đóng
     </Button>
   </DialogActions>
 </Dialog>

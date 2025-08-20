@@ -19,13 +19,13 @@ const AddChapterDialog = ({ courseId, chapters, setChapters }) => {
 
   const handleAdd = async () => {
     if (!title.trim()) {
-      toast.error("Chapter title must not be empty!");
+      toast.error("Tên chương không được để trống!");
       return;
     }
 
     const posNumber = Number(position);
     if (!posNumber || posNumber < 1 || !Number.isInteger(posNumber)) {
-      toast.error("Position must be a positive integer!");
+      toast.error("Vị trí phải là một số nguyên dương!");
       return;
     }
 
@@ -35,13 +35,13 @@ const AddChapterDialog = ({ courseId, chapters, setChapters }) => {
       const resAll = await getAllChapter(courseId);
       setChapters(resAll.data.data);
 
-      toast.success("Chapter added successfully!");
+      toast.success("Học phần đã được thêm thành công!");
       setOpen(false);
       setTitle("");
       setDescription("");
       setPosition("");
     } catch (error) {
-      const apiError = error?.response?.data?.error || "Error while adding chapter";
+      const apiError = error?.response?.data?.error || "Lỗi khi thêm học phần!";
       console.log(apiError)
       toast.error(apiError);
     } finally {
@@ -91,7 +91,7 @@ const AddChapterDialog = ({ courseId, chapters, setChapters }) => {
             onChange={(e) => setPosition(e.target.value)}
             inputProps={{ min: 1, step: 1 }}
             error={isInvalidPosition}
-            helperText={isInvalidPosition ? "Must be a positive integer" : ""}
+            helperText={isInvalidPosition ? "Phải là một số nguyên dương" : ""}
           />
         </DialogContent>
         <DialogActions>

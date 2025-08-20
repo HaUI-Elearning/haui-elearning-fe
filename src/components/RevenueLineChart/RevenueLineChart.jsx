@@ -48,11 +48,11 @@ const RevenueLineChart = () => {
       }}
     >
       <h2 style={{ marginBottom: 24, fontWeight: "bold", fontSize: 24 }}>
-        📈 Course Revenue (Line Chart)
+        📈 Doanh thu khóa học 
       </h2>
 
       {loading ? (
-        <p style={{ color: "#888" }}>Loading data...</p>
+        <p style={{ color: "#888" }}>Đang tải dữ liệu ...</p>
       ) : (
         <ResponsiveContainer width="100%" height={350}>
           <LineChart
@@ -67,7 +67,7 @@ const RevenueLineChart = () => {
             <Line
               type="monotone"
               dataKey="revenue"
-              name="Revenue"
+              name="Doanh thu"
               stroke="#1976d2"
               strokeWidth={3}
               activeDot={{ r: 8 }}
