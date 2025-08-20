@@ -32,13 +32,13 @@ const EditChapterDialog = ({ open, onClose, courseId, chapter, setChapters }) =>
 
   const handleUpdate = async () => {
     if (!title.trim()) {
-      toast.error("Chapter name cannot be empty!");
+      toast.error("Tên chương không được để trống!");
       return;
     }
 
     const posNumber = Number(position);
     if (!posNumber || posNumber < 1 || !Number.isInteger(posNumber)) {
-      toast.error("Position must be a positive integer!");
+      toast.error("Vị trí phải là một số nguyên dương!");
       return;
     }
 
@@ -49,11 +49,11 @@ const EditChapterDialog = ({ open, onClose, courseId, chapter, setChapters }) =>
       const resAll = await getAllChapter(courseId);
       setChapters(resAll.data.data);
 
-      toast.success("Chapter updated successfully!");
+      toast.success("Cập nhật học phần thành công!");
       handleClose();
     } catch (error) {
       console.error(error);
-      toast.error("Error updating chapter");
+      toast.error("Lỗi khi cập nhật chương học: " );
     } finally {
       setLoading(false);
     }
@@ -64,19 +64,19 @@ const EditChapterDialog = ({ open, onClose, courseId, chapter, setChapters }) =>
 
   return (
     <Dialog open={open} onClose={handleClose}>
-      <DialogTitle>Edit Chapter</DialogTitle>
+      <DialogTitle>Sửa Phần Học</DialogTitle>
       <DialogContent>
         <TextField
           autoFocus
           margin="dense"
-          label="Chapter Name"
+          label="Tên Phần Học"
           fullWidth
           value={title}
           onChange={(e) => setTitle(e.target.value)}
         />
         <TextField
           margin="dense"
-          label="Description"
+          label="Mô tả"
           fullWidth
           multiline
           rows={3}
@@ -85,7 +85,7 @@ const EditChapterDialog = ({ open, onClose, courseId, chapter, setChapters }) =>
         />
         <TextField
           margin="dense"
-          label="Position"
+          label="Vị trí"
           type="number"
           fullWidth
           value={position}
@@ -96,9 +96,9 @@ const EditChapterDialog = ({ open, onClose, courseId, chapter, setChapters }) =>
         />
       </DialogContent>
       <DialogActions>
-        <Button onClick={handleClose} disabled={loading}>Cancel</Button>
+        <Button onClick={handleClose} disabled={loading}>Quay Lại</Button>
         <Button variant="contained" onClick={handleUpdate} disabled={loading}>
-          {loading ? "Updating..." : "Update"}
+          {loading ? "Đang cập nhật..." : "Cập nhật"}
         </Button>
       </DialogActions>
     </Dialog>

@@ -38,7 +38,7 @@ const CreateNewCourse = () => {
         );
         setCategories(response.data.data);
       } catch (error) {
-        toast.error("Failed to load categories");
+        toast.error("Không tải được danh mục");
       }
     };
 
@@ -54,18 +54,18 @@ const CreateNewCourse = () => {
       !price.trim() ||
       !thumbnail
     ) {
-      toast.error("Please fill in all required fields.");
+      toast.error("Vui lòng điền tất cả các trường bắt buộc.");
       return;
     }
     if (!categoryId) {
-      toast.error("Please select a category.");
+      toast.error("Vui lòng chọn một danh mục.");
       return;
     }
 
     // Validate price is positive number
     const priceNumber = Number(price);
     if (isNaN(priceNumber) || priceNumber < 0) {
-      toast.error("Price must be a valid positive number.");
+      toast.error("Giá phải là một số dương.");
       return;
     }
 
@@ -157,12 +157,12 @@ const CreateNewCourse = () => {
               gutterBottom
               color="primary"
             >
-              Create New Course
+              Tạo khóa học 
             </Typography>
 
             <Box display="flex" flexDirection="column" gap={2}>
               <TextField
-                label="Course name"
+                label="Tên khóa học"
                 fullWidth
                 value={name}
                 onChange={(e) => setName(e.target.value)}
@@ -170,7 +170,7 @@ const CreateNewCourse = () => {
               />
 
               <TextField
-                label="Description"
+                label="Mô tả"
                 fullWidth
                 multiline
                 minRows={3}
@@ -180,7 +180,7 @@ const CreateNewCourse = () => {
               />
 
               <TextField
-                label="Content"
+                label="Nội dung khóa học"
                 fullWidth
                 value={content}
                 onChange={(e) => setContent(e.target.value)}
@@ -188,7 +188,7 @@ const CreateNewCourse = () => {
               />
 
               <TextField
-                label="Price"
+                label="Giá khóa học"
                 type="number"
                 fullWidth
                 value={price}
@@ -204,7 +204,7 @@ const CreateNewCourse = () => {
                 <Select
                   labelId="category-select-label"
                   value={categoryId}
-                  label="Category"
+                  label="Danh mục"
                   onChange={(e) => setCategoryId(e.target.value)}
                 >
                   {categories.map((category) => (
@@ -233,7 +233,7 @@ const CreateNewCourse = () => {
                   },
                 }}
               >
-                Choose thumbnail
+                Chọn hình ảnh 
                 <input
                   type="file"
                   hidden
@@ -259,7 +259,7 @@ const CreateNewCourse = () => {
                     textTransform: "none",
                   }}
                 >
-                  Cancel
+                  Quay lại
                 </Button>
                 <Button
                   variant="contained"
@@ -282,7 +282,7 @@ const CreateNewCourse = () => {
                     },
                   }}
                 >
-                  {loading ? "Creating..." : "Create Course"}
+                  {loading ? "Đang tạo ..." : "Tạo khóa học"}
                 </Button>
               </Box>
             </Box>
