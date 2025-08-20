@@ -29,14 +29,14 @@ function MenuTeacher() {
 
     const handleLogoutClick = () => {
         Swal.fire({
-            title: 'Confirm logout',
-            text: 'Are you sure you want to log out?',
+            title: 'Xác nhận đăng xuất',
+            text: 'Bạn có chắc chắn muốn đăng xuất không?',
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Logout',
-            cancelButtonText: 'Cancel'
+            confirmButtonText: 'Đăng xuất',
+            cancelButtonText: 'Hủy',
         }).then((result) => {
             if (result.isConfirmed) {
                 dispatch(logout());
@@ -81,14 +81,14 @@ function MenuTeacher() {
                         </Grid>
                         <Grid item marginLeft={1}>
                             <Typography>{parseInfo.name}</Typography>
-                            <Typography>{parseInfo.email}</Typography>
+                            
                         </Grid>
                     </Grid>
                     <ul style={{ listStyleType: 'none', padding: 0, margin: 0 }}>
                         {[
                             
-                            { text: "Revenue statistics", path: "/my-revenue" },
-                            { text: "Log out", path: null, onClick: handleLogoutClick }, 
+                            { text: "Thống kê", path: "/my-revenue" },
+                            { text: "Đăng xuất", path: null, onClick: handleLogoutClick }, 
                         ].map((item, index) => (
                             <li
                                 key={index}

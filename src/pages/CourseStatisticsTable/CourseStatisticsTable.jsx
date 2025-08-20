@@ -44,7 +44,6 @@ const CourseStatisticsTable = () => {
           }
         );
 
-        console.log("📦 Data from API:", response.data);
 
         const data = response.data?.data;
         const stats = data?.listCourseStatistics;
@@ -59,7 +58,6 @@ const CourseStatisticsTable = () => {
             totalRejected: data?.totalRejectCourse || 0,
           });
         } else {
-          console.warn("❗ listCourseStatistics is not an array:", stats);
           setCourseStats([]);
           setCourseStatusStats({
             totalApproved: 0,
@@ -68,10 +66,6 @@ const CourseStatisticsTable = () => {
           });
         }
       } catch (error) {
-        console.error(
-          "Error fetching statistics data:",
-          error.response?.data || error.message
-        );
       } finally {
         setLoading(false);
       }
@@ -92,10 +86,10 @@ const CourseStatisticsTable = () => {
       }}
     >
       <h2 style={{ marginBottom: 24, fontWeight: "bold", fontSize: 24 }}>
-        📊 Student Statistics by Course
+        📊 Thống kê sinh viên theo khóa học
       </h2>
       {loading ? (
-        <p style={{ color: "#888" }}>Loading data...</p>
+        <p style={{ color: "#888" }}>Đang tải dữ liệu..."</p>
       ) : (
         <>
           <TableContainer>
@@ -103,16 +97,16 @@ const CourseStatisticsTable = () => {
               <TableHead>
                 <TableRow>
                   <TableCell>
-                    <strong>Course Name</strong>
+                    <strong>Tên khóa học</strong>
                   </TableCell>
                   <TableCell align="center">
-                    <strong>New Students</strong>
+                    <strong>Học sinh mới</strong>
                   </TableCell>
                   <TableCell align="center">
-                    <strong>Growth</strong>
+                    <strong>Tăng trưởng</strong>
                   </TableCell>
                   <TableCell align="center">
-                    <strong>Warning</strong>
+                    <strong>Cảnh báo</strong>
                   </TableCell>
                 </TableRow>
               </TableHead>
@@ -136,9 +130,9 @@ const CourseStatisticsTable = () => {
                     </TableCell>
                     <TableCell align="center">
                       {course.warning ? (
-                        <Chip label="Warning" color="error" variant="outlined" />
+                        <Chip label="Cảnh báo" color="error" variant="outlined" />
                       ) : (
-                        <Chip label="Stable" variant="outlined" />
+                        <Chip label="Ổn định" variant="outlined" />
                       )}
                     </TableCell>
                   </TableRow>
@@ -156,7 +150,7 @@ const CourseStatisticsTable = () => {
               fontSize: 20,
             }}
           >
-            📈 Comparison of New Students & Previous Month Students by Course
+            📈 So sánh số sinh viên mới và sinh viên của tháng trước theo khóa học
           </h3>
 
           <ResponsiveContainer width="100%" height={300}>
@@ -169,10 +163,10 @@ const CourseStatisticsTable = () => {
               <YAxis allowDecimals={false} />
               <Tooltip />
               <Legend />
-              <Bar dataKey="newStudents" name="New Students" fill="#1976d2" />
+              <Bar dataKey="newStudents" name="Sinh viên mới" fill="#1976d2" />
               <Bar
                 dataKey="prevMonthStudents"
-                name="Previous Month Students"
+                name="Sinh viên của tháng trước"
                 fill="#9e9e9e"
               />
             </BarChart>
@@ -186,7 +180,7 @@ const CourseStatisticsTable = () => {
               fontSize: 20,
             }}
           >
-            🧮 Course Status Distribution
+            🧮 Phân bố trạng thái khóa học
           </h3>
 
           <ResponsiveContainer width="100%" height={300}>
@@ -195,9 +189,9 @@ const CourseStatisticsTable = () => {
                 dataKey="value"
                 isAnimationActive={true}
                 data={[
-                  { name: "Approved", value: courseStatusStats.totalApproved },
-                  { name: "Pending", value: courseStatusStats.totalPending },
-                  { name: "Rejected", value: courseStatusStats.totalRejected },
+                  { name: "Đã duyệt", value: courseStatusStats.totalApproved },
+                  { name: "Chờ duyệt", value: courseStatusStats.totalPending },
+                  { name: "Từ chối", value: courseStatusStats.totalRejected },
                 ]}
                 cx="50%"
                 cy="50%"

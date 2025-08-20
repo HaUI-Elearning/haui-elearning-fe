@@ -287,7 +287,7 @@ const ChapterTeacherList = () => {
                 marginLeft: 2,
               }}
             >
-              EDIT COURSE
+              chỉnh sửa khóa học
             </Button>
           )}
 
@@ -308,7 +308,7 @@ const ChapterTeacherList = () => {
                   marginLeft: 2,
                 }}
               >
-                REJECTED
+                Xem lý do
               </Button>
 
               <Dialog
@@ -318,7 +318,7 @@ const ChapterTeacherList = () => {
                 maxWidth="sm"
               >
                 <DialogTitle sx={{ color: "red" }}>
-                  Your course has been rejected
+                  Lý do từ chối khóa học
                 </DialogTitle>
                 <DialogContent dividers>
                   {loadingReason ? (
@@ -342,10 +342,10 @@ const ChapterTeacherList = () => {
                     variant="contained"
                     color="primary"
                   >
-                    EDIT COURSE
+                    Chỉnh sửa khóa học
                   </Button>
                   <Button onClick={handleCloseDialog} color="inherit">
-                    Close
+                    Đóng
                   </Button>
                 </DialogActions>
               </Dialog>
@@ -367,7 +367,7 @@ const ChapterTeacherList = () => {
               borderRadius: "8px",
             }}
           >
-            CANCEL
+            Quay lại
           </Button>
         </div>
       </div>
@@ -448,7 +448,7 @@ const ChapterTeacherList = () => {
                         ))
                       ) : (
                         <div className="section-item">
-                          <p>No lessons yet</p>
+                          <p>Chưa có bài học nào.</p>
                         </div>
                       )}
                     </div>
@@ -457,17 +457,17 @@ const ChapterTeacherList = () => {
               ))
             ) : (
               <div className="box-not-courses">
-                <p>No chapters created yet.</p>
+                <p>Chưa có học phần nào được tạo.</p>
               </div>
             )}
             <Dialog
               open={openConfirmLessonDialog}
               onClose={() => setOpenConfirmLessonDialog(false)}
             >
-              <DialogTitle>Confirm Lesson Deletion</DialogTitle>
+              <DialogTitle>Xác nhận xóa bài học</DialogTitle>
               <DialogContent>
                 <DialogContentText>
-                  Are you sure you want to delete this lesson?
+                  Bạn có chắc chắn muốn xóa bài học này không? 
                 </DialogContentText>
               </DialogContent>
               <DialogActions>
@@ -475,14 +475,14 @@ const ChapterTeacherList = () => {
                   onClick={() => setOpenConfirmLessonDialog(false)}
                   color="primary"
                 >
-                  Cancel
+                  Hủy
                 </Button>
                 <Button
                   onClick={confirmDeleteLesson}
                   color="error"
                   variant="contained"
                 >
-                  Delete
+                  Xóa
                 </Button>
               </DialogActions>
             </Dialog>
@@ -491,10 +491,10 @@ const ChapterTeacherList = () => {
               open={openConfirmDialog}
               onClose={() => setOpenConfirmDialog(false)}
             >
-              <DialogTitle>Confirm Chapter Deletion</DialogTitle>
+              <DialogTitle>Xác nhận xóa học phần</DialogTitle>
               <DialogContent>
                 <DialogContentText>
-                  Are you sure you want to delete this chapter?
+                  Bạn có chắc chắn muốn xóa học phần này không?
                 </DialogContentText>
               </DialogContent>
               <DialogActions>
@@ -502,14 +502,14 @@ const ChapterTeacherList = () => {
                   onClick={() => setOpenConfirmDialog(false)}
                   color="primary"
                 >
-                  Cancel
+                  Hủy
                 </Button>
                 <Button
                   onClick={confirmDeleteChapter}
                   color="error"
                   variant="contained"
                 >
-                  Delete
+                  Xóa
                 </Button>
               </DialogActions>
             </Dialog>

@@ -89,12 +89,12 @@ const CreateNewCourse = () => {
           },
         }
       );
-      toast.success("Course created successfully!");
+      toast.success("Khóa học đã được tạo thành công!");
       setTimeout(() => {
         navigate("/teacher");
       }, 2000);
     } catch (error) {
-      toast.error(error.response?.data?.message || "An error occurred");
+      toast.error(error.response?.data?.message || "Lỗi khi tạo khóa học!");
     } finally {
       setLoading(false);
     }
