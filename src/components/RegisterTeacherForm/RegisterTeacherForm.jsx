@@ -9,13 +9,13 @@ const RegisterTeacherForm = () => {
   const navigate = useNavigate();
 
   const questions = [
-    "1. Why do you want to become a teacher?",
-    "2. Do you have any teaching experience? If yes, please describe.",
-    "3. Which subjects are you able to teach?",
-    "4. When are you available to teach?",
-    "5. Do you have any teaching-related certificates?",
-    "6. What age group of students have you worked with?",
-    "7. What are your expectations when becoming a teacher on our platform?",
+    "1. Tại sao bạn muốn trở thành giáo viên?",
+    "2. Bạn có kinh nghiệm giảng dạy không? Nếu có, vui lòng mô tả.",
+    "3. Bạn có thể dạy những môn học nào?",
+    "4. Bạn có thể dạy vào thời gian nào?",
+    "5. Bạn có chứng chỉ liên quan đến giảng dạy không?",
+    "6. Bạn đã từng làm việc với nhóm học sinh ở độ tuổi nào?",
+    "7. Kỳ vọng của bạn khi trở thành giáo viên trên nền tảng của chúng tôi là gì?",
   ];
 
   const handleChange = (index, value) => {
@@ -63,7 +63,7 @@ const RegisterTeacherForm = () => {
   return (
     <div className="teacher-container">
       <div className="teacher-form-container">
-        <h2>Apply to Become a Teacher</h2>
+        <h2>Đăng ký trở thành giáo viên</h2>
         <form onSubmit={handleSubmit} className="teacher-form">
           {questions.map((q, index) => (
             <div key={index} className="form-group">
@@ -73,16 +73,20 @@ const RegisterTeacherForm = () => {
                 value={answers[index]}
                 onChange={(e) => handleChange(index, e.target.value)}
                 required
-                placeholder="Enter your answer..."
+                placeholder="Nhập câu trả lời của bạn..."
               />
             </div>
           ))}
           <div className="button-group">
-            <button type="button" className="back-btn" onClick={() => navigate(-1)}>
-              Back
+            <button
+              type="button"
+              className="back-btn"
+              onClick={() => navigate(-1)}
+            >
+              Quay lại
             </button>
             <button type="submit" className="submit-btn">
-              Submit Application
+              Nộp đơn
             </button>
           </div>
         </form>

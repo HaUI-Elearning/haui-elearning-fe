@@ -114,12 +114,12 @@ const AddLesson = () => {
               gutterBottom
               color="primary"
             >
-              Add New Lesson
+              Tạo Bài Giảng
             </Typography>
 
             <Box display="flex" flexDirection="column" gap={2}>
               <TextField
-                label="Lesson Title"
+                label="Tên Bài Giảng"
                 fullWidth
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
@@ -127,7 +127,7 @@ const AddLesson = () => {
               />
 
               <TextField
-                label="Lesson Position"
+                label="Ví trí"
                 type="number"
                 fullWidth
                 value={position}
@@ -151,7 +151,7 @@ const AddLesson = () => {
                   },
                 }}
               >
-                Upload Video File
+                Thêm video
                 <input
                   type="file"
                   hidden
@@ -180,7 +180,7 @@ const AddLesson = () => {
                   },
                 }}
               >
-                Upload PDF File
+                Thêm file PDF
                 <input
                   type="file"
                   hidden
@@ -201,7 +201,7 @@ const AddLesson = () => {
                   onClick={() => navigate(-1)}
                   sx={{ borderRadius: 2, textTransform: "none" }}
                 >
-                  Cancel
+                  Quay lại
                 </Button>
                 <Button
                   variant="contained"
@@ -220,7 +220,7 @@ const AddLesson = () => {
                     "&:hover": { backgroundColor: "#1565c0" },
                   }}
                 >
-                  {loading ? "Submitting..." : "Add Lesson"}
+                  {loading ? "Đang tạo..." : "Tạo Bài Giảng"}
                 </Button>
               </Box>
             </Box>

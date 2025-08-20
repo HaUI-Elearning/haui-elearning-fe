@@ -55,7 +55,7 @@ const AddChapterDialog = ({ courseId, chapters, setChapters }) => {
   return (
     <>
       <Button variant="contained" onClick={() => setOpen(true)}>
-        Add Folder
+        Tạo Thư Mục
       </Button>
 
       <Dialog
@@ -63,19 +63,19 @@ const AddChapterDialog = ({ courseId, chapters, setChapters }) => {
         onClose={() => setOpen(false)}
         disableEscapeKeyDown={false}
       >
-        <DialogTitle>Add New Chapter</DialogTitle>
+        <DialogTitle>Tạo Phần Học</DialogTitle>
         <DialogContent>
           <TextField
             autoFocus
             margin="dense"
-            label="Chapter Title"
+            label="Tên Phần Học"
             fullWidth
             value={title}
             onChange={(e) => setTitle(e.target.value)}
           />
           <TextField
             margin="dense"
-            label="Description"
+            label="Mô tả"
             fullWidth
             multiline
             rows={3}
@@ -84,7 +84,7 @@ const AddChapterDialog = ({ courseId, chapters, setChapters }) => {
           />
           <TextField
             margin="dense"
-            label="Position"
+            label="Vị trí"
             type="number"
             fullWidth
             value={position}
@@ -97,7 +97,7 @@ const AddChapterDialog = ({ courseId, chapters, setChapters }) => {
         <DialogActions>
           <Button onClick={() => setOpen(false)}>Cancel</Button>
           <Button variant="contained" onClick={handleAdd} disabled={loading}>
-            {loading ? "Adding..." : "Add"}
+            {loading ? "Đang thêm ..." : "Thêm"}
           </Button>
         </DialogActions>
       </Dialog>

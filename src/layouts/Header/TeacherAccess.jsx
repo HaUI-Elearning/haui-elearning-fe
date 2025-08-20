@@ -14,13 +14,13 @@ const TeacherAccess = () => {
     }
 
     try {
-      const decoded = jwtDecode(token); // ✅ dùng jwtDecode
+      const decoded = jwtDecode(token); 
       const roles = decoded.codernewbie || [];
 
       if (roles.includes("ROLE_TEACHER")) {
-        navigate("/teacher"); // chuyển đến trang giáo viên
+        navigate("/teacher"); 
       } else {
-        navigate("/register-teacher"); // chuyển đến trang đăng ký giáo viên
+        navigate("/register-teacher"); 
       }
     } catch (error) {
       console.error("Lỗi khi giải mã token:", error);
