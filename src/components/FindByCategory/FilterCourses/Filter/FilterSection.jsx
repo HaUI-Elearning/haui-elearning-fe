@@ -56,10 +56,10 @@ const FilterSection = ({ filters, setFilters, sortOption, setSortOption }) => {
             </Accordion>
             <Accordion sx={styles.accordion}>
                 <AccordionSummary expandIcon={<ExpandMoreIcon />} style={styles.accordionSummary}>
-                    <Typography sx={styles.typo1}>Thời lượng</Typography>
+                    <Typography sx={styles.typo1}>Thời lượng (giờ)</Typography>
                 </AccordionSummary>
                 <AccordionDetails style={styles.accordionDetails}>
-                    {['3-6', '6-9', '9-12', 'Lâu hơn'].map((range) => (
+                    {['0-3','3-6', '6-9', '9-12', 'Lâu hơn'].map((range) => (
                         <div key={range}>
                             <label >
                                 <input

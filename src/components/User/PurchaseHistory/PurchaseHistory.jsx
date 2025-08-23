@@ -17,6 +17,7 @@ import { fetchOrderDetail } from "../../../apis/OrderHistory/getOrderDetail";
 import PurchaseFilters from "./PurchaseFilter/PurchaseFilter";
 import PurchaseView from "./PurchaseView/PurchaseView";
 import styles from "./styles";
+import EmptyPurchase from "./EmptyPurchase/EmpryPurchase";
 
 const PurchaseHistory = () => {
   const [status, setStatus] = useState("");
@@ -72,7 +73,9 @@ const PurchaseHistory = () => {
       console.error("Error fetching order detail:", error);
     }
   };
-
+if (!orders || orders.length === 0) {
+  return <EmptyPurchase />;
+}
   return (
     <Container>
       <PurchaseFilters
