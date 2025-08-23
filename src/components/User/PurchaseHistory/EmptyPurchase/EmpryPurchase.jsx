@@ -1,7 +1,7 @@
 import { Button, Container, Typography, Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 
-const EmptyCart = () => {
+const EmptyPurchase = () => {
     const navigate = useNavigate();
 
     return (
@@ -22,8 +22,7 @@ const EmptyCart = () => {
             style={{ width: "400px", height: "auto", marginRight: "10px" }}
           />
           <Typography variant="h6" sx={{ textAlign: "center" }}>
-            Giỏ hàng của bạn đang trống. Hãy tiếp tục mua sắm để tìm khóa học
-            nhé!
+            Lịch sử mua trống. Hãy tiếp tục mua sắm nhé!
           </Typography>
         </Box>
         <Button
@@ -37,4 +36,4 @@ const EmptyCart = () => {
     );
 }
 
-export default EmptyCart;
+export default EmptyPurchase;
